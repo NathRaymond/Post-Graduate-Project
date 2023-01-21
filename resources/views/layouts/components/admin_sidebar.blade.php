@@ -62,7 +62,7 @@
                                             class="path2"></span></i>Roles and Permission</a></li>
                             <li><a href="#"><i class="icon-Commit"><span class="path1"></span><span
                                             class="path2"></span></i>Academic Session</a></li>
-                            <li><a href="#"><i class="icon-Commit"><span class="path1"></span><span
+                            <li><a href="{{route('programmes_home')}}"><i class="icon-Commit"><span class="path1"></span><span
                                             class="path2"></span></i>Programmes</a></li>
                             <li><a href="#"><i class="icon-Commit"><span class="path1"></span><span
                                             class="path2"></span></i>Courses</a></li>

@@ -858,7 +858,7 @@
 
 	<script src="{{ asset('adminassets/src/js/template.js')}}"></script>
 	<script src="{{ asset('adminassets/src/js/pages/dashboard.js')}}"></script>
-
+	@yield('scripts')
 </body>
 
 </html>
