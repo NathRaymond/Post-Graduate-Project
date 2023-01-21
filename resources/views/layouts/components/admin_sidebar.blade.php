@@ -56,7 +56,7 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="#"><i class="icon-Commit"><span class="path1"></span><span
+                            <li><a href="{{ route('users_home') }}"><i class="icon-Commit"><span class="path1"></span><span
                                             class="path2"></span></i>Manage Users</a></li>
                             <li><a href="#"><i class="icon-Commit"><span class="path1"></span><span
                                             class="path2"></span></i>Roles and Permission</a></li>

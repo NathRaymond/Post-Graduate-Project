@@ -32,8 +32,22 @@ Route::group(['middleware' => 'auth'], function () {
         });
     });
 
+
+
+    Route::group(['prefix' => 'users'], function () {
+        Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('users_home');
+        Route::any('view_user_details/{id}', [App\Http\Controllers\UserController::class, 'viewDetails'])->name('view_user_details');
+        Route::post('/create', [App\Http\Controllers\UserController::class, 'create'])->name('create_new_user');
+        Route::post('/update', [App\Http\Controllers\UserController::class, 'update'])->name('update_user');
+        Route::get('/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('get_user_by_id');
+        Route::get('/delete', [App\Http\Controllers\UserController::class, 'delete'])->name('user.destroy');
+    });
+
+
+    
     Route::get('/get_lga', [App\Http\Controllers\AgentController::class, 'getLGA'])->name("get_state_lga");
-        Route::group(['prefix' => 'student'], function () {
+    Route::group(['prefix' => 'student'], function () {
+
     });
 
 });
