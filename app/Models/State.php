@@ -6,11 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class State extends Model
 {
-    protected $table = 'state';
+    protected $table ='state';
+
+
 
     protected $fillable = [
 
         'state', 'id_no',
 
     ];
+    // $table->primary('id_no');
+
 }
