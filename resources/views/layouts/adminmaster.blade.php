@@ -70,80 +70,24 @@
       <div class="navbar-custom-menu r-side">
         <ul class="nav navbar-nav">
 			<li class="dropdown notifications-menu btn-group nav-item">
-				<a href="#" class="waves-effect waves-light nav-link btn-primary-light svg-bt-icon" data-bs-toggle="dropdown" title="Notifications">
+				<a href="#" class="waves-effect waves-light nav-link btn-primary-light svg-bt-icon"  title="Notifications">
 					<i class="icon-Notifications"><span class="path1"></span><span class="path2"></span></i>
 					<div class="pulse-wave"></div>
 			    </a>
-				<ul class="dropdown-menu animated bounceIn">
-				  <li class="header">
-					<div class="p-20">
-						<div class="flexbox">
-							<div>
-								<h4 class="mb-0 mt-0">Notifications</h4>
-							</div>
-							<div>
-								<a href="#" class="text-danger">Clear All</a>
-							</div>
-						</div>
-					</div>
-				  </li>
-				  <li>
-					<!-- inner menu: contains the actual data -->
-					<ul class="menu sm-scrol">
-					  <li>
-						<a href="#">
-						  <i class="fa fa-users text-info"></i> Curabitur id eros quis nunc suscipit blandit.
-						</a>
-					  </li>
-					  <li>
-						<a href="#">
-						  <i class="fa fa-warning text-warning"></i> Duis malesuada justo eu sapien elementum, in semper diam posuere.
-						</a>
-					  </li>
-					  <li>
-						<a href="#">
-						  <i class="fa fa-users text-danger"></i> Donec at nisi sit amet tortor commodo porttitor pretium a erat.
-						</a>
-					  </li>
-					  <li>
-						<a href="#">
-						  <i class="fa fa-shopping-cart text-success"></i> In gravida mauris et nisi
-						</a>
-					  </li>
-					  <li>
-						<a href="#">
-						  <i class="fa fa-user text-danger"></i> Praesent eu lacus in libero dictum fermentum.
-						</a>
-					  </li>
-					  <li>
-						<a href="#">
-						  <i class="fa fa-user text-primary"></i> Nunc fringilla lorem
-						</a>
-					  </li>
-					  <li>
-						<a href="#">
-						  <i class="fa fa-user text-success"></i> Nullam euismod dolor ut quam interdum, at scelerisque ipsum imperdiet.
-						</a>
-					  </li>
-					</ul>
-				  </li>
-				  <li class="footer">
-					  <a href="#">View all</a>
-				  </li>
-				</ul>
+
 			</li>
 			<li class="btn-group nav-item">
-				<a href="#" class="waves-effect waves-light nav-link btn-primary-light svg-bt-icon" title="" data-bs-toggle="modal" data-bs-target="#quick_actions_toggle">
+				<a href="#" class="waves-effect waves-light nav-link btn-primary-light svg-bt-icon" title="">
 					<i class="icon-Layout-arrange"><span class="path1"></span><span class="path2"></span></i>
 			    </a>
 			</li>
 			<li class="btn-group nav-item d-xl-inline-flex d-none">
-				<a href="#" class="waves-effect waves-light nav-link btn-primary-light svg-bt-icon" title="" data-bs-toggle="modal" data-bs-target="#quick_panel_toggle">
+				<a href="#" class="waves-effect waves-light nav-link btn-primary-light svg-bt-icon" title="">
 					<i class="icon-Notification"><span class="path1"></span><span class="path2"></span></i>
 			    </a>
 			</li>
 			<li class="btn-group nav-item d-xl-inline-flex d-none">
-				<a href="#" class="waves-effect waves-light nav-link btn-primary-light svg-bt-icon" title="" data-bs-toggle="modal" data-bs-target="#quick_shop_toggle">
+				<a href="#" class="waves-effect waves-light nav-link btn-primary-light svg-bt-icon" title="">
 					<i class="icon-Cart1"><span class="path1"></span><span class="path2"></span></i>
 			    </a>
 			</li>
@@ -153,18 +97,6 @@
 			    </a>
 			</li>
 
-			<li class="btn-group d-xl-inline-flex d-none">
-			    <a href="#" class="waves-effect waves-light nav-link btn-primary-light svg-bt-icon dropdown-toggle" data-bs-toggle="dropdown">
-					<img class="rounded" src="" alt="">
-				</a>
-			    <div class="dropdown-menu">
-					<a class="dropdown-item my-5" href="#"><img class="w-20 rounded me-10" src="" alt=""> English</a>
-					<a class="dropdown-item my-5" href="#"><img class="w-20 rounded me-10" src="" alt=""> Spanish</a>
-					<a class="dropdown-item my-5" href="#"><img class="w-20 rounded me-10" src="" alt=""> German</a>
-					<a class="dropdown-item my-5" href="#"><img class="w-20 rounded me-10" src="" alt=""> Japanese</a>
-					<a class="dropdown-item my-5" href="#"><img class="w-20 rounded me-10" src="" alt=""> French</a>
-			    </div>
-			</li>
 
 			<li class="btn-group nav-item d-xl-inline-flex d-none">
 				<a href="#" data-provide="fullscreen" class="waves-effect waves-light nav-link btn-primary-light svg-bt-icon" title="Full Screen">
@@ -173,7 +105,7 @@
 			</li>
 
 			<li class="btn-group nav-item">
-				<a href="reports.html" class="waves-effect waves-light nav-link bg-primary btn-primary w-auto fs-14" title="Full Screen">
+				<a href="#" class="waves-effect waves-light nav-link bg-primary btn-primary w-auto fs-14" title="Full Screen">
 					Reports
 			    </a>
 			</li>
