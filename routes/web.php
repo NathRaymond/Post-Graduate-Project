@@ -38,6 +38,27 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('get_user_by_id');
             Route::get('/delete', [App\Http\Controllers\UserController::class, 'delete'])->name('user.destroy');
         });
+        Route::group(['prefix' => 'role'], function () {
+            Route::get('/', [App\Http\Controllers\RolesController::class, 'index'])->name('roles_home');
+            Route::get('/create', [App\Http\Controllers\RolesController::class, 'create'])->name('create_new_role');
+            Route::post('/store', [App\Http\Controllers\RolesController::class, 'store'])->name('roles.store');
+            Route::get('/roleList', [App\Http\Controllers\RolesController::class, 'getAccountRolesList'])->name('get_role_list');
+            Route::get('/edit/{id}', [App\Http\Controllers\RolesController::class, 'edit'])->name('edit_role');
+            Route::get('/show/{id}', [App\Http\Controllers\RolesController::class, 'show'])->name('show_role');
+            Route::any('/update/{id}', [App\Http\Controllers\RolesController::class, 'update'])->name('update_role');
+            Route::get('/delete', [App\Http\Controllers\RolesController::class, 'destroy'])->name('role.destroy');
+            Route::get('/rolelist', [App\Http\Controllers\RolesController::class, 'getRolelist'])->name('role_list');
+        });
+
+        Route::group(['prefix' => 'session'], function () {
+            Route::get('/', [App\Http\Controllers\AcademicSessionController::class, 'index'])->name('academic_session_home');
+            Route::POST('/create', [App\Http\Controllers\AcademicSessionController::class, 'create'])->name('create_new_session');
+
+        });
+        Route::group(['prefix' => 'programme'], function () {
+            Route::get('/', [App\Http\Controllers\ProgrammeController::class, 'index'])->name('programmes_home');
+
+        });
 
 
     });
