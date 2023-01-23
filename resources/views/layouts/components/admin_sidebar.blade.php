@@ -31,7 +31,7 @@
                         <a class="dropdown-item" href="mailbox.html"><i class="ti-email"></i> Inbox</a>
                         <a class="dropdown-item" href="contact_app_chat.html"><i class="ti-link"></i> Conversation</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="auth_login.html"><i class="ti-lock"></i> Logout</a>
+                        <a class="dropdown-item" href="/logout"><i class="ti-lock"></i> Logout</a>
                     </div>
                 </div>
             </div>
@@ -66,7 +66,7 @@
                                             class="path2"></span></i>Programmes</a></li>
                             <li><a href="#"><i class="icon-Commit"><span class="path1"></span><span
                                             class="path2"></span></i>Courses</a></li>
-                            <li><a href="#"><i class="icon-Commit"><span class="path1"></span><span
+                            <li><a href="{{route('fees_home')}}"><i class="icon-Commit"><span class="path1"></span><span
                                             class="path2"></span></i>Fees</a></li>
                             <li><a href="#"><i class="icon-Commit"><span class="path1"></span><span
                                             class="path2"></span></i>Special Control</a></li>

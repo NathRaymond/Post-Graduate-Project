@@ -59,6 +59,10 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/', [App\Http\Controllers\Admin\ProgrammesController::class, 'index'])->name('programmes_home');
             Route::post('/create', [App\Http\Controllers\Admin\ProgrammesController::class, 'create'])->name('create-new-programme');
         });
+        Route::group(['prefix' => 'fees'], function () {
+            Route::get('/', [App\Http\Controllers\Admin\FeeController::class, 'index'])->name('fees_home');
+            Route::post('/create', [App\Http\Controllers\Admin\FeeController::class, 'create'])->name('create-new-fee');
+        });
 
 
     });
