@@ -32,11 +32,16 @@ Route::group(['middleware' => 'auth'], function () {
         });
     });
     Route::get('/get_lga', [App\Http\Controllers\AgentController::class, 'getLGA'])->name("get_state_lga");
-Route::group(['prefix' => 'student'], function () {
 
-   });
+    Route::group(['prefix' => 'student'], function () {
+        Route::get('/dashboard', [App\Http\Controllers\Student\StudentController::class, 'studentindex'])->name('studentpage');
 
+        Route::get('/registration', [App\Http\Controllers\Student\StudentRegistrationController::class, 'studentregistration'])->name('student_registration_page');
+        Route::get('/payment', [App\Http\Controllers\Student\StudentRegistrationController::class, 'studentpayment'])->name('student_payment_page');
+        
+    });
+  
 });
    Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name("logout");
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
