@@ -17,7 +17,7 @@
 	<!-- Style-->
 	<link rel="stylesheet" href="{{ asset('adminassets/src/css/style.css')}}">
 	<link rel="stylesheet" href="{{ asset('adminassets/src/css/skin_color.css')}}">
-
+	<meta name="csrf-token" content="{{ csrf_token() }}">
   </head>
 
 <body class="hold-transition light-skin sidebar-mini theme-primary fixed">

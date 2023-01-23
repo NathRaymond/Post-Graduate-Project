@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use function App\Helpers\api_request_response;
+use function App\Helpers\bad_response_status_code;
+use function App\Helpers\success_status_code;
 use App\Models\Programmes;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -24,9 +26,36 @@ class ProgrammesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        try{
+            $input = $request->all();
+            $available = Programmes::where('description', $request->description)->first();
+            if($available){
+                return api_request_response(
+                    "error",
+                    "Programme already created ",
+                    bad_response_status_code()
+                );
+            }
+            $program = Programmes::create($input);
+            $programmes = Programmes::all();
+            return api_request_response(
+                "ok",
+                "Programme  Created Succesfully!",
+                success_status_code(),
+                $programmes
+            );
+        }
+        catch(\Exception $exception){
+
+            return api_request_response(
+                "error",
+                $exception->getMessage(),
+                bad_response_status_code()
+            );
+            // return Redirect::back()->withErrors(["exception" => $exception->getMessage()])->withInput($request->all());
+        }
     }
 
     /**
