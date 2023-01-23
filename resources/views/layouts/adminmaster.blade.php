@@ -510,10 +510,8 @@
   <!-- /quick_panel_toggle -->
 
 
-
 </div>
 <!-- ./wrapper -->
-
 
 
 

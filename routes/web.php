@@ -55,20 +55,22 @@ Route::group(['middleware' => 'auth'], function () {
             Route::POST('/create', [App\Http\Controllers\AcademicSessionController::class, 'create'])->name('create_new_session');
 
         });
-        Route::group(['prefix' => 'programme'], function () {
-            Route::get('/', [App\Http\Controllers\ProgrammeController::class, 'index'])->name('programmes_home');
-
+        Route::group(['prefix' => 'programmes'], function () {
+            Route::get('/', [App\Http\Controllers\Admin\ProgrammesController::class, 'index'])->name('programmes_home');
+            Route::post('/create', [App\Http\Controllers\Admin\ProgrammesController::class, 'create'])->name('create-new-programme');
         });
 
 
     });
 
+        
+    });
+
+
+    
     Route::get('/get_lga', [App\Http\Controllers\AgentController::class, 'getLGA'])->name("get_state_lga");
     Route::group(['prefix' => 'student'], function () {
 
     });
 
-});
    Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name("logout");
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
