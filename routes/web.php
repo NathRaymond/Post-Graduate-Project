@@ -19,6 +19,9 @@ Route::get('/register-agent', function () {
 Route::get('/', function () {
     return  redirect()->route('login');
 });
+Route::get('/getfee', [App\Http\Controllers\Auth\RegisterController::class, 'getFee'])->name('get_fee_by_type');
+Route::get('/new-registration', [App\Http\Controllers\Auth\RegisterController::class, 'register'])->name('register_page');
+Route::post('/temporary-registration', [App\Http\Controllers\Auth\RegisterController::class, 'tempRegistration'])->name('temporary-registration');
 Route::POST('/register-agent', [App\Http\Controllers\AgentController::class, 'registerAgent'])->name('register_agent');
 
 Auth::routes();
