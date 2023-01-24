@@ -17,7 +17,7 @@ class CreateRegistrationFilesTable extends Migration
             $table->id();
             $table->string("file");
             $table->string("email");
-            $table->string("description")->nullable();
+            $table->text("description")->nullable();
             $table->string("validated")->default(0);
             $table->timestamps();
         });

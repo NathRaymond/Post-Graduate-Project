@@ -20,6 +20,8 @@ Route::get('/', function () {
     return  redirect()->route('login');
 });
 Route::get('/getfee', [App\Http\Controllers\Auth\RegisterController::class, 'getFee'])->name('get_fee_by_type');
+Route::get('/upload-receipt', [App\Http\Controllers\Auth\RegisterController::class, 'uploadReceipt'])->name('upload-receipt');
+Route::post('/upload-receipt', [App\Http\Controllers\Auth\RegisterController::class, 'saveReceipt'])->name('upload-receipt-file');
 Route::get('/new-registration', [App\Http\Controllers\Auth\RegisterController::class, 'register'])->name('register_page');
 Route::post('/temporary-registration', [App\Http\Controllers\Auth\RegisterController::class, 'tempRegistration'])->name('temporary-registration');
 Route::POST('/register-agent', [App\Http\Controllers\AgentController::class, 'registerAgent'])->name('register_agent');
@@ -65,6 +67,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::group(['prefix' => 'fees'], function () {
             Route::get('/', [App\Http\Controllers\Admin\FeeController::class, 'index'])->name('fees_home');
             Route::post('/create', [App\Http\Controllers\Admin\FeeController::class, 'create'])->name('create-new-fee');
+        });
+        Route::group(['prefix' => 'payments'], function () {
+            Route::get('/', [App\Http\Controllers\PaymentController::class, 'index'])->name('fees_home');
+            Route::get('/awaiting-confirmation', [App\Http\Controllers\PaymentController::class, 'awaitingConfirmation'])->name('awaiting-confirmation');
         });
 
 

@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class RegistrationFile extends Model
 {
     use HasFactory;
+    protected $fillable = [
+
+        'file', 'description','validated', 'email'
+
+    ];
 }

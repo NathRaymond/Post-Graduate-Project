@@ -12,6 +12,7 @@ use App\Models\AcademicSession;
 use App\Models\Programmes;
 use App\Models\FeeCategory;
 use App\Models\TemporalRegistration;
+use App\Models\RegistrationFile;
 use App\Models\Fee;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -158,6 +159,52 @@ class RegisterController extends Controller
                 $exception->getMessage(),
                 bad_response_status_code()
             );
+        }
+    }
+
+    public function uploadReceipt(){
+        return view('auth.upload');
+    }
+
+    public function saveReceipt(Request $request){
+        try {
+            // dd($request->all());
+            $input = $request->all();
+            $checkEmail = TemporalRegistration::where('email', $input['email'])->first();
+            if(!$checkEmail){
+                return api_request_response(
+                    'error',
+                    "Invalid Email Address",
+                    bad_response_status_code()
+                );
+            }
+            if ($request->has('file')) {
+                $input['file'] = $fileName = time() . '.' . $request->file->extension();
+                $request->file->move(public_path('receipts'), $fileName);
+            }
+            $saveFile = RegistrationFile::create($input);
+            return api_request_response(
+                "ok",
+                "Search Complete!",
+                success_status_code(),
+                []
+            );
+        } catch (\Exception $exception) {
+            $errorCode = $exception->errorInfo[1] ?? $exception;
+            if (is_int($errorCode)) {
+                return api_request_response(
+                    'error',
+                    $exception->errorInfo[2],
+                    bad_response_status_code()
+                );
+            } else {
+                return api_request_response(
+                    'error',
+                    $exception->getMessage(),
+                    bad_response_status_code()
+                );
+                // dd($exception);
+            }
         }
     }
 

@@ -59,7 +59,7 @@
 										<!-- /.col -->
 										<div class="col-6">
 										 <div class="fog-pwd text-end">
-											<a href="javascript:void(0)" class="hover-warning"><i class="ion ion-locked"></i> Forgot pwd?</a><br>
+											<a href="{{route('upload-receipt')}}" class="hover-warning"><i class="ion ion-locked"></i> Upload Receipt</a><br>
 										  </div>
 										</div>
 										<!-- /.col -->

@@ -117,6 +117,8 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
+                            <li><a href="{{route('awaiting-confirmation')}}"><i class="icon-Commit"><span class="path1"></span><span
+                                            class="path2"></span></i>Awaiting Confirmation </a></li>
                             <li><a href="#"><i class="icon-Commit"><span class="path1"></span><span
                                             class="path2"></span></i>Payment </a></li>
                         </ul>
