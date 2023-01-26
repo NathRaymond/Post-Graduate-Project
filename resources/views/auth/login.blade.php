@@ -59,7 +59,7 @@
 										<!-- /.col -->
 										<div class="col-6">
 										 <div class="fog-pwd text-end">
-											<a href="javascript:void(0)" class="hover-warning"><i class="ion ion-locked"></i> Forgot pwd?</a><br>
+											<a href="{{route('upload-receipt')}}" class="hover-warning"><i class="ion ion-locked"></i> Upload Receipt</a><br>
 										  </div>
 										</div>
 										<!-- /.col -->
@@ -70,7 +70,7 @@
 									  </div>
 								</form>	
 								<div class="text-center">
-									<p class="mt-15 mb-0">Don't have an account? <a href="/register" class="text-warning ms-5">Sign Up</a></p>
+									<p class="mt-15 mb-0">Don't have an account? <a href="{{route('register_page')}}" class="text-warning ms-5">Sign Up</a></p>
 								</div>	
 							</div>						
 						</div>

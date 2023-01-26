@@ -71,7 +71,7 @@
                                             class="path2"></span></i>Programmes</a></li>
                             <li><a href="#"><i class="icon-Commit"><span class="path1"></span><span
                                             class="path2"></span></i>Courses</a></li>
-                            <li><a href="#"><i class="icon-Commit"><span class="path1"></span><span
+                            <li><a href="{{route('fees_home')}}"><i class="icon-Commit"><span class="path1"></span><span
                                             class="path2"></span></i>Fees</a></li>
                             <li><a href="#"><i class="icon-Commit"><span class="path1"></span><span
                                             class="path2"></span></i>Special Control</a></li>
@@ -124,6 +124,8 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
+                            <li><a href="{{route('awaiting-confirmation')}}"><i class="icon-Commit"><span class="path1"></span><span
+                                            class="path2"></span></i>Awaiting Confirmation </a></li>
                             <li><a href="#"><i class="icon-Commit"><span class="path1"></span><span
                                             class="path2"></span></i>Payment </a></li>
                         </ul>

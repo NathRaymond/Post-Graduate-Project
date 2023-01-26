@@ -12,9 +12,24 @@ use Illuminate\Support\Facades\Auth;
 use App\Student; // Student Model
 use App\Payment; // Payment Model
 use App\User; // User model
+use App\Models\TemporalRegistration; 
+use App\Models\RegistrationFile; 
 class PaymentController extends Controller
 {
 
+  public function awaitingConfirmation(){
+    $files = RegistrationFile::all();
+    $file = RegistrationFile::where('validated', 0)->pluck('email')->toArray();
+    $pending =  TemporalRegistration::wherein('email', $file)->get();
+    $pending->map(function ($transaction) use ($files) {
+          $value = $files->where('email', $transaction->email)->first();
+          $transaction->file = $value->file;
+  
+    });
+    // dd($pending);
+    $data['pending']  = $pending;
+    return view('admin.payments.pending', $data);
+  }
     /**
      * Redirect the User to Paystack Payment Page
      * @return Url
