@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePropertyDetailsTable extends Migration
+class CreateStudentPublicationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreatePropertyDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('property_details', function (Blueprint $table) {
+        Schema::create('student_publications', function (Blueprint $table) {
             $table->id();
+            $table->integer('student_id');
+            $table->string('title');
+            $table->date('date_published');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreatePropertyDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('property_details');
+        Schema::dropIfExists('student_publications');
     }
 }

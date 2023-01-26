@@ -222,12 +222,12 @@ class UserController extends Controller
         // try {
 
             if ($this->user = User::where('email', $this->input['email'])->first()) {
-                throw new \Exception('This email already exists!');
+                return redirect()->back()->withErrors('This email already exists!');
             }
 
 
             if ($this->user = User::where('phone_number', $this->input['phone_number'])->first()) {
-                throw new \Exception('This phone number has been used!');
+                return redirect()->back()->withErrors('This phone number has been used!');
             }
 
 
@@ -321,12 +321,7 @@ class UserController extends Controller
         //Session::flash( 'message', 'Delete successfully.' );
     }
 
-    public function createSuperAdmin(Request $request)
-    {
-        $this->is_super_admin = true;
 
-        $this->createUser($request);
-    }
 
     public function getCurrentUser(Request $request)
     {
@@ -460,5 +455,14 @@ class UserController extends Controller
             return redirect()->back()->withErrors(["exception" => $e->getMessage()]);
             //throw $th;
         }
+    }
+
+    public function edit(Request $request)
+    {
+        $id = $request->id;
+        // dd($id);
+        $premise_id = User::where('id', $id)->with('roles')->first();
+        return response()->json($premise_id);
+        # code...
     }
 }

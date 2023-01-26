@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAcademicSessionsTable extends Migration
+class CreateStudentContactsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateAcademicSessionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('academic_sessions', function (Blueprint $table) {
+        Schema::create('student_contacts', function (Blueprint $table) {
             $table->id();
-            $table->string('description');
-            $table->string('calendar');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->integer('student_id');
+            $table->string('email');
+            $table->integer('country_id');
+            $table->string('state');
+            $table->string('city');
+            $table->string('c_o');
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ class CreateAcademicSessionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('academic_sessions');
+        Schema::dropIfExists('student_contacts');
     }
 }
