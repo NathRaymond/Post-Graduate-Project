@@ -3,7 +3,7 @@
     <section class="sidebar position-relative">
         <div class="d-flex align-items-center logo-box justify-content-start d-md-block d-none">
             <!-- Logo -->
-            <a href="index.html" class="logo">
+            <a href="#" class="logo">
                 <!-- logo-->
                 <div class="logo-mini">
                     <span class="light-logo"><img src="{{ asset('funaab-logo.jpg') }}"

@@ -9,11 +9,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use Paystack;// Paystack package
 use Illuminate\Support\Facades\Auth;
-use App\Student; // Student Model
-use App\Payment; // Payment Model
-use App\User; // User model
-use App\Models\TemporalRegistration; 
-use App\Models\RegistrationFile; 
+use App\Models\Student; // Student Model
+use App\Models\Payment; // Payment Model
+use App\Models\User; // User model
+use App\Models\TemporalRegistration;
+use App\Models\RegistrationFile;
 class PaymentController extends Controller
 {
 
@@ -24,7 +24,7 @@ class PaymentController extends Controller
     $pending->map(function ($transaction) use ($files) {
           $value = $files->where('email', $transaction->email)->first();
           $transaction->file = $value->file;
-  
+
     });
     // dd($pending);
     $data['pending']  = $pending;
@@ -34,12 +34,12 @@ class PaymentController extends Controller
      * Redirect the User to Paystack Payment Page
      * @return Url
      */
-     
+
        public function paystackIndex()
     {
         return view('paystack_payment_page');
     }
-    
+
   public function welcome()
   {
     return view('welcome3');
@@ -50,9 +50,9 @@ class PaymentController extends Controller
         // dd("here");
       // $paystack = new Paystack();
       if(empty($request->email)){
-         $input["email"] = "persieworm@gmail.com";  
+         $input["email"] = "persieworm@gmail.com";
       }
-     
+
       //dd($input["email"]);
         try{
             $donorSubscription = Payment::create([
@@ -67,7 +67,7 @@ class PaymentController extends Controller
         }catch(\Exception $e) {
             return redirect()->back()->withErrors(['exception' => $e->getMessage()]);
             // return Redirect::back()->withMessage(['msg'=>'The paystack token has expired. Please refresh the page and try again.', 'type'=>'error']);
-        }        
+        }
     }
 
     /**
@@ -87,19 +87,19 @@ class PaymentController extends Controller
         // $number = 'year'.$number;
         // dd($status);
         if($status == "success"){ //Checking to Ensure the transaction was succesful
-          
+
            // Payment::where('uuid', $paymentDetails['data']['reference'])->update(['payment_status' => 1]);
             Payment::where('uuid', $paymentDetails['data']['reference'])->update(['payment_status' => 1, 'amount' => $paymentDetails['data']['amount'] ]);
             return view('welcome3')->with("message", "You have successfully donated");
             // redirect()->route('welcome')->with("message", "You have successfully donated");
             // redirect()->route('welcome')->with("message", "You have successfully donated");
         }
-      
+
         // Now you have the payment details,
         // you can store the authorization_code in your DB to allow for recurrent subscriptions
         // you can then redirect or do whatever you want
     }
-    
+
     public function index(){
        $data['payments'] = Payment::orderBy('created_at', 'desc')->get();
     //    dd($data);
