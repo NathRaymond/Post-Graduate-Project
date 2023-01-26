@@ -42,13 +42,15 @@
                                     aria-controls="profile" aria-selected="false">SSCE (O Level Results)</a>
                                 <a class="dropdown-item" id="profile-tab2" data-toggle="tab" href="#profile2" role="tab"
                                     aria-controls="profile2" aria-selected="false">Other Certificate</a>
-                                <a class="dropdown-item" id="profile-tab2" data-toggle="tab" href="#profile2" role="tab"
-                                    aria-controls="profile2" aria-selected="false">Publication</a>
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
+                            <a class="nav-link" id="prizes" data-toggle="tab" href="#contact" role="tab"
                                 aria-controls="contact" aria-selected="false">Prizes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab3" data-toggle="tab" href="#profile3" role="tab"
+                                aria-controls="profile2" aria-selected="false">Publication</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="appointment-tab" data-toggle="tab" href="#appointment" role="tab"
@@ -70,11 +72,14 @@
                                 @include('layouts.studentmodal.olevelcontent')
                             </p>
                         </div>
+                        <div class="tab-pane fade" id="profile3" role="tabpanel" aria-labelledby="profile-tab3">
+                            <p class="">
+                                @include('layouts.studentmodal.publicationcontent')
+                            </p>
+                        </div>
                         <div class="tab-pane fade" id="profile2" role="tabpanel" aria-labelledby="profile-tab2">
                             <p class="">
-                                Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                @include('layouts.studentmodal.certificatecontent')
                             </p>
                         </div>
                         <div class="tab-pane fade" id="course" role="tabpanel" aria-labelledby="course-tab">
@@ -89,6 +94,9 @@
                         </div>
                         <div class="tab-pane fade" id="appointment" role="tabpanel" aria-labelledby="appointment-tab">
                             @include('layouts.studentmodal.appointmentcontent')
+                        </div>
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="prizes">
+                            @include('layouts.studentmodal.prizecontent')
                         </div>
                         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                             <p class="">

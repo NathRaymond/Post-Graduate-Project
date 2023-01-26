@@ -31,16 +31,19 @@
                 </div>
                 <div class="modal-body">
                     <div class="box-body wizard-content">
-                        <form action="#" class="tab-wizard wizard-circle">
+                        <form method="POST" action="{{route('create_regStock')}}" id="createCourse">
+                            @csrf
                             <section>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="SurnameName5" class="form-label">Department :</label>
-                                            <select class="form-select" id="sex" name="sex">
+                                            <select class="form-select" id="sex" name="dept_id">
                                                 <option value="">Select Department</option>
-                                                <option value="Dept of Horiculture">Dept of Horiculture</option>
-                                                <option value="Dept of Animal Science">Dept of Animal Science</option>
+                                                @foreach ($departments as $department )
+                                                <option value="{{ $department->id }}">{{$department->description}}
+                                                </option>
+                                                @endforeach
                                             </select>
 
                                         </div>
@@ -48,10 +51,12 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="firstName5" class="form-label">Degree/Programme :</label>
-                                            <select class="form-select" id="degree" name="degree">
+                                            <select class="form-select" id="degree" name="prog_id">
                                                 <option value="">Select Degree/Programme</option>
-                                                <option value="M.AgSE">M.AgSE</option>
-                                                <option value="PhD.AgSE">PhD.AgSE</option>
+                                                @foreach ($programmes as $programme )
+                                                <option value="{{ $programme->id }}">{{$programme->description}}
+                                                </option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -60,17 +65,18 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="middleName5" class="form-label">Field of Interest :</label>
-                                            <select class="form-select" id="filed_of_interest" name="field_of_interest">
+                                            <select class="form-select" id="filed_of_interest" name="course_id">
                                                 <option value="">Select Field of Interest</option>
-                                                <option value="Animal">Animal Field</option>
-                                                <option value="Plant">Plant Field</option>
+                                                @foreach ($courses as $course )
+                                                <option value="{{ $course->id }}">{{$course->description}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="sex" class="form-label">Mode of Study</label>
-                                            <select class="form-select" id="Mode of Study" name="Mode_of_study">
+                                            <select class="form-select" id="Mode of Study" name="mode_of_study">
                                                 <option value="">Mode of Study</option>
                                                 <option value="Full Time">Full Time</option>
                                                 <option value="Part Time">Part Time</option>
@@ -79,18 +85,58 @@
                                     </div>
                                 </div>
                             </section>
+                            <div class="modal-footer">
+                                <div class="text-right">
+                                    <button class="btn btn-danger " data-dismiss="modal"><i
+                                            class="flaticon-cancel-12"></i> Close</button>
+                                    <button type="submit" class="btn btn-success">Save</button>
+                                </div>
+                            </div>
                         </form>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <div class="text-right">
-                    <button class="btn btn-danger " data-dismiss="modal"><i class="flaticon-cancel-12"></i> Close</button>
-                    <button type="button" class="btn btn-success">Save</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </body>
+<script src="{{ asset('js\requestController.js') }}"></script>
+<script src="{{ asset('js\formController.js') }}"></script>
+<script src="{{ asset('js/sweetalert/dist/sweetalert.min.js') }}"></script>
+
+<script>
+    $(document).ready(function() {
+             $.ajaxSetup({
+                 headers: {
+                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                 }
+             });
+
+             $("#add-btn").on('click', async function(e) {
+                        e.preventDefault();
+                try {
+                    const willUpdate = await new swal({
+                    title: "Confirm Form submit",
+                    text: `Are you sure you want to submit this form?`,
+                    icon: "warning",
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes!",
+                    showCancelButton: true,
+                    buttons: ["Cancel", "Yes, Submit"]
+                });
+                if (willUpdate.isConfirmed == true) {
+                    $("#createCourse").submit();
+                } else {
+                    swal("Course will not be save  :)");
+                }
+                } catch (e) {
+                    if ('message' in e) {
+                        console.log('e.message', e.message);
+                        swal("Opss", e.message, "error");
+                        loader.hide();
+                    }
+                }
+            })
+         })
+</script>
 
 </html>

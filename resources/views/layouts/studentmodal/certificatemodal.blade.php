@@ -17,12 +17,12 @@
 </head>
 
 <body class="hold-transition light-skin sidebar-mini theme-primary fixed">
-    <div class="modal fade modal-notification" id="standardModal" tabindex="-1" role="dialog"
-        aria-labelledby="standardModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document" id="standardModalLabel">
+    <div id="fadeleftModal" class="modal animated fadeInLeft custo-fadeInLeft" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="myLargeModalLabel">Add Refree</h5>
+                    <h5 class="modal-title">Modal Header</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -34,64 +34,53 @@
                 </div>
                 <div class="modal-body">
                     <div class="box-body wizard-content">
-                        <form method="post" action="{{ route('create_regrefree') }}" class="tab-wizard wizard-circle"
-                            id="createRefree">
+                        <form method="post" action="{{ route('create_regolevel') }}" id="createCourse"
+                            class="tab-wizard wizard-circle">
                             @csrf
                             <section>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="">
                                         <div class="form-group">
-                                            <label for="SurnameName5" class="form-label">Title :</label>
-                                            <input type="text" name="title" class="form-control" id="middleName5">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="firstName5" class="form-label">Surname :</label>
-                                            <input type="text" name="surname" class="form-control" id="middleName5">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="SurnameName5" class="form-label">Firstname :</label>
-                                            <input type="text" name="firstname" class="form-control" id="middleName5">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="SurnameName5" class="form-label">Middlename :</label>
-                                            <input type="text" name="middlename" class="form-control" id="middleName5">
+                                            <label for="SurnameName5" class="form-label">Exam :</label>
+                                            <select class="form-select" name="exam_type">
+                                                <option value="">Select Olevel</option>
+                                                <option value="Waec">SSCE</option>
+                                                <option value="Waec">Waec</option>
+                                                <option value="Neco">Neco</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="middleName5" class="form-label">Address :</label>
-                                            <input type="text" name="address" class="form-control" id="middleName5">
+                                            <label for="firstName5" class="form-label">Registration Number :</label>
+                                            <input type="text" class="form-control" name="reg_number">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="middleName5" class="form-label">Email :</label>
-                                            <input type="text" name="email" class="form-control" id="middleName5">
+                                            <label for="firstName5" class="form-label">Year :</label>
+                                            <input type="text" class="form-control" name="year">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="firstName5" class="form-label">Post :</label>
-                                            <input type="text" name="post" class="form-control" id="middleName5">
+                                            <label for="SurnameName5" class="form-label">Subject :</label>
+                                            <select class="form-select" id="Subject" name="subject_id">
+                                                <option value="">Select Subject</option>
+                                                @foreach ($subjects as $subject )
+                                                <option value="{{ $subject->id }}">{{$subject->subject}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="sex" class="form-label">Phone Number :</label>
-                                            <input type="text" name="phone_number" class="form-control"
-                                                id="middleName5">
+                                            <label for="firstName5" class="form-label">Grade :</label>
+                                            <input type="text" class="form-control" name="grade">
                                         </div>
                                     </div>
                                 </div>
@@ -106,6 +95,10 @@
                             </div>
                         </form>
                     </div>
+                </div>
+                <div class="modal-footer md-button">
+                    <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</button>
+                    <button type="button" class="btn btn-primary">Save</button>
                 </div>
             </div>
         </div>
@@ -144,6 +137,7 @@
 <script src="{{ asset('js\requestController.js') }}"></script>
 <script src="{{ asset('js\formController.js') }}"></script>
 <script src="{{ asset('js/sweetalert/dist/sweetalert.min.js') }}"></script>
+
 <script>
     $(document).ready(function() {
              $.ajaxSetup({
@@ -165,7 +159,7 @@
                     buttons: ["Cancel", "Yes, Submit"]
                 });
                 if (willUpdate.isConfirmed == true) {
-                    $("#createRefree").submit();
+                    $("#createCourse").submit();
                 } else {
                     swal("Course will not be save  :)");
                 }

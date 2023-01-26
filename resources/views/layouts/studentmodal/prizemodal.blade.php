@@ -17,12 +17,12 @@
 </head>
 
 <body class="hold-transition light-skin sidebar-mini theme-primary fixed">
-    <div class="modal fade modal-notification" id="standardModal" tabindex="-1" role="dialog"
-        aria-labelledby="standardModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document" id="standardModalLabel">
+    <div id="fadeinModal" class="modal animated fadeInDown" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="myLargeModalLabel">Add Refree</h5>
+                    <h5 class="modal-title">Add Prizes</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -32,66 +32,18 @@
                         </svg>
                     </button>
                 </div>
+
                 <div class="modal-body">
                     <div class="box-body wizard-content">
-                        <form method="post" action="{{ route('create_regrefree') }}" class="tab-wizard wizard-circle"
-                            id="createRefree">
+                        <form method="post" action="{{ route('create_regprize') }}" id="createCourse"
+                            class="tab-wizard wizard-circle">
                             @csrf
                             <section>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="">
                                         <div class="form-group">
-                                            <label for="SurnameName5" class="form-label">Title :</label>
-                                            <input type="text" name="title" class="form-control" id="middleName5">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="firstName5" class="form-label">Surname :</label>
-                                            <input type="text" name="surname" class="form-control" id="middleName5">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="SurnameName5" class="form-label">Firstname :</label>
-                                            <input type="text" name="firstname" class="form-control" id="middleName5">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="SurnameName5" class="form-label">Middlename :</label>
-                                            <input type="text" name="middlename" class="form-control" id="middleName5">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="middleName5" class="form-label">Address :</label>
-                                            <input type="text" name="address" class="form-control" id="middleName5">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="middleName5" class="form-label">Email :</label>
-                                            <input type="text" name="email" class="form-control" id="middleName5">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="firstName5" class="form-label">Post :</label>
-                                            <input type="text" name="post" class="form-control" id="middleName5">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="sex" class="form-label">Phone Number :</label>
-                                            <input type="text" name="phone_number" class="form-control"
-                                                id="middleName5">
+                                            <label for="firstName5" class="form-label">Prize Description :</label>
+                                            <input type="text" class="form-control" name="description">
                                         </div>
                                     </div>
                                 </div>
@@ -144,6 +96,7 @@
 <script src="{{ asset('js\requestController.js') }}"></script>
 <script src="{{ asset('js\formController.js') }}"></script>
 <script src="{{ asset('js/sweetalert/dist/sweetalert.min.js') }}"></script>
+
 <script>
     $(document).ready(function() {
              $.ajaxSetup({
@@ -165,9 +118,9 @@
                     buttons: ["Cancel", "Yes, Submit"]
                 });
                 if (willUpdate.isConfirmed == true) {
-                    $("#createRefree").submit();
+                    $("#createCourse").submit();
                 } else {
-                    swal("Course will not be save  :)");
+                    swal("Prize will not be save  :)");
                 }
                 } catch (e) {
                     if ('message' in e) {

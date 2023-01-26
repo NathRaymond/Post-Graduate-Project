@@ -34,13 +34,15 @@
                 </div>
                 <div class="modal-body">
                     <div class="box-body wizard-content">
-                        <form action="#" class="tab-wizard wizard-circle">
+                        <form method="post" action="{{ route('create_regolevel') }}" id="createCourse"
+                            class="tab-wizard wizard-circle">
+                            @csrf
                             <section>
                                 <div class="row">
                                     <div class="">
                                         <div class="form-group">
-                                            <label for="SurnameName5" class="form-label">O'level :</label>
-                                            <select class="form-select" id="o'level" name="o'level">
+                                            <label for="SurnameName5" class="form-label">Exam :</label>
+                                            <select class="form-select" name="exam_type">
                                                 <option value="">Select O'level</option>
                                                 <option value="Waec">SSCE</option>
                                                 <option value="Waec">Waec</option>
@@ -52,30 +54,46 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
+                                            <label for="firstName5" class="form-label">Registration Number :</label>
+                                            <input type="text" class="form-control" name="reg_number">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="firstName5" class="form-label">Year :</label>
+                                            <input type="text" class="form-control" name="year">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
                                             <label for="SurnameName5" class="form-label">Subject :</label>
-                                            <select class="form-select" id="Subject" name="Subject">
+                                            <select class="form-select" id="Subject" name="subject_id">
                                                 <option value="">Select Subject</option>
-                                                <option value="Mathematics">Mathematics</option>
-                                                <option value="English">English</option>
+                                                @foreach ($subjects as $subject )
+                                                <option value="{{ $subject->id }}">{{$subject->subject}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="firstName5" class="form-label">Score :</label>
-                                            <input type="text" class="form-control" id="middleName5">
+                                            <label for="firstName5" class="form-label">Grade :</label>
+                                            <input type="text" class="form-control" name="grade">
                                         </div>
                                     </div>
                                 </div>
                             </section>
+                            <div class="modal-footer">
+                                <div class="text-right">
+                                    <button class="btn btn-danger " data-dismiss="modal"><i
+                                            class="flaticon-cancel-12"></i>
+                                        Close</button>
+                                    <button type="submit" class="btn btn-success">Save</button>
+                                </div>
+                            </div>
                         </form>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <div class="text-right">
-                        <button class="btn btn-danger " data-dismiss="modal"><i class="flaticon-cancel-12"></i>
-                            Close</button>
-                        <button type="button" class="btn btn-success">Save</button>
                     </div>
                 </div>
             </div>
@@ -112,5 +130,44 @@
             })
     </script>
 </body>
+<script src="{{ asset('js\requestController.js') }}"></script>
+<script src="{{ asset('js\formController.js') }}"></script>
+<script src="{{ asset('js/sweetalert/dist/sweetalert.min.js') }}"></script>
+
+<script>
+    $(document).ready(function() {
+             $.ajaxSetup({
+                 headers: {
+                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                 }
+             });
+
+             $("#add-btn").on('click', async function(e) {
+                        e.preventDefault();
+                try {
+                    const willUpdate = await new swal({
+                    title: "Confirm Form submit",
+                    text: `Are you sure you want to submit this form?`,
+                    icon: "warning",
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes!",
+                    showCancelButton: true,
+                    buttons: ["Cancel", "Yes, Submit"]
+                });
+                if (willUpdate.isConfirmed == true) {
+                    $("#createCourse").submit();
+                } else {
+                    swal("Course will not be save  :)");
+                }
+                } catch (e) {
+                    if ('message' in e) {
+                        console.log('e.message', e.message);
+                        swal("Opss", e.message, "error");
+                        loader.hide();
+                    }
+                }
+            })
+         })
+</script>
 
 </html>

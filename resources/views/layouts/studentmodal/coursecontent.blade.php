@@ -1,10 +1,9 @@
 @include('layouts.studentmodal.coursemodal')
 
 <div class="text-right">
-    <button type="button" class="btn btn-success mb-2 mr-2" data-toggle="modal" data-target=".bd-example-modal-lg">Add
+    <button type="button" class="btn btn-success mb-2 mr-2 add-btn" data-toggle="modal" data-target=".bd-example-modal-lg">Add
         Course/Degree</button>
 </div>
-</p>
 <div class="container-full">
     <div class="content-header">
         <div class="d-flex align-items-center">
@@ -54,84 +53,6 @@
                             </div>
                         </div>
                         <hr>
-                        {{-- <h4 class="box-title my-20 fw-500 py-20 border-bottom d-block">
-                            Education</h4>
-                        <div class="d-flex no-block fa fa-check-circle text-success">
-                            <h6 class="ms-10 text-dark">Primary education from XYZ
-                                school</h6>
-                        </div>
-                        <div class="d-flex no-block fa fa-check-circle text-success">
-                            <h6 class="ms-10 text-dark">SSC from ABC School</h6>
-                        </div>
-                        <div class="d-flex no-block fa fa-check-circle text-success">
-                            <h6 class="ms-10 text-dark">HSC from ABC School</h6>
-                        </div>
-
-                        <h4 class="box-title my-20 fw-500 py-20 border-bottom d-block">
-                            Certification</h4>
-                        <div class="d-flex no-block fa fa-check-circle text-success">
-                            <h6 class="ms-10 text-dark">Lorem ipsum dolor sit amet,
-                                consectetur
-                                adipiscing elit.</h6>
-                        </div>
-                        <div class="d-flex no-block fa fa-check-circle text-success">
-                            <h6 class="ms-10 text-dark">Excepteur sint occaecat
-                                cupidatat non
-                                proident.</h6>
-                        </div>
-                        <div class="d-flex no-block fa fa-check-circle text-success">
-                            <h6 class="ms-10 text-dark">Lorem ipsum dolor sit amet,
-                                consectetur
-                                adipiscing elit.</h6>
-                        </div>
-                        <div class="d-flex no-block fa fa-check-circle text-success">
-                            <h6 class="ms-10 text-dark">Excepteur sint occaecat
-                                cupidatat non
-                                proident.</h6>
-                        </div>
-                        <div class="d-flex no-block fa fa-check-circle text-success">
-                            <h6 class="ms-10 text-dark">Lorem ipsum dolor sit amet,
-                                consectetur
-                                adipiscing elit.</h6>
-                        </div>
-                        <div class="d-flex no-block fa fa-check-circle text-success">
-                            <h6 class="ms-10 text-dark">Excepteur sint occaecat
-                                cupidatat non
-                                proident.</h6>
-                        </div>
-
-                        <h4 class="box-title my-20 fw-500 py-20 border-bottom d-block">
-                            Subjects</h4>
-                        <div class="d-flex no-block fa fa-check-circle text-success">
-                            <h6 class="ms-10 text-dark">Lorem ipsum dolor sit amet,
-                                consectetur
-                                adipiscing elit.</h6>
-                        </div>
-                        <div class="d-flex no-block fa fa-check-circle text-success">
-                            <h6 class="ms-10 text-dark">Excepteur sint occaecat
-                                cupidatat non
-                                proident.</h6>
-                        </div>
-                        <div class="d-flex no-block fa fa-check-circle text-success">
-                            <h6 class="ms-10 text-dark">Lorem ipsum dolor sit amet,
-                                consectetur
-                                adipiscing elit.</h6>
-                        </div>
-                        <div class="d-flex no-block fa fa-check-circle text-success">
-                            <h6 class="ms-10 text-dark">Excepteur sint occaecat
-                                cupidatat non
-                                proident.</h6>
-                        </div>
-                        <div class="d-flex no-block fa fa-check-circle text-success">
-                            <h6 class="ms-10 text-dark">Lorem ipsum dolor sit amet,
-                                consectetur
-                                adipiscing elit.</h6>
-                        </div>
-                        <div class="d-flex no-block fa fa-check-circle text-success">
-                            <h6 class="ms-10 text-dark">Excepteur sint occaecat
-                                cupidatat non
-                                proident.</h6>
-                        </div> --}}
                     </div>
                 </div>
             </div>

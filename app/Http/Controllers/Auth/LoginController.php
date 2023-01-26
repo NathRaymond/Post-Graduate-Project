@@ -24,7 +24,7 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'user_type' => 'student'])) {
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'user_type' => 'admin'])) {
             // The user is active, not suspended, and exists.
             //    if (Auth::user()->is_first_time == 1) {
             //     return redirect()->intended('/password/change');
@@ -33,7 +33,7 @@ class LoginController extends Controller
                 return redirect()->intended('/student');
             // }
 
-        } else if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'user_type' => 'admin'])) {
+        } else if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'user_type' => 'student'])) {
 
             // The user is active, not suspended, and exists.
 

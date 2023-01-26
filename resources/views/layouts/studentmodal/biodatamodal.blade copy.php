@@ -44,6 +44,7 @@
             border-radius: 5px;
             border: 1px solid transparent;
         }
+
     </style>
 </head>
 
@@ -70,6 +71,7 @@
                     <div class="box-body wizard-content">
                         <form method="post" id="frm_main" class="tab-wizard wizard-circle">
                             @csrf
+                            <!-- Step 1 -->
                             <h6>Bio Data</h6>
                             <section>
                                 <div class="row">
@@ -138,8 +140,8 @@
                                             <label for="addressline2" class="form-label">Nationality :</label>
                                             <select class="form-select" id="location3" name="nationality">
                                                 <option value="">Select Nationality</option>
-                                                @foreach ($countries as $country)
-                                                <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                                @foreach($countries as $country)
+                                                    <option value="{{ $country->id }}">{{ $country->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -151,8 +153,8 @@
                                             <label for="location3" class="form-label">State of Origin :</label>
                                             <select class="form-select" id="location3" name="state_of_origin">
                                                 <option value="">State of Origin</option>
-                                                @foreach ($states as $state )
-                                                <option value="{{ $state->id }}">{{$state->state}}</option>
+                                                @foreach($states as $state )
+                                                    <option value="{{ $state->id }}">{{ $state->state }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -188,16 +190,18 @@
                                         </div>
                                     </div>
                                 </div>
-                                <hr>
-                                <h6>Contact Address</h6>
+                            </section>
+                            <!-- Step 2. -->
+                            <h6>Contact Address</h6>
+                            <section>
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="State" class="form-label">Country :</label>
                                             <select class="form-select" id="Country" name="country">
                                                 <option value="">Select Country</option>
-                                                @foreach ($countries as $country)
-                                                <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                                @foreach($countries as $country)
+                                                    <option value="{{ $country->id }}">{{ $country->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -207,8 +211,8 @@
                                             <label for="State" class="form-label">State :</label>
                                             <select class="form-select" id="Location1" name="state">
                                                 <option value="">Select State</option>
-                                                @foreach ($states as $state )
-                                                <option value="{{ $state->id }}">{{$state->state}}</option>
+                                                @foreach($states as $state )
+                                                    <option value="{{ $state->id }}">{{ $state->state }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -230,16 +234,18 @@
                                         </div>
                                     </div>
                                 </div>
-                                <hr>
-                                <h6>Home Address</h6>
+                            </section>
+
+                            <h6>Home Address</h6>
+                            <section>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="int234" class="form-label">State :</label>
                                             <select class="form-select" id="Location1" name="state">
                                                 <option value="">Select State</option>
-                                                @foreach ($states as $state )
-                                                <option value="{{ $state->id }}">{{$state->state}}</option>
+                                                @foreach($states as $state )
+                                                    <option value="{{ $state->id }}">{{ $state->state }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -248,8 +254,8 @@
                                             <label for="State" class="form-label">Country :</label>
                                             <select class="form-select" id="Country" name="country">
                                                 <option value="">Select Country</option>
-                                                @foreach ($countries as $country)
-                                                <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                                @foreach($countries as $country)
+                                                    <option value="{{ $country->id }}">{{ $country->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -266,16 +272,22 @@
                                         </div>
                                     </div>
                                 </div>
-                            </section>
-                            <div class="modal-footer">
-                                <div class="text-right">
-                                    <button class="btn btn-danger " data-dismiss="modal"><i
-                                            class="flaticon-cancel-12"></i>
-                                        Close</button>
-                                    <button type="submit" class="btn btn-success">Save</button>
+                                <br />
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="c-inputs-stacked">
+                                            <input type="checkbox" id="checkbox_1">
+                                            <label for="checkbox_1" class="d-block">Click here to indicate that you
+                                                have filled the right information requested before you submit</label>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            </section>
                         </form>
+                        <div class="modal-footer">
+                            <button class="btn btn-danger" data-dismiss="modal"><i class="flaticon-cancel-12"></i>
+                                Close</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -283,21 +295,36 @@
     </div>
 </body>
 
+<script src="{{ asset('modalasset/src/js/vendors.min.js') }}"></script>
+<script src="{{ asset('modalasset/src/js/pages/chat-popup.js') }}"></script>
+<script src="{{ asset('modalasset/assets/icons/feather-icons/feather.min.js') }}"></script>
+<script
+    src="{{ asset('modalasset/assets/vendor_components/jquery-steps-master/build/jquery.steps.js') }}">
+</script>
+<script
+    src="{{ asset('modalasset/assets/vendor_components/jquery-validation-1.17.0/dist/jquery.validate.min.js') }}">
+</script>
+<script src="{{ asset('modalasset/assets/vendor_components/sweetalert/sweetalert.min.js') }}">
+</script>
 
+<!-- CRMi App -->
+<script src="{{ asset('modalasset/src/js/template.js') }}"></script>
+
+<script src="{{ asset('modalasset/src/js/pages/steps.js') }}"></script>
 
 <script src="{{ asset('js\requestController.js') }}"></script>
 <script src="{{ asset('js\formController.js') }}"></script>
 <script src="{{ asset('js/sweetalert/dist/sweetalert.min.js') }}"></script>
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
 
-        $("#frm_main").on('submit', async function(e) {
+        $("#frm_main").on('submit', async function (e) {
             e.preventDefault();
 
             const serializedData = $("#frm_main").serializeArray();
@@ -331,16 +358,17 @@
                     new swal("Process aborted  :)");
 
                 }
-                } catch (e) {
-                    if ('message' in e) {
-                        console.log('e.message', e.message);
-                        var loader = $("#loader1");
-                        loader.hide();
-                        new swal("Opss", e.message, "error");
-                    }
+            } catch (e) {
+                if ('message' in e) {
+                    console.log('e.message', e.message);
+                    var loader = $("#loader1");
+                    loader.hide();
+                    new swal("Opss", e.message, "error");
                 }
-            })
+            }
         })
+    })
+
 </script>
 
 </html>
