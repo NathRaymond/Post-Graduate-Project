@@ -9,7 +9,7 @@ class Countries extends Model
 
     protected $table = 'country';
 
-    protected $guarded = [
-
+    protected $fillable = [
+        'name',
     ];
 }

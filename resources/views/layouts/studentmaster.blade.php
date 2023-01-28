@@ -34,6 +34,14 @@
             .wizard-content .wizard > .steps > ul > li.disabled a {
                 color: red !important;
             }
+
+            .header-container .sidebarCollapse {
+                color: green !important;
+            }
+
+            .swal2-styled.swal2-confirm {
+                background-color: green !important;
+            }
         </style>
         @yield('headlinks')
 </head>

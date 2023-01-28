@@ -10,6 +10,7 @@ class Prize extends Model
     use HasFactory;
     protected $table = 'student_prizes';
     protected $fillable = [
+        'student_id',
         'description',
     ];
 }

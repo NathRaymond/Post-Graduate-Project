@@ -24,4 +24,9 @@ class Student extends Model
         'email',
         'alt_email',
     ];
+
+    public function statename()
+    {
+        return $this->belongsTo('App\Models\State', 'state_of_origin')->withDefault(['name'=> '']);
+    }
 }

@@ -35,20 +35,20 @@
                 <div class="modal-body">
                     <div class="box-body wizard-content">
                         <form method="post" action="{{ route('create_regrefree') }}" class="tab-wizard wizard-circle"
-                            id="createRefree">
+                            id="createRefree" onsubmit="showloader2()">
                             @csrf
                             <section>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="SurnameName5" class="form-label">Title :</label>
-                                            <input type="text" name="title" class="form-control" id="middleName5">
+                                            <input type="text" name="title" class="form-control" id="" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="firstName5" class="form-label">Surname :</label>
-                                            <input type="text" name="surname" class="form-control" id="middleName5">
+                                            <input type="text" name="surname" class="form-control" id="" required>
                                         </div>
                                     </div>
                                 </div>
@@ -56,27 +56,27 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="SurnameName5" class="form-label">Firstname :</label>
-                                            <input type="text" name="firstname" class="form-control" id="middleName5">
+                                            <input type="text" name="firstname" class="form-control" id="" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="SurnameName5" class="form-label">Middlename :</label>
-                                            <input type="text" name="middlename" class="form-control" id="middleName5">
+                                            <input type="text" name="middlename" class="form-control" id="" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="middleName5" class="form-label">Address :</label>
-                                            <input type="text" name="address" class="form-control" id="middleName5">
+                                            <label for="" class="form-label">Address :</label>
+                                            <input type="text" name="address" class="form-control" id="" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="middleName5" class="form-label">Email :</label>
-                                            <input type="text" name="email" class="form-control" id="middleName5">
+                                            <label for="" class="form-label">Email :</label>
+                                            <input type="text" name="email" class="form-control" id="" required>
                                         </div>
                                     </div>
                                 </div>
@@ -84,25 +84,23 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="firstName5" class="form-label">Post :</label>
-                                            <input type="text" name="post" class="form-control" id="middleName5">
+                                            <input type="text" name="post" class="form-control" id="" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="sex" class="form-label">Phone Number :</label>
-                                            <input type="text" name="phone_number" class="form-control"
-                                                id="middleName5">
+                                            <input type="text" name="phone_number" class="form-control" id="" required>
                                         </div>
                                     </div>
                                 </div>
                             </section>
-                            <div class="modal-footer">
-                                <div class="text-right">
-                                    <button class="btn btn-danger " data-dismiss="modal"><i
-                                            class="flaticon-cancel-12"></i>
-                                        Close</button>
-                                    <button type="submit" class="btn btn-success">Save</button>
-                                </div>
+                            <div class="modal-footer" style="float: right">
+                                <button class="btn btn-danger " data-dismiss="modal"><i class="flaticon-cancel-12"></i>
+                                    Close</button>
+                                <button type="submit" class="btn btn-success">Save&nbsp;<span
+                                        class="spinner-border loader spinner-border-sm" id="thisLoader2" role="status"
+                                        aria-hidden="true" style="display:none"></span></button>
                             </div>
                         </form>
                     </div>
@@ -178,6 +176,13 @@
                 }
             })
          })
+</script>
+
+<script>
+    function showloader2() {
+        var loader = document.getElementById('thisLoader2');
+        loader.style.display = "inline-block";
+    }
 </script>
 
 </html>

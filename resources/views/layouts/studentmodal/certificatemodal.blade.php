@@ -18,11 +18,11 @@
 
 <body class="hold-transition light-skin sidebar-mini theme-primary fixed">
     <div id="fadeleftModal" class="modal animated fadeInLeft custo-fadeInLeft" role="dialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Modal Header</h5>
+                    <h5 class="modal-title">Update Certificate</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -34,71 +34,96 @@
                 </div>
                 <div class="modal-body">
                     <div class="box-body wizard-content">
-                        <form method="post" action="{{ route('create_regolevel') }}" id="createCourse"
-                            class="tab-wizard wizard-circle">
+                        <form method="post" action="{{ route('create_regcertificate') }}" id="createCourse"
+                            class="tab-wizard wizard-circle" enctype="multipart/form-data" onsubmit="showloader7()">
                             @csrf
                             <section>
                                 <div class="row">
-                                    <div class="">
+                                    <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="SurnameName5" class="form-label">Exam :</label>
-                                            <select class="form-select" name="exam_type">
-                                                <option value="">Select Olevel</option>
-                                                <option value="Waec">SSCE</option>
-                                                <option value="Waec">Waec</option>
-                                                <option value="Neco">Neco</option>
-                                            </select>
+                                            <label for="School" class="form-label">School :</label>
+                                            <input type="text" class="form-control" name="school" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Matric Number :</label>
+                                            <input type="text" class="form-control" name="matric_number" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="firstName5" class="form-label">Registration Number :</label>
-                                            <input type="text" class="form-control" name="reg_number">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="firstName5" class="form-label">Year :</label>
-                                            <input type="text" class="form-control" name="year">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="SurnameName5" class="form-label">Subject :</label>
-                                            <select class="form-select" id="Subject" name="subject_id">
-                                                <option value="">Select Subject</option>
-                                                @foreach ($subjects as $subject )
-                                                <option value="{{ $subject->id }}">{{$subject->subject}}</option>
+                                            <label for="State" class="form-label">Country :</label>
+                                            <select class="form-select" id="Country" name="country" required>
+                                                @foreach ($countries as $country )
+                                                <option value="{{ $country->id }}" {{$certificates->country
+                                                    ==$country->id ? 'selected': ' '}}>{{$country->name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     </div>
+
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="firstName5" class="form-label">Grade :</label>
-                                            <input type="text" class="form-control" name="grade">
+                                            <label for="firstName5" class="form-label">Town :</label>
+                                            <input type="text" class="form-control" name="town" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="firstName5" class="form-label">Year :</label>
+                                            <input type="text" class="form-control" name="year" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="firstName5" class="form-label">Date Obtained:</label>
+                                            <input type="date" class="form-control" name="date_obtained" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="firstName5" class="form-label"> Class of Degree:</label>
+                                            <input type="text" class="form-control" name="class_of_degree" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="firstName5" class="form-label">Upload Certificate:</label>
+                                            <input type="file" class="form-control" name="certificate" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="firstName5" class="form-label">CGPA:</label>
+                                            <input type="text" class="form-control" name="cgpa" required>
                                         </div>
                                     </div>
                                 </div>
                             </section>
-                            <div class="modal-footer">
+                            <div class="modal-footer" style="float: right">
                                 <div class="text-right">
                                     <button class="btn btn-danger " data-dismiss="modal"><i
                                             class="flaticon-cancel-12"></i>
                                         Close</button>
-                                    <button type="submit" class="btn btn-success">Save</button>
+                                    <button type="submit" class="btn btn-success">Save &nbsp;<span
+                                            class="spinner-border loader spinner-border-sm" id="thisLoader7"
+                                            role="status" aria-hidden="true" style="display:none"></span></button>
                                 </div>
                             </div>
                         </form>
                     </div>
-                </div>
-                <div class="modal-footer md-button">
-                    <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</button>
-                    <button type="button" class="btn btn-primary">Save</button>
                 </div>
             </div>
         </div>
@@ -161,7 +186,7 @@
                 if (willUpdate.isConfirmed == true) {
                     $("#createCourse").submit();
                 } else {
-                    swal("Course will not be save  :)");
+                    swal("Certificate will not be save  :)");
                 }
                 } catch (e) {
                     if ('message' in e) {
@@ -172,6 +197,13 @@
                 }
             })
          })
+</script>
+
+<script>
+    function showloader7() {
+        var loader = document.getElementById('thisLoader7');
+        loader.style.display = "inline-block";
+    }
 </script>
 
 </html>

@@ -1,5 +1,5 @@
 @include('layouts.studentmodal.olevelmodal')
-
+@include('includes.js')
 <div class="text-right">
     <button type="button" class="btn btn-success mb-2 mr-2" data-toggle="modal" data-target=".bd-example-modal-sm">Add
         O'level Result</button>
@@ -9,7 +9,7 @@
     <div class="content-header">
         <div class="d-flex align-items-center">
             <div class="me-auto">
-                <h4 class="page-title" style="color: green">O'level Result</h4>
+                <h4 class="page-title" style="color: green">Exam Type</h4>
                 <div class="d-inline-block align-items-center">
                     <nav>
                         <ol class="breadcrumb">
@@ -24,43 +24,36 @@
     </div>
 
     <!-- Main content -->
+    @foreach ( $olevels as $olevel )
     <section class="content">
-        <div class="row">
-            <div class="">
-                <div class="box">
-                    <div class="box-body">
-                        <div class="row">
-                            <div class="col-md-6 border-end"> <strong>O'Level</strong>
-                                <br>
-                                <p class="text-muted">SSCE</p>
-                            </div>
-                            <div class="col-md-6">
-                                <strong>Subject</strong>
-                                <br>
-                                <p class="text-muted">English <text>B</text></p>
-                                <p class="text-muted">Mathematics <text>B</text></p>
-                                <p class="text-muted">Agricultural Science <text>B</text></p>
-                                <p class="text-muted">Computer Science <text>B</text></p>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-6 border-end">
-                                <strong>O'Level</strong>
-                                <br>
-                                <p class="text-muted">Waec</p>
-                            </div>
-                            <div class="col-md-6"> <strong>Subject</strong>
-                                <br>
-                                <p class="text-muted">English <text>B</text></p>
-                                <p class="text-muted">Mathematics <text>B</text></p>
-                                <p class="text-muted">Agricultural Science <text>B</text></p>
-                                <p class="text-muted">Computer Science <text>B</text></p>
-                            </div>
-                        </div>
+        <div class="box">
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-6 border-end"> <strong>Exam Type</strong>
+                        <br>
+                        <p class="text-muted">{{ $olevel->exam_type ?? ''}}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <strong>Subject</strong>
+                        <br>
+                        <p class="text-muted">{{ $olevel->sub->subject ?? $olevel->subject_id ?? ''}} - <text>{{
+                                $olevel->grade }}</text></p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6 border-end"> <strong>Year</strong>
+                        <br>
+                        <p class="text-muted">{{ $olevel->year ?? ''}}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <strong>Registration number</strong>
+                        <br>
+                        <p class="text-muted">{{ $olevel->reg_number ?? ''}}</text></p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    @endforeach
 </div>

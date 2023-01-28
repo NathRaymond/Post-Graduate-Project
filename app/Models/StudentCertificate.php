@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class StudentCertifcate extends Model
+class StudentCertificate extends Model
 {
     use HasFactory;
     protected $table = 'student_certifcates';
     protected $fillable = [
+        'student_id',
         'school',
         'matric_number',
         'country',
@@ -20,5 +21,10 @@ class StudentCertifcate extends Model
         'certificate',
         'cgpa',
     ];
+
+    public function studcount()
+    {
+        return $this->belongsTo('App\Models\Countries', 'country')->withDefault(['name'=> '']);
+    }
     								
 }

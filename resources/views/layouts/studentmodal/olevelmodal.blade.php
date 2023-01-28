@@ -35,15 +35,15 @@
                 <div class="modal-body">
                     <div class="box-body wizard-content">
                         <form method="post" action="{{ route('create_regolevel') }}" id="createCourse"
-                            class="tab-wizard wizard-circle">
+                            class="tab-wizard wizard-circle" onsubmit="showloader()">
                             @csrf
                             <section>
                                 <div class="row">
                                     <div class="">
                                         <div class="form-group">
                                             <label for="SurnameName5" class="form-label">Exam :</label>
-                                            <select class="form-select" name="exam_type">
-                                                <option value="">Select O'level</option>
+                                            <select class="form-select" name="exam_type" required>
+                                                <option value="" disabled selected>Select O'level</option>
                                                 <option value="Waec">SSCE</option>
                                                 <option value="Waec">Waec</option>
                                                 <option value="Neco">Neco</option>
@@ -55,13 +55,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="firstName5" class="form-label">Registration Number :</label>
-                                            <input type="text" class="form-control" name="reg_number">
+                                            <input type="text" class="form-control" name="reg_number" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="firstName5" class="form-label">Year :</label>
-                                            <input type="text" class="form-control" name="year">
+                                            <input type="text" class="form-control" name="year" required>
                                         </div>
                                     </div>
                                 </div>
@@ -69,8 +69,8 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="SurnameName5" class="form-label">Subject :</label>
-                                            <select class="form-select" id="Subject" name="subject_id">
-                                                <option value="">Select Subject</option>
+                                            <select class="form-select" id="Subject" name="subject_id" required>
+                                                <option value="" selected disabled>Select Subject</option>
                                                 @foreach ($subjects as $subject )
                                                 <option value="{{ $subject->id }}">{{$subject->subject}}</option>
                                                 @endforeach
@@ -80,17 +80,19 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="firstName5" class="form-label">Grade :</label>
-                                            <input type="text" class="form-control" name="grade">
+                                            <input type="text" class="form-control" name="grade" required>
                                         </div>
                                     </div>
                                 </div>
                             </section>
-                            <div class="modal-footer">
+                            <div class="modal-footer" style="float: right">
                                 <div class="text-right">
                                     <button class="btn btn-danger " data-dismiss="modal"><i
                                             class="flaticon-cancel-12"></i>
                                         Close</button>
-                                    <button type="submit" class="btn btn-success">Save</button>
+                                    <button type="submit" class="btn btn-success">Save &nbsp;<span
+                                            class="spinner-border loader spinner-border-sm" id="thisLoader"
+                                            role="status" aria-hidden="true" style="display:none"></span></button>
                                 </div>
                             </div>
                         </form>
@@ -168,6 +170,13 @@
                 }
             })
          })
+</script>
+
+<script>
+    function showloader() {
+        var loader = document.getElementById('thisLoader');
+        loader.style.display = "inline-block";
+    }
 </script>
 
 </html>

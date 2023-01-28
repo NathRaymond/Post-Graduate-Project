@@ -18,7 +18,7 @@
 
 <body class="hold-transition light-skin sidebar-mini theme-primary fixed">
     <div id="fadeinModal" class="modal animated fadeInDown" role="dialog">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
@@ -36,24 +36,26 @@
                 <div class="modal-body">
                     <div class="box-body wizard-content">
                         <form method="post" action="{{ route('create_regprize') }}" id="createCourse"
-                            class="tab-wizard wizard-circle">
+                            class="tab-wizard wizard-circle" onsubmit="showloader5()">
                             @csrf
                             <section>
                                 <div class="row">
                                     <div class="">
                                         <div class="form-group">
-                                            <label for="firstName5" class="form-label">Prize Description :</label>
-                                            <input type="text" class="form-control" name="description">
+                                            <label for="firstName5" class="form-label">Prize :</label>
+                                            <input type="text" class="form-control" name="description" required>
                                         </div>
                                     </div>
                                 </div>
                             </section>
-                            <div class="modal-footer">
+                            <div class="modal-footer"  style="float: right">
                                 <div class="text-right">
                                     <button class="btn btn-danger " data-dismiss="modal"><i
                                             class="flaticon-cancel-12"></i>
                                         Close</button>
-                                    <button type="submit" class="btn btn-success">Save</button>
+                                    <button type="submit" class="btn btn-success">Save &nbsp;<span
+                                            class="spinner-border loader spinner-border-sm" id="thisLoader5"
+                                            role="status" aria-hidden="true" style="display:none"></span></button>
                                 </div>
                             </div>
                         </form>
@@ -131,6 +133,13 @@
                 }
             })
          })
+</script>
+
+<script>
+    function showloader5() {
+        var loader = document.getElementById('thisLoader5');
+        loader.style.display = "inline-block";
+    }
 </script>
 
 </html>

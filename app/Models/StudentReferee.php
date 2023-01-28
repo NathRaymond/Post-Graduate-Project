@@ -10,6 +10,7 @@ class StudentReferee extends Model
     use HasFactory;
     protected $table = 'student_referees';
     protected $fillable = [
+        'student_id',	
         'title',	
         'surname',
         'firstname',	

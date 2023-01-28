@@ -9,8 +9,6 @@
     <meta name="author" content="">
     <link rel="icon" href="https://crm-admin-dashboard-template.multipurposethemes.com/images/favicon.ico">
 
-    <style>
-    </style>
 </head>
 
 <body class="hold-transition light-skin sidebar-mini theme-primary fixed">
@@ -31,18 +29,19 @@
                 </div>
                 <div class="modal-body">
                     <div class="box-body wizard-content">
-                        <form method="POST" action="{{route('create_regStock')}}" id="createCourse">
+                        <form method="POST" action="{{route('create_regStock')}}" id="createCourse"
+                            onsubmit="showloader1()">
                             @csrf
                             <section>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="SurnameName5" class="form-label">Department :</label>
-                                            <select class="form-select" id="sex" name="dept_id">
-                                                <option value="">Select Department</option>
+                                            <select class="form-select" name="dept_id" required>
+                                                <option selected disabled>Select Department</option>
                                                 @foreach ($departments as $department )
-                                                <option value="{{ $department->id }}">{{$department->description}}
-                                                </option>
+                                                <option value="{{ $department->id }}" {{$stdcourses->dept_id
+                                                    ==$department->id ? 'selected': ' '}}>{{$department->description}}</option>
                                                 @endforeach
                                             </select>
 
@@ -51,11 +50,11 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="firstName5" class="form-label">Degree/Programme :</label>
-                                            <select class="form-select" id="degree" name="prog_id">
-                                                <option value="">Select Degree/Programme</option>
+                                            <select class="form-select" id="degree" name="prog_id" required>
+                                                <option selected disabled>Select Degree/Programme</option>
                                                 @foreach ($programmes as $programme )
-                                                <option value="{{ $programme->id }}">{{$programme->description}}
-                                                </option>
+                                                <option value="{{ $programme->id }}" {{$stdcourses->prog_id
+                                                    ==$programme->id ? 'selected': ' '}}>{{$programme->description}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -65,10 +64,12 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="middleName5" class="form-label">Field of Interest :</label>
-                                            <select class="form-select" id="filed_of_interest" name="course_id">
-                                                <option value="">Select Field of Interest</option>
+                                            <select class="form-select" id="filed_of_interest" name="course_id"
+                                                required>
+                                                <option selected disabled>Select Field of Interest</option>
                                                 @foreach ($courses as $course )
-                                                <option value="{{ $course->id }}">{{$course->description}}</option>
+                                                <option value="{{ $course->id }}" {{$stdcourses->course_id
+                                                    ==$course->id ? 'selected': ' '}}>{{$course->description}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -76,8 +77,10 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="sex" class="form-label">Mode of Study</label>
-                                            <select class="form-select" id="Mode of Study" name="mode_of_study">
-                                                <option value="">Mode of Study</option>
+                                            <select class="form-select" id="Mode of Study" name="mode_of_study"
+                                                required>
+                                                <option value="{{ $stdcourses->mode_of_study }}">{{ $stdcourses->mode_of_study }}</option>
+                                                {{--  <option selected disabled>Mode of Study</option>  --}}
                                                 <option value="Full Time">Full Time</option>
                                                 <option value="Part Time">Part Time</option>
                                             </select>
@@ -85,12 +88,12 @@
                                     </div>
                                 </div>
                             </section>
-                            <div class="modal-footer">
-                                <div class="text-right">
-                                    <button class="btn btn-danger " data-dismiss="modal"><i
-                                            class="flaticon-cancel-12"></i> Close</button>
-                                    <button type="submit" class="btn btn-success">Save</button>
-                                </div>
+                            <div class="modal-footer" style="float: right">
+                                <button class="btn btn-danger " data-dismiss="modal"><i class="flaticon-cancel-12"></i>
+                                    Close</button>
+                                <button type="submit" class="btn btn-success">Save&nbsp;<span
+                                        class="spinner-border loader spinner-border-sm" id="thisLoader1" role="status"
+                                        aria-hidden="true" style="display:none"></span></button>
                             </div>
                         </form>
                     </div>
@@ -137,6 +140,13 @@
                 }
             })
          })
+</script>
+
+<script>
+    function showloader1() {
+        var loader = document.getElementById('thisLoader1');
+        loader.style.display = "inline-block";
+    }
 </script>
 
 </html>

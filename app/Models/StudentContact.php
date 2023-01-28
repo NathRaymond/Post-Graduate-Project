@@ -11,10 +11,19 @@ class StudentContact extends Model
     protected $table = 'student_contacts';
     protected $fillable = [
         'student_id',	
-        'email',
-        'country_id',	
-        'state',
-        'city'	,
-        'c_o',		
+        'cont_email',
+        'cont_country_id',	
+        'cont_state',
+        'cont_city'	,
+        'cont_c_o',		
     ];	
+
+    public function SState()
+    {
+        return $this->belongsTo('App\Models\State', 'hom_state')->withDefault(['name'=> '']);
+    }
+    public function Scount()
+    {
+        return $this->belongsTo('App\Models\Countries', 'cont_country_id')->withDefault(['name'=> '']);
+    }
 }

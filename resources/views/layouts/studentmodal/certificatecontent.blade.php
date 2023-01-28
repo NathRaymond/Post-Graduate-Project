@@ -1,6 +1,8 @@
 @include('layouts.studentmodal.certificatemodal')
+@include('includes.js')
 <div class="text-right">
-    <button type="button" class="btn btn-secondary mb-2 mr-2" data-toggle="modal" data-target="#fadeleftModal">Add Certificate</button>
+    <button type="button" class="btn btn-success mb-2 mr-2" data-toggle="modal" data-target="#fadeleftModal">Add
+        Certificate</button>
 </div>
 <div class="container-full">
     <div class="content-header">
@@ -22,17 +24,56 @@
 
     <!-- Main content -->
     <section class="content">
-        <div class="row">
-            <div class="">
-                <div class="box">
-                    <div class="box-body">
-                        <div class="row">
-                            {{-- <h3 style="color: green">Course/Degree Details</h3> --}}
-                            <div class="col-md-6">
-                                <p><strong>Description</strong></p>
-                                <p class="text-muted">Best in Compoter Science</p>
-                            </div>
-                        </div>
+        <div class="box">
+            <div class="box-body">
+                <div class="row">
+                    <h3 style="color: green">Certificates Information</h3>
+                    <div class="col-md-3 col-xs-6 border-end"> <strong>School</strong>
+                        <br>
+                        <p class="text-muted">{{ $certificates->school ?? '' }}</p>
+                    </div>
+                    <div class="col-md-3 col-xs-6 border-end">
+                        <strong>Matric Number</strong>
+                        <br>
+                        <p class="text-muted">{{ $certificates->matric_number ?? ''}}</p>
+                    </div>
+                    <div class="col-md-3 col-xs-6 border-end">
+                        <strong>Country</strong>
+                        <br>
+                        <p class="text-muted">{{ $certificates->studcount->name ?? $certificates->country ?? ''}}</p>
+                    </div>
+                    <div class="col-md-3 col-xs-6"> <strong>Town</strong>
+                        <br>
+                        <p class="text-muted">{{ $certificates->town ?? ''}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-3 col-xs-6 border-end">
+                        <strong>Year</strong>
+                        <br>
+                        <p class="text-muted">{{ $certificates->year ?? ''}}</p>
+                    </div>
+                    <div class="col-md-3 col-xs-6 border-end">
+                        <strong>Date Obtained</strong>
+                        <br>
+                        <p class="text-muted">{{ $certificates->date_obtained ?? ''}}</p>
+                    </div>
+                    <div class="col-md-3 col-xs-6 border-end"> <strong>Class of Degree</strong>
+                        <br>
+                        <p class="text-muted">{{ $certificates->class_of_degree ?? ''}}</p>
+                    </div>
+                    <div class="col-md-3 col-xs-6 border-end"> <strong>Certificate</strong>
+                        <br>
+                        <p class="text-muted">{{ $certificates->certificate ?? ''}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-3 col-xs-6 border-end">
+                        <strong>CGPA</strong>
+                        <br>
+                        <p class="text-muted">{{ $certificates->cgpa ?? ''}}</p>
                     </div>
                 </div>
             </div>

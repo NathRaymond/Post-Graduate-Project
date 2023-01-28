@@ -18,7 +18,9 @@
                             <h4>Student Registration</h4>
                         </div>
                     </div>
+                    @include('includes.js')
                 </div>
+                @include('includes.js')
                 <div class="widget-content widget-content-area simple-tab">
                     <ul class="nav nav-tabs  mb-3 mt-3" id="simpletab" role="tablist">
                         <li class="nav-item">

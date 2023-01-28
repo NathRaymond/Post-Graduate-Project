@@ -11,9 +11,17 @@ class StudentHomeAdd extends Model
     protected $table = 'student_home_adds';
     protected $fillable = [
         'student_id',	
-        'state',
-        'country_id',	
-        'town',
-        'street',
+        'hom_state',
+        'hom_country_id',	
+        'hom_town',
+        'hom_street',
     ];
+    public function hState()
+    {
+        return $this->belongsTo('App\Models\State', 'hom_state')->withDefault(['name'=> '']);
+    }
+    public function Hcount()
+    {
+        return $this->belongsTo('App\Models\Countries', 'hom_country_id')->withDefault(['name'=> '']);
+    }
 }				

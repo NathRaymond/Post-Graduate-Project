@@ -1,5 +1,5 @@
 @include('layouts.studentmodal.publicationmodal')
-
+@include('includes.js')
 <div class="text-right">
     <button type="button" class="btn btn-success mb-2 mr-2" data-toggle="modal" data-target="#fadeupModal">Add
         Publication</button>
@@ -28,31 +28,21 @@
             <div class="">
                 <div class="box">
                     <div class="box-body">
+                        @foreach ($publications as $publication)
                         <div class="row">
                             {{-- <h3 style="color: green">Course/Degree Details</h3> --}}
-                            <div class="col-md-6 border-end"> <strong>Department</strong>
+                            <div class="col-md-6 border-end"> <strong>Title</strong>
                                 <br>
-                                <p class="text-muted">Dept of Agricultural Science</p>
+                                <p class="text-muted">{{ $publication->title }}</p>
                             </div>
                             <div class="col-md-6">
-                                <strong>Degree/Programme</strong>
+                                <strong>Date Publish</strong>
                                 <br>
-                                <p class="text-muted">M.AgSE</p>
+                                <p class="text-muted">{{ $publication->date_published }}</p>
                             </div>
                         </div>
                         <hr>
-                        <div class="row">
-                            <div class="col-md-6 border-end">
-                                <strong>Field of Interest</strong>
-                                <br>
-                                <p class="text-muted">Animal Field</p>
-                            </div>
-                            <div class="col-md-6"> <strong>Mode of Study</strong>
-                                <br>
-                                <p class="text-muted">Full Time</p>
-                            </div>
-                        </div>
-                        <hr>
+                        @endforeach
                     </div>
                 </div>
             </div>

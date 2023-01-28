@@ -31,30 +31,30 @@
                 </div>
                 <div class="modal-body">
                     <form method="POST" action="{{ route('create_regpublication') }}" class="tab-wizard wizard-circle"
-                        id="createCourse">
+                        id="createCourse" onsubmit="showloader4()">
                         @csrf
                         <section>
                             <div class="row">
                                 <div class="">
                                     <div class="form-group">
                                         <label for="SurnameName5" class="form-label">Title :</label>
-                                        <input type="text" name="title" class="form-control">
+                                        <input type="text" name="title" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="">
                                     <div class="form-group">
                                         <label for="firstName5" class="form-label">Date Published :</label>
-                                        <input type="date" class="form-control" name="date_published">
+                                        <input type="date" class="form-control" name="date_published" required>
                                     </div>
                                 </div>
                             </div>
                         </section>
-                        <div class="modal-footer">
-                            <div class="text-right">
-                                <button class="btn btn-danger " data-dismiss="modal"><i class="flaticon-cancel-12"></i>
-                                    Close</button>
-                                <button type="submit" class="btn btn-success">Save</button>
-                            </div>
+                        <div class="modal-footer" style="float: right">
+                            <button class="btn btn-danger " data-dismiss="modal"><i class="flaticon-cancel-12"></i>
+                                Close</button>
+                            <button type="submit" class="btn btn-success">Save&nbsp;<span
+                                    class="spinner-border loader spinner-border-sm" id="thisLoader4" role="status"
+                                    aria-hidden="true" style="display:none"></span></button>
                         </div>
                     </form>
                 </div>
@@ -100,6 +100,13 @@
                 }
             })
          })
+</script>
+
+<script>
+    function showloader4() {
+        var loader = document.getElementById('thisLoader4');
+        loader.style.display = "inline-block";
+    }
 </script>
 
 </html>

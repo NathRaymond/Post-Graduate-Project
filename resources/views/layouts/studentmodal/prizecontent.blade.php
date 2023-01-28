@@ -1,4 +1,5 @@
 @include('layouts.studentmodal.prizemodal')
+@include('includes.js')
 <div class="text-right">
     <button type="button" class="btn btn-success mb-2 mr-2" data-toggle="modal" data-target="#fadeinModal">Add
         Prize</button>
@@ -24,19 +25,20 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="">
-                <div class="box">
-                    <div class="box-body">
-                        <div class="row">
-                            {{-- <h3 style="color: green">Course/Degree Details</h3> --}}
-                            <div class="col-md-6">
-                               <p><strong>Description</strong></p>
-                                <p class="text-muted">Best in Compoter Science</p>
-                            </div>
+            @foreach ($prizes as $prize )
+            <div class="box">
+                <div class="box-body">
+                    <div class="row">
+                        {{-- <h3 style="color: green">Course/Degree Details</h3> --}}
+                        <div class="col-md-6">
+                            <p><strong>Description</strong></p>
+                            <p class="text-muted">{{ $prize->description }}</p>
                         </div>
                     </div>
                 </div>
             </div>
+            @endforeach
+
         </div>
     </section>
 </div>

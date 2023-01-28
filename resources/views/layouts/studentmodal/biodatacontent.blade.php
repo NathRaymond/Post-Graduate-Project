@@ -1,10 +1,9 @@
 @include('layouts.studentmodal.biodatamodal')
-
+@include('includes.js')
 <div class="text-right">
-    <button type="button" class="btn btn-success mb-2 mr-2" data-toggle="modal"
-        data-target=".bd-example-modal-xl">Add Biodata</button>
+    <button type="button" class="btn btn-success mb-2 mr-2" data-toggle="modal" data-target=".bd-example-modal-xl"
+        id="edit-student" data-id="{{$biodatas->id ?? ''}}">Update Biodata</button>
 </div>
-</p>
 <div class="container-full">
     <div class="content-header">
         <div class="d-flex align-items-center">
@@ -30,36 +29,34 @@
         <div class="row">
             <div class="col-lg-4 col-xlg-3 col-md-5">
                 <div class="box">
-                    <center><div class="user-bg"  style="padding: 0px 10px;">
-                         <img width="70%" alt="user"
-                            src="{{ asset('studentassets/assets/img/profile-32.jpg') }}">
-                    </div></center>
+                    <center>
+                        <div class="user-bg" style="padding: 10px 10px;">
+                            <img width="70%" alt="user" src="{{ asset('studentassets/assets/img/avatar.png') }}">
+                        </div>
+                    </center>
                     <div class="box-body">
                         <div class="row text-center mt-10">
                             <div class="col-md-6 border-end">
                                 <strong>Name</strong>
-                                <p>Adebayo Nathaniel</p>
+                                <p>{{ $biodatas->surname ?? ''}} {{ $biodatas->firstname ?? ''}} {{ $biodatas->middlename ?? ''}}</p>
                             </div>
                             <div class="col-md-6"><strong>Degree/Programme</strong>
-                                <p>PhD.AgSE</p>
+                                <p> {{ $stdcourses->dProgramme->description ?? $stdcourses->prog_id ?? ''}}</p>
                             </div>
                         </div>
                         <hr>
                         <div class="row text-center mt-10">
-                            <div class="col-md-6 border-end"><strong>Email ID</strong>
-                                <p>nath@gmail.com</p>
+                            <div class="col-md-6 border-end"><strong>Email</strong>
+                                <p>{{ $biodatas->email ?? ''}}</p>
                             </div>
                             <div class="col-md-6"><strong>Phone</strong>
-                                <p>08148009197</p>
-                                <p>07032066789</p>
+                                <p>{{ $biodatas->phone_number ?? ''}}</p>
                             </div>
                         </div>
                         <hr>
                         <div class="row text-center mt-10">
                             <div class="col-md-12"><strong>Address</strong>
-                                <p>No 2, Ganiyat Estate, Oke-ilewo
-                                    <br> Abeokuta, Ogun State.
-                                </p>
+                                <p>{{ $homeaddress->hom_state}} {{ $homeaddress->hom_street}} {{ $homeaddress->hom_town}} </p>
                             </div>
                         </div>
                         <hr>
@@ -74,21 +71,21 @@
                             <div class="col-md-3 col-xs-6 border-end"> <strong>Full
                                     Name</strong>
                                 <br>
-                                <p class="text-muted">Adebayo Nathaniel Raymond</p>
+                                <p class="text-muted">{{ $biodatas->surname ?? ''}} {{ $biodatas->firstname ?? ''}} {{ $biodatas->middlename ?? ''}}</p>
                             </div>
                             <div class="col-md-3 col-xs-6 border-end">
                                 <strong>Sex</strong>
                                 <br>
-                                <p class="text-muted">Male</p>
+                                <p class="text-muted">{{ $biodatas->sex ?? ''}} </p>
                             </div>
                             <div class="col-md-3 col-xs-6 border-end">
                                 <strong>Marital Status</strong>
                                 <br>
-                                <p class="text-muted">Married</p>
+                                <p class="text-muted"> {{ $biodatas->marital_status ?? ''}}</p>
                             </div>
                             <div class="col-md-3 col-xs-6"> <strong>Date of Birth</strong>
                                 <br>
-                                <p class="text-muted">01/02/1996</p>
+                                <p class="text-muted">{{ $biodatas->dob ?? ''}} </p>
                             </div>
                         </div>
                         <hr>
@@ -96,22 +93,21 @@
                             <div class="col-md-3 col-xs-6 border-end">
                                 <strong>Religion</strong>
                                 <br>
-                                <p class="text-muted">Christian</p>
+                                <p class="text-muted"> {{ $biodatas->religion ?? ''}}</p>
                             </div>
                             <div class="col-md-3 col-xs-6 border-end">
                                 <strong>Nationality</strong>
                                 <br>
-                                <p class="text-muted">Nigerian</p>
+                                <p class="text-muted"> {{ $biodatas->nationality ?? ''}}</p>
                             </div>
                             <div class="col-md-3 col-xs-6"> <strong>State of Origin</strong>
                                 <br>
-                                <p class="text-muted">Kwara State</p>
+                                <p class="text-muted"> {{ $biodatas->state_of_origin ?? ''}}</p>
                             </div>
                             <div class="col-md-3 col-xs-6 border-end"> <strong>Phone
                                     Number</strong>
                                 <br>
-                                <p class="text-muted">08148009197</p>
-                                <p class="text-muted">07032066789</p>
+                                <p class="text-muted">{{ $biodatas->phone_number ?? ''}}</p>
                             </div>
                         </div>
                         <hr>
@@ -119,8 +115,7 @@
                             <div class="col-md-3 col-xs-6 border-end">
                                 <strong>Email</strong>
                                 <br>
-                                <p class="text-muted">nath@gmail.com</p>
-                                <p class="text-muted">raymond@gmail.com</p>
+                                <p class="text-muted">{{ $biodatas->email ?? ''}}</p>
                             </div>
                         </div>
                         <hr>
@@ -130,27 +125,27 @@
                             <div class="col-md-3 col-xs-6 border-end">
                                 <strong>POBox/PMB/Postal Code</strong>
                                 <br>
-                                <p class="text-muted">PoBox 123980</p>
+                                <p class="text-muted"> </p>
                             </div>
                             <div class="col-md-3 col-xs-6 border-end">
                                 <strong>Country</strong>
                                 <br>
-                                <p class="text-muted">Nigeria</p>
+                                <p class="text-muted">{{ $studcontacts->Scount->name ??  $studcontacts->cont_country_id ?? ''}} </p>
                             </div>
                             <div class="col-md-3 col-xs-6 border-end">
                                 <strong>State</strong>
                                 <br>
-                                <p class="text-muted">Kwara State</p>
+                                <p class="text-muted">{{ $studcontacts->cont_state ?? ''}} </p>
                             </div>
                             <div class="col-md-3 col-xs-6"> <strong>City</strong>
                                 <br>
-                                <p class="text-muted">Ilorin</p>
+                                <p class="text-muted"> {{ $studcontacts->cont_city ?? ''}}</p>
                             </div>
                             <hr>
                             <div class="col-md-3 col-xs-6 border-end">
                                 <strong>C/O</strong>
                                 <br>
-                                <p class="text-muted">Null</p>
+                                <p class="text-muted"> {{ $studcontacts->cont_c_o ?? ''}}</p>
                             </div>
                         </div>
                         <hr>
@@ -160,102 +155,24 @@
                             <div class="col-md-3 col-xs-6 border-end">
                                 <strong>Country</strong>
                                 <br>
-                                <p class="text-muted">Nigeria</p>
+                                <p class="text-muted">{{ $homeaddress->Hcount->name ?? $homeaddress->hom_country_id ?? ''}} </p>
                             </div>
                             <div class="col-md-3 col-xs-6 border-end">
                                 <strong>State</strong>
                                 <br>
-                                <p class="text-muted">Kwara</p>
+                                <p class="text-muted"> {{ $homeaddress->state ?? $homeaddress->hom_state ?? ''}}</p>
                             </div>
                             <div class="col-md-3 col-xs-6 border-end">
                                 <strong>Town</strong>
                                 <br>
-                                <p class="text-muted">Ilorin</p>
+                                <p class="text-muted"> {{ $homeaddress->hom_town ?? ''}}</p>
                             </div>
                             <div class="col-md-3 col-xs-6"> <strong>Street</strong>
                                 <br>
-                                <p class="text-muted">No 2, Elite Street</p>
+                                <p class="text-muted"> {{ $homeaddress->hom_street ?? ''}}</p>
                             </div>
                         </div>
                         <hr>
-                        {{-- <h4 class="box-title my-20 fw-500 py-20 border-bottom d-block">
-                            Education</h4>
-                        <div class="d-flex no-block fa fa-check-circle text-success">
-                            <h6 class="ms-10 text-dark">Primary education from XYZ
-                                school</h6>
-                        </div>
-                        <div class="d-flex no-block fa fa-check-circle text-success">
-                            <h6 class="ms-10 text-dark">SSC from ABC School</h6>
-                        </div>
-                        <div class="d-flex no-block fa fa-check-circle text-success">
-                            <h6 class="ms-10 text-dark">HSC from ABC School</h6>
-                        </div>
-
-                        <h4 class="box-title my-20 fw-500 py-20 border-bottom d-block">
-                            Certification</h4>
-                        <div class="d-flex no-block fa fa-check-circle text-success">
-                            <h6 class="ms-10 text-dark">Lorem ipsum dolor sit amet,
-                                consectetur
-                                adipiscing elit.</h6>
-                        </div>
-                        <div class="d-flex no-block fa fa-check-circle text-success">
-                            <h6 class="ms-10 text-dark">Excepteur sint occaecat
-                                cupidatat non
-                                proident.</h6>
-                        </div>
-                        <div class="d-flex no-block fa fa-check-circle text-success">
-                            <h6 class="ms-10 text-dark">Lorem ipsum dolor sit amet,
-                                consectetur
-                                adipiscing elit.</h6>
-                        </div>
-                        <div class="d-flex no-block fa fa-check-circle text-success">
-                            <h6 class="ms-10 text-dark">Excepteur sint occaecat
-                                cupidatat non
-                                proident.</h6>
-                        </div>
-                        <div class="d-flex no-block fa fa-check-circle text-success">
-                            <h6 class="ms-10 text-dark">Lorem ipsum dolor sit amet,
-                                consectetur
-                                adipiscing elit.</h6>
-                        </div>
-                        <div class="d-flex no-block fa fa-check-circle text-success">
-                            <h6 class="ms-10 text-dark">Excepteur sint occaecat
-                                cupidatat non
-                                proident.</h6>
-                        </div>
-
-                        <h4 class="box-title my-20 fw-500 py-20 border-bottom d-block">
-                            Subjects</h4>
-                        <div class="d-flex no-block fa fa-check-circle text-success">
-                            <h6 class="ms-10 text-dark">Lorem ipsum dolor sit amet,
-                                consectetur
-                                adipiscing elit.</h6>
-                        </div>
-                        <div class="d-flex no-block fa fa-check-circle text-success">
-                            <h6 class="ms-10 text-dark">Excepteur sint occaecat
-                                cupidatat non
-                                proident.</h6>
-                        </div>
-                        <div class="d-flex no-block fa fa-check-circle text-success">
-                            <h6 class="ms-10 text-dark">Lorem ipsum dolor sit amet,
-                                consectetur
-                                adipiscing elit.</h6>
-                        </div>
-                        <div class="d-flex no-block fa fa-check-circle text-success">
-                            <h6 class="ms-10 text-dark">Excepteur sint occaecat
-                                cupidatat non
-                                proident.</h6>
-                        </div>
-                        <div class="d-flex no-block fa fa-check-circle text-success">
-                            <h6 class="ms-10 text-dark">Lorem ipsum dolor sit amet,
-                                consectetur
-                                adipiscing elit.</h6>
-                        </div>
-                        <div class="d-flex no-block fa fa-check-circle text-success">
-                            <h6 class="ms-10 text-dark">Excepteur sint occaecat
-                                cupidatat non
-                                proident.</h6>
-                        </div> --}}
                     </div>
                 </div>
             </div>

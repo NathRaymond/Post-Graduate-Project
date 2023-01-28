@@ -11,8 +11,8 @@ class State extends Model
 
 
     protected $fillable = [
-
-        'state', 'id_no',
+        'id_no',
+        'state', 
 
     ];
     // $table->primary('id_no');

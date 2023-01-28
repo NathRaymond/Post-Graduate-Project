@@ -30,20 +30,20 @@
                 <div class="modal-body">
                     <div class="box-body wizard-content">
                         <form method="POST" action="{{ route('create_regappointment') }}"
-                            class="tab-wizard wizard-circle" id="createCourse">
+                            class="tab-wizard wizard-circle" id="createCourse" onsubmit="showloader3()">
                             @csrf
                             <section>
                                 <div class="row">
                                     <div class="">
                                         <div class="form-group">
-                                            <label for="SurnameName5" class="form-label">Employer :</label>
-                                            <input type="text" name="employer" class="form-control" id="middleName5">
+                                            <label class="form-label">Employer :</label>
+                                            <input type="text" name="employer" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="">
                                         <div class="form-group">
                                             <label for="firstName5" class="form-label">Post :</label>
-                                            <input type="text" class="form-control" name="post" id="middleName5">
+                                            <input type="text" class="form-control" name="post" required>
                                         </div>
                                     </div>
                                 </div>
@@ -51,18 +51,17 @@
                                     <div class="">
                                         <div class="form-group">
                                             <label for="middleName5" class="form-label">Duration :</label>
-                                            <input type="text" class="form-control" name="duration" id="middleName5">
+                                            <input type="text" class="form-control" name="duration" required>
                                         </div>
                                     </div>
                                 </div>
                             </section>
-                            <div class="modal-footer">
-                                <div class="text-right">
-                                    <button class="btn btn-danger " data-dismiss="modal"><i
-                                            class="flaticon-cancel-12"></i>
-                                        Close</button>
-                                    <button type="submit" class="btn btn-success">Save</button>
-                                </div>
+                            <div class="modal-footer" style="float: right">
+                                <button class="btn btn-danger " data-dismiss="modal"><i class="flaticon-cancel-12"></i>
+                                    Close</button>
+                                <button type="submit" class="btn btn-success">Save &nbsp;<span
+                                        class="spinner-border loader spinner-border-sm" id="thisLoader3" role="status"
+                                        aria-hidden="true" style="display:none"></span></button>
                             </div>
                         </form>
                     </div>
@@ -70,37 +69,8 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript">
-        $("#rowAdder").click(function () {
-                newRowAdd =
-                '<div id="row"> 
-                    <div class="col-md-6">' +
-                        '<div class="input-group-prepend">' +
-                            '<button class="btn btn-danger" id="DeleteRow" type="button">' +
-                                '<i class="bi bi-trash"></i> Delete
-                            </button> 
-                        </div>' +
-                        '<label for="name" class="form-label">Name:</label>
-                        '<input type="name" class="form-control">
-                        '<label for="pst" class="form-label">Post:</label>
-                        '<input type="pst" class="form-control">
-                        '<label for="address" class="form-label">Address:</label>
-                        '<input type="address" class="form-control">
-                        '<label for="email" class="form-label">Email:</label>
-                        '<input type="email" class="form-control">
-                        '<label for="phone" class="form-label">Phone:</label>
-                        '<input type="phone" class="form-control">
-                    </div> 
-                </div>';
-    
-                $('#newinput').append(newRowAdd);
-            });
-    
-            $("body").on("click", "#DeleteRow", function () {
-                $(this).parents("#row").remove();
-            })
-    </script>
 </body>
+<script src="{{ asset('js/sweetalert/dist/sweetalert.min.js') }}"></script>
 <script>
     $(document).ready(function() {
              $.ajaxSetup({
@@ -135,6 +105,12 @@
                 }
             })
          })
-</script>F
+</script>
+<script>
+    function showloader3() {
+        var loader = document.getElementById('thisLoader3');
+        loader.style.display = "inline-block";
+    }
+</script>
 
 </html>
