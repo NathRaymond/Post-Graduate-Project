@@ -14,4 +14,5 @@ class Student extends Model implements Auditable
         'firstname', 'surname', 'email', 'sex',
 
     ];
+
 }

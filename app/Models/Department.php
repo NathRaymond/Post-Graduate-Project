@@ -9,7 +9,14 @@ class Department extends Model
 
     protected $fillable = [
 
-        'description'
+        'name',
+        'head',
+        'image'
 
     ];
+
+    public function users()
+    {
+        return $this->belongsTo('App\Models\User', 'head')->withDefault(['name' => '']);;
+    }
 }

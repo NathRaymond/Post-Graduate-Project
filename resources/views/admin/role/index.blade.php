@@ -34,7 +34,7 @@
                   <!-- /.box-header -->
                   <div class="box-body">
                       <div class="table-responsive-sm">
-                        <table class="table table-center table-hover mb-0 datatable">
+                        <table id="example2" class="table table-center table-hover mb-0 datatable">
                             <thead>
                                 <tr>
                                     <th>SN</th>
@@ -54,14 +54,17 @@
                                     </td>
                                     <td>{{$role->created_at}}</td>
                                     <td class="text-end">
-                                        <a href="{{ route('edit_role', $role->id) }}" class="btn btn-sm bg-pink me-2"><i
-                                                class="fas fa-user-shield"></i></a>
+
+                                                <a href="{{ route('edit_role', $role->id) }}" class="waves-effect waves-light btn btn-sm btn-primary-light btn-circle mx-5">
+                                                    <span class="icon-Write">
+                                                    <span class="path1"></span><span class="path2"></span></span></a>
                                         <a href="{{ route('edit_role', $role->id) }}" class="btn btn-sm btn-secondary me-2"><i
-                                                class="far fa-edit"></i></a>
+                                                class="fa fa-edit"></i></a>
+
                                                 <a href="javascript:void(0);" class="btn btn-sm btn-danger"
                                                 id="deleteRecord" data-bs-toggle="modal"
                                                 data-bs-target="#delete_category" data-id="{{ $role->id }}"><i
-                                                    class="far fa-trash-alt"></i></a>
+                                                    class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

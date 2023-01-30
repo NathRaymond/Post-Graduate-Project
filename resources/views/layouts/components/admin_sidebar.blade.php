@@ -20,16 +20,21 @@
                     <img src="{{ asset('adminassets/images/avatar/avatar-13.png') }}" class="rounded-0 me-10"
                         alt="User Image">
                     <div>
-                        <h4 class="mb-0 fw-600">{{ Auth::user()->name }}</h4>
-                        <p class="mb-0">Super Admin</p>
+                        <h4 class="mb-0 fw-600">{{ Auth::user()->title }} {{ Auth::user()->name }}</h4>
+                        <p class="mb-0">
+                            @if (!empty(Auth::user()->getRoleNames()))
+                                            @foreach (Auth::user()->getRoleNames() as $v)
+                                                <p class="text-info">Role: {{ $v }}</p>
+                                            @endforeach
+                                        @endif
+                        </p>
                     </div>
                 </div>
                 <div class="info">
                     <a class="dropdown-toggle p-15 d-grid" data-bs-toggle="dropdown" href="#"></a>
                     <div class="dropdown-menu dropdown-menu-end">
-                        <a class="dropdown-item" href="extra_profile.html"><i class="ti-user"></i> Profile</a>
-                        <a class="dropdown-item" href="mailbox.html"><i class="ti-email"></i> Inbox</a>
-                        <a class="dropdown-item" href="contact_app_chat.html"><i class="ti-link"></i> Conversation</a>
+                        <a class="dropdown-item" href="#"><i class="ti-user"></i> Profile</a>
+
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/logout"><i class="ti-lock"></i> Logout</a>
                     </div>
@@ -70,6 +75,8 @@
                                             class="path2"></span></i>Fees</a></li>
                             <li><a href="#"><i class="icon-Commit"><span class="path1"></span><span
                                             class="path2"></span></i>Special Control</a></li>
+                            <li><a href="{{ route('referee_questions') }}"><i class="icon-Commit"><span class="path1"></span><span
+                                            class="path2"></span></i>Referee Questions</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
@@ -85,12 +92,12 @@
                                             class="path2"></span></i>New Registration</a></li>
                             <li><a href=""><i class="icon-Commit"><span class="path1"></span><span
                                             class="path2"></span></i>Registered Student</a></li>
-                            <li><a href=""><i class="icon-Commit"><span class="path1"></span><span
+                            <li><a href="{{ route('admin_student_home') }}"><i class="icon-Commit"><span class="path1"></span><span
                                             class="path2"></span></i>All students</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="departments.html">
+                        <a href="{{ route('department_home') }}">
                             <i class="icon-Ticket"></i>
                             <span>Departments</span>
                         </a>

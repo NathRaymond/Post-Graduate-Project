@@ -7,14 +7,14 @@
 $(function () {
 
   'use strict';
-	
+        var thisyear = new Date();
 		var options = {
           series: [{
           name: 'Fees',
           type: 'column',
           data: [440, 505, 414, 671, 227, 413, 201, 352, 752, 320, 257, 160]
         }, {
-          name: 'Donaion',
+          name: 'Expenditure',
           type: 'line',
           data: [23, 42, 35, 27, 43, 22, 17, 31, 22, 22, 12, 16]
         }],
@@ -49,7 +49,7 @@ $(function () {
           title: {
             text: 'Fees',
           },
-        
+
         }, {
           opposite: true,
           title: {
@@ -60,15 +60,15 @@ $(function () {
 
         var chart = new ApexCharts(document.querySelector("#chart-report"), options);
         chart.render();
-	
-	
-	
+
+
+
 		$('.event-bx').slimScroll({
 			height: '300px'
 		});
-	
+
 		$('.complaint-bx').slimScroll({
 			height: '300px'
 		});
-	
+
 }); // End of use strict

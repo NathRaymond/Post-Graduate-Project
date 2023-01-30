@@ -39,8 +39,8 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('users_home');
             Route::any('view_user_details/{id}', [App\Http\Controllers\UserController::class, 'viewDetails'])->name('view_user_details');
             Route::post('/create', [App\Http\Controllers\UserController::class, 'create'])->name('create_new_user');
-            Route::post('/update', [App\Http\Controllers\UserController::class, 'update'])->name('update_user');
-            Route::get('/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('get_user_by_id');
+            Route::post('/update', [App\Http\Controllers\UserController::class, 'update'])->name('admin_user_update');
+            Route::get('/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('user_edit');
             Route::get('/delete', [App\Http\Controllers\UserController::class, 'delete'])->name('user.destroy');
         });
         Route::group(['prefix' => 'role'], function () {
@@ -54,6 +54,21 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/delete', [App\Http\Controllers\RolesController::class, 'destroy'])->name('role.destroy');
             Route::get('/rolelist', [App\Http\Controllers\RolesController::class, 'getRolelist'])->name('role_list');
         });
+
+        Route::group(['prefix' => 'student'], function () {
+            Route::get('/', [App\Http\Controllers\StudentController::class, 'index'])->name('admin_student_home');
+            Route::get('/view/{id}', [App\Http\Controllers\StudentController::class, 'viewDetails'])->name('view_student_details');
+
+        });
+        Route::group(['prefix' => 'referee'], function () {
+            Route::get('/', [App\Http\Controllers\StudentController::class, 'refereeQuestions'])->name('referee_questions');
+            Route::get('/delete', [App\Http\Controllers\StudentController::class, 'deleteRefereeQuestion'])->name('deleteRefereeQuestion');
+            Route::get('/edit', [App\Http\Controllers\StudentController::class, 'editQuestion'])->name('edit_question');
+
+            Route::post('/store', [App\Http\Controllers\StudentController::class, 'storeRefereeQuestion'])->name('addNewQuestion');
+            Route::post('/update', [App\Http\Controllers\StudentController::class, 'updateQuestion'])->name('updateQuestion');
+        });
+
 
         Route::group(['prefix' => 'session'], function () {
             Route::get('/', [App\Http\Controllers\AcademicSessionController::class, 'index'])->name('academic_session_home');
@@ -76,6 +91,14 @@ Route::group(['middleware' => 'auth'], function () {
             // Route::get('/', [App\Http\Controllers\PaymentController::class, 'index'])->name('fees_home');
             Route::get('/awaiting-confirmation', [App\Http\Controllers\PaymentController::class, 'awaitingConfirmation'])->name('awaiting-confirmation');
             Route::post('/save', [App\Http\Controllers\PaymentController::class, 'save'])->name('save-payment');
+        });
+
+        Route::group(['prefix' => 'department'], function () {
+            Route::get('/', [App\Http\Controllers\DepartmentController::class, 'index'])->name('department_home');
+            Route::post('/create', [App\Http\Controllers\DepartmentController::class, 'createDepartment'])->name('createDepartment');
+            Route::post('/update', [App\Http\Controllers\DepartmentController::class, 'updateDepartment'])->name('updateDepartment');
+            Route::get('/delete', [App\Http\Controllers\DepartmentController::class, 'deleteDepartment'])->name('deleteDepartment');
+            Route::get('/info', [App\Http\Controllers\DepartmentController::class, 'departmentInfo'])->name('departmentInfo');
         });
 
 
