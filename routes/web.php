@@ -66,11 +66,16 @@ Route::group(['middleware' => 'auth'], function () {
         });
         Route::group(['prefix' => 'fees'], function () {
             Route::get('/', [App\Http\Controllers\Admin\FeeController::class, 'index'])->name('fees_home');
+            Route::get('/update-fee-status', [App\Http\Controllers\Admin\FeeController::class, 'updateFeeStatus'])->name('update-fee-status');
+            Route::get('/all-fees-data', [App\Http\Controllers\Admin\FeeController::class, 'feesData'])->name('all-fees-data');
+            Route::get('/get-fee-info', [App\Http\Controllers\Admin\FeeController::class, 'feeInfo'])->name('get-fee-info');
             Route::post('/create', [App\Http\Controllers\Admin\FeeController::class, 'create'])->name('create-new-fee');
+            Route::post('/update', [App\Http\Controllers\Admin\FeeController::class, 'update'])->name('create-fee-record');
         });
         Route::group(['prefix' => 'payments'], function () {
-            Route::get('/', [App\Http\Controllers\PaymentController::class, 'index'])->name('fees_home');
+            // Route::get('/', [App\Http\Controllers\PaymentController::class, 'index'])->name('fees_home');
             Route::get('/awaiting-confirmation', [App\Http\Controllers\PaymentController::class, 'awaitingConfirmation'])->name('awaiting-confirmation');
+            Route::post('/save', [App\Http\Controllers\PaymentController::class, 'save'])->name('save-payment');
         });
 
 

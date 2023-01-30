@@ -185,7 +185,11 @@
                     $("#amount").val("");
                 }else{
                     $.get('{{ route('get_fee_by_type') }}?type=' + type + "&programme="+programme, function (data) {
-                        $("#amount").val(data.amount);
+						if(data.status == 1){
+							$("#amount").val(data.late_fee);
+						}else{
+							$("#amount").val(data.amount);
+						}
                     })
                 }
                 
@@ -201,7 +205,11 @@
                     $("#amount").val("");
                 }else{
                     $.get('{{ route('get_fee_by_type') }}?type=' + type + "&programme="+programme, function (data) {
-                        $("#amount").val(data.amount);
+                        if(data.status == 1){
+							$("#amount").val(data.late_fee);
+						}else{
+							$("#amount").val(data.amount);
+						}
                     })
                 }
                   

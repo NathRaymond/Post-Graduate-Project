@@ -48,13 +48,8 @@
                                             <td>
                                                 <div>
                                                     <button type="button" class="btn btn-info btn-sm"
-                                                        data-bs-toggle="modal" data-bs-target="#modal-default">
+                                                        data-bs-toggle="modal" data-id="{{$programme->id}}" id="editProgram" data-bs-target="#modal-default">
                                                         Edit
-                                                    </button>
-
-                                                    <button type="button" class="btn btn-danger btn-sm"
-                                                        data-bs-toggle="modal" data-bs-target="#modal-info">
-                                                        Delete
                                                     </button>
                                                 </div>
                                             </td>

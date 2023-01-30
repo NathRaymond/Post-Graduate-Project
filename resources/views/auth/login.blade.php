@@ -40,7 +40,7 @@
 									<div class="form-group">
 										<div class="input-group mb-3">
 											<span class="input-group-text bg-transparent"><i class="ti-user"></i></span>
-											<input type="text" class="form-control ps-15 bg-transparent" name="email" placeholder="Username">
+											<input type="text" class="form-control ps-15 bg-transparent" name="email" placeholder="Email">
 										</div>
 									</div>
 									<div class="form-group">

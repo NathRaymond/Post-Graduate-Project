@@ -17,11 +17,38 @@
 	<!-- Style-->
 	<link rel="stylesheet" href="{{ asset('adminassets/src/css/style.css')}}">
 	<link rel="stylesheet" href="{{ asset('adminassets/src/css/skin_color.css')}}">
+  <style>
+		.preloader {
+			align-items: center;
+			background: gray;
+			display: flex;
+			height: 100vh;
+			justify-content: center;
+			left: 0;
+			position: fixed;
+			top: 0;
+			transition: opacity 0.3s linear;
+			width: 100%;
+			z-index: 9999;
+			opacity: 0.4;
+		}
+
+    .text-right{
+       text-align: right;
+    }
+		</style>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    
   </head>
 
 <body class="hold-transition light-skin sidebar-mini theme-primary fixed">
-
+  <div class="preloader" style="display: none">
+    <div class="spinner-grow text-info m-1" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+    {{-- <img src="spinner.svg" alt="spinner"> --}}
+</div>
 <div class="wrapper">
 	<div id="loader"></div>
 
