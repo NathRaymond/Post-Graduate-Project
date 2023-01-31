@@ -1,0 +1,36 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\User;
+
+class HomeController extends Controller
+{
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function adminDashboard()
+    {
+        $data['users'] = User::where('user_type', "admin")->take(10)->get();
+        return view('admin.dashboard', $data);
+    }
+    
+    public function studentDashboard()
+    {
+         $data['users'] = User::where('user_type', "student")->take(13)->get();
+        return view('student.dashboard', $data);
+    }
+}
