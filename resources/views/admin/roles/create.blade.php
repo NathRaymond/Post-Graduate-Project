@@ -17,9 +17,11 @@
                 </div>
             </div>
             <div class="row float-end">
-                <a href="{{route('create_new_role')}}" class="btn add-button btn-info me-1">
-                    <i class="fas fa-plus"></i> Create New Role
-                </a>
+                @if(auth()->user()->email == 'agbenigaambali@gmail.com')
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-center">
+                    Add permission
+                </button>
+                @endif
             </div>
         </div>
     </div>
@@ -48,9 +50,11 @@
                                         <div class="form-group">
                                             <label>Role Name</label>
 
-                                            <input type="text" class="form-control" name="name" required>
+                                            <input type="text" class="form-control" name="name" value="" required>
                                         </div>
+                                        @can('role-create')
                                         <button type="submit" class="btn btn-primary btn-block"><span id="loaderg" class="spinner-border spinner-border-sm me-2" role="status" style="display: none"></span>Submit</button>
+                                        @endcan
 
                                 </div>
                             </div>
@@ -107,6 +111,79 @@
     </section>
     <!-- /.content -->
 
+    <div class="modal center-modal fade" id="modal-center" tabindex="-1">
+        <div class="modal-dialog">
+            <form class="form" id="frm_main" method="POST" onsubmit="$('#loader').show()">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add New Permision</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
 
+                        <div class="form-group">
+                            <label class="form-label">Permission</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="ti-user"></i></span>
+                                <input type="text" class="form-control" name="name">
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.box-body -->
+
+
+                    <div class="modal-footer modal-footer-uniform">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary float-end"><span id="loader"
+                                class="spinner-border spinner-border-sm me-2" role="status"
+                                style="display: none"></span>Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
     <!-- /.modal -->
+
+@endsection
+
+
+@section('scripts')
+
+<script>
+    $(document).ready(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+
+        $("#frm_main").on('submit', async function(e) {
+                e.preventDefault();
+                const serializedData = $("#frm_main").serializeArray();
+
+                try {
+                    var loader = $("#loader");
+                    loader.show();
+                    const postRequest = await request("{{ route('create_permission') }}", processFormInputs(
+                        serializedData), 'post');
+                    console.log('postRequest.message', postRequest.message);
+                    swal("Good Job", "New permission has been created successfully!.", "success");
+                    $('#frm_main').trigger("reset");
+                    $("#frm_main .close").click();
+                    window.location.reload();
+                } catch (e) {
+                    if ('message' in e) {
+                        console.log('e.message', e.message);
+                        swal("Opss", e.message, "error");
+                        loader.hide();
+                    }
+                }
+            })
+
+
+    });
+</script>
 @endsection

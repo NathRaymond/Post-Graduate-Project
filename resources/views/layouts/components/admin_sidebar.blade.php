@@ -3,14 +3,14 @@
     <section class="sidebar position-relative">
         <div class="d-flex align-items-center logo-box justify-content-start d-md-block d-none">
             <!-- Logo -->
-            <a href="#" class="logo">
+            <a href="/admin" class="logo">
                 <!-- logo-->
                 <div class="logo-mini">
                     <span class="light-logo"><img src="{{ asset('funaab-logo.jpg') }}"
                             alt="logo"></span>
                 </div>
                 <div class="logo-lg">
-                    <span class="light-logo fs-36 fw-700 text-success">CEADESE<span class="text-primary"></span></span>
+                    <span class="light-logo fs-36 fw-700">CEADESE<span class="text-primary"></span></span>
                 </div>
             </a>
         </div>
@@ -21,16 +21,16 @@
                         alt="User Image">
                     <div>
                         <h4 class="mb-0 fw-600">{{ Auth::user()->title }} {{ Auth::user()->name }}</h4>
-                        <p class="mb-0">
-                            @if (!empty(Auth::user()->getRoleNames()))
+                        <p class="mb-0"> 
+                        @if (!empty(Auth::user()->getRoleNames()))
                                             @foreach (Auth::user()->getRoleNames() as $v)
                                                 <p class="text-info">Role: {{ $v }}</p>
                                             @endforeach
                                         @endif
-                        </p>
+                                        </p>
                     </div>
                 </div>
-                <div class="info">
+                 <div class="info">
                     <a class="dropdown-toggle p-15 d-grid" data-bs-toggle="dropdown" href="#"></a>
                     <div class="dropdown-menu dropdown-menu-end">
                         <a class="dropdown-item" href="#"><i class="ti-user"></i> Profile</a>
@@ -61,24 +61,40 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="{{ route('users_home') }}"><i class="icon-Commit"><span class="path1"></span><span
-                                            class="path2"></span></i>Manage Users</a></li>
+                      @can('role-list')
                             <li><a href="{{ route('roles_home') }}"><i class="icon-Commit"><span class="path1"></span><span
                                             class="path2"></span></i>Roles and Permission</a></li>
+                         @endcan
+                        @can('user-list')    
+                          <li><a href="{{ route('users_home') }}"><i class="icon-Commit"><span class="path1"></span><span
+                                    class="path2"></span></i>Manage Users</a></li>
+                        @endcan
+                        @can('view-academic-session')
                             <li><a href="{{ route('academic_session_home') }}"><i class="icon-Commit"><span class="path1"></span><span
                                             class="path2"></span></i>Academic Session</a></li>
+                        @endcan
+                        
                             <li><a href="{{route('programmes_home')}}"><i class="icon-Commit"><span class="path1"></span><span
                                             class="path2"></span></i>Programmes</a></li>
-                            <li><a href="#"><i class="icon-Commit"><span class="path1"></span><span
+                        @can('view-courses')
+                            <li><a href="{{ route('course_home') }}"><i class="icon-Commit"><span class="path1"></span><span
                                             class="path2"></span></i>Courses</a></li>
+                          @endcan 
+                          
+                          @can('view-fee')
                             <li><a href="{{route('fees_home')}}"><i class="icon-Commit"><span class="path1"></span><span
                                             class="path2"></span></i>Fees</a></li>
-                            <li><a href="#"><i class="icon-Commit"><span class="path1"></span><span
-                                            class="path2"></span></i>Special Control</a></li>
+                            @endcan
+                            
+                            @can('view-referee-questions')
                             <li><a href="{{ route('referee_questions') }}"><i class="icon-Commit"><span class="path1"></span><span
                                             class="path2"></span></i>Referee Questions</a></li>
+                            @endcan
+                            <li><a href="#"><i class="icon-Commit"><span class="path1"></span><span
+                                            class="path2"></span></i>Special Control</a></li>
                         </ul>
                     </li>
+                    @can('view-student')
                     <li class="treeview">
                         <a href="#">
                             <i class="icon-User"><span class="path1"></span><span class="path2"></span></i>
@@ -88,20 +104,32 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="#"><i class="icon-Commit"><span class="path1"></span><span
-                                            class="path2"></span></i>New Registration</a></li>
-                            <li><a href=""><i class="icon-Commit"><span class="path1"></span><span
+                            @can('view-applicants')
+                             <li><a href="{{ route('applicants_home') }}"><i class="icon-Commit"><span class="path1"></span><span
+                                            class="path2"></span></i>Applicants</a></li>
+                            @endcan
+                            @can('view-application')
+                            <li><a href="{{ route('applications_home') }}"><i class="icon-Commit"><span class="path1"></span><span
+                                            class="path2"></span></i>Applications</a></li>
+                            @endcan
+                            
+                            @can('view-student')
+                            <li><a href="{{ route('registered_students') }}"><i class="icon-Commit"><span class="path1"></span><span
                                             class="path2"></span></i>Registered Student</a></li>
+                           
                             <li><a href="{{ route('admin_student_home') }}"><i class="icon-Commit"><span class="path1"></span><span
                                             class="path2"></span></i>All students</a></li>
+                             @endcan
                         </ul>
                     </li>
-                    <li>
-                        <a href="{{ route('department_home') }}">
+                    @endcan
+                   
+                   {{-- <li>
+                        <a href="#">
                             <i class="icon-Ticket"></i>
                             <span>Departments</span>
                         </a>
-                    </li>
+                    </li>--}}
                     <li class="treeview">
                         <a href="#">
                             <i class="icon-Address-card"></i>
@@ -115,6 +143,7 @@
                                             class="path2"></span></i>Lecturer List</a></li>
                         </ul>
                     </li>
+                    @can('view-payment')
                     <li class="treeview">
                         <a href="#">
                             <i class="icon-Address-card"></i>
@@ -124,12 +153,15 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="{{route('awaiting-confirmation')}}"><i class="icon-Commit"><span class="path1"></span><span
+                              <li><a href="{{route('awaiting-confirmation')}}"><i class="icon-Commit"><span class="path1"></span><span
                                             class="path2"></span></i>Awaiting Confirmation </a></li>
-                            <li><a href="#"><i class="icon-Commit"><span class="path1"></span><span
+                            <li><a href="{{route('payment-home')}}"><i class="icon-Commit"><span class="path1"></span><span
                                             class="path2"></span></i>Payment </a></li>
                         </ul>
                     </li>
+                    @endcan
+                    
+                    @can('view-report')
                     <li class="treeview">
                         <a href="#">
                             <i class="icon-Address-card"></i>
@@ -146,6 +178,17 @@
                             <li><a href="#"><i class="icon-Commit"><span class="path1"></span><span
                                             class="path2"></span></i>Other Report</a></li>
                         </ul>
+                    </li>
+                    
+                    @endcan
+                    
+                    
+                    
+                    <li>
+                        <a href="javascript:void" data-bs-toggle="modal" data-bs-target="#modal-changePassword">
+                            <i class="icon-Key"></i>
+                            <span>Change Password</span>
+                        </a>
                     </li>
                 </ul>
 

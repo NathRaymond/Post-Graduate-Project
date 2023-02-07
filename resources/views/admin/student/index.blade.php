@@ -63,7 +63,7 @@
                             <td>{{ $student->email }}</td>
                             <td>{{ $student->phone_number }}</td>
                             <td class="nowrap">
-                              <a href="{{ route('view_student_details',[$student->id]) }}" class="btn btn-info">View </a>
+                              <a href="{{ route('view_student_details',[$student->id]) }}" class="btn btn-info btn-sm">View </a>
                             </td>
 
                         </tr>

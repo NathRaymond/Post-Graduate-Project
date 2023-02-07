@@ -17,6 +17,37 @@
 	<!-- Style-->
 	<link rel="stylesheet" href="{{ asset('adminassets/src/css/style.css')}}">
 	<link rel="stylesheet" href="{{ asset('adminassets/src/css/skin_color.css')}}">
+	    <style>
+        .table>thead>tr>td,
+        .table>thead>tr>th {
+            padding: 0.5rem !important;
+
+        }
+
+        .table>tbody>tr>td,
+        .table>tbody>tr>th {
+            padding: 0.5rem !important;
+            vertical-align: middle;
+        }
+        .preloader {
+			align-items: center;
+			background: gray;
+			display: flex;
+			height: 100vh;
+			justify-content: center;
+			left: 0;
+			position: fixed;
+			top: 0;
+			transition: opacity 0.3s linear;
+			width: 100%;
+			z-index: 9999;
+			opacity: 0.4;
+		}
+
+    .text-right{
+       text-align: right;
+    }
+    </style>
     <meta name="csrf-token" content="{{ csrf_token() }}">
   </head>
 
@@ -132,69 +163,79 @@
 	  &copy; <script>document.write(new Date().getFullYear())</script> <a href="#">CEADESE</a>. All Rights Reserved.
   </footer>
   <!-- Side panel -->
-  <!-- quick_actions_toggle -->
-  <div class="modal modal-right fade" id="quick_actions_toggle" tabindex="-1">
-	  <div class="modal-dialog">
-		<div class="modal-content slim-scroll">
-		  <div class="modal-body bg-white p-30">
-			<div class="d-flex align-items-center justify-content-between pb-30">
-				<h4 class="m-0">Quick Actions<br>
-				<small class="badge fs-12 badge-primary mt-10">23 tasks pending</small></h4>
-				<a href="#" class="btn btn-icon btn-danger-light btn-sm no-shadow" data-bs-dismiss="modal">
-					<span class="fa fa-close"></span>
-				</a>
-			</div>
-            <div class="row">
-                <div class="col-6">
-                    <a class="waves-effect waves-light btn btn-app btn btn-primary-light btn-flat mx-0 mb-20 no-shadow py-35 h-auto d-block" href="accounting.html">
-                        <i class="icon-Euro fs-36"><span class="path1"></span><span class="path2"></span></i>
-                        <span class="fs-16">Accounting</span>
-                    </a>
-                </div>
-                <div class="col-6">
-                    <a class="waves-effect waves-light btn btn-app btn btn-primary-light btn-flat mx-0 mb-20 no-shadow py-35 h-auto d-block" href="contact_userlist_grid.html">
-                        <i class="icon-Mail-attachment fs-36"><span class="path1"></span><span class="path2"></span></i>
-                        <span class="fs-16">Members</span>
-                    </a>
-                </div>
-                <div class="col-6">
-                    <a class="waves-effect waves-light btn btn-app btn btn-primary-light btn-flat mx-0 mb-20 no-shadow py-35 h-auto d-block" href="projects.html">
-                        <i class="icon-Box2 fs-36"><span class="path1"></span><span class="path2"></span></i>
-                        <span class="fs-16">Projects</span>
-                    </a>
-                </div>
-                <div class="col-6">
-                    <a class="waves-effect waves-light btn btn-app btn btn-primary-light btn-flat mx-0 mb-20 no-shadow py-35 h-auto d-block" href="contact_userlist.html">
-                        <i class="icon-Group fs-36"><span class="path1"></span><span class="path2"></span></i>
-                        <span class="fs-16">Customers</span>
-                    </a>
-                </div>
-                <div class="col-6">
-                    <a class="waves-effect waves-light btn btn-app btn btn-primary-light btn-flat mx-0 mb-20 no-shadow py-35 h-auto d-block" href="mailbox.html">
-                        <i class="icon-Chart-bar fs-36"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>
-                        <span class="fs-16">Email</span>
-                    </a>
-                </div>
-                <div class="col-6">
-                    <a class="waves-effect waves-light btn btn-app btn btn-primary-light btn-flat mx-0 mb-20 no-shadow py-35 h-auto d-block" href="setting.html">
-                        <i class="icon-Color-profile fs-36"><span class="path1"></span><span class="path2"></span></i>
-                        <span class="fs-16">Settings</span>
-                    </a>
-                </div>
-                <div class="col-6">
-                    <a class="waves-effect waves-light btn btn-app btn btn-primary-light btn-flat mx-0 mb-20 no-shadow py-35 h-auto d-block" href="ecommerce_orders.html">
-                        <i class="icon-Euro fs-36"><span class="path1"></span><span class="path2"></span></i>
-                        <span class="fs-18">Orders</span>
-                    </a>
-                </div>
-			</div>
-		  </div>
-		</div>
-	  </div>
-  </div>
-  <!-- /quick_actions_toggle -->
+        <!-- Add Modal -->
+        <div class="modal center-modal fade" id="modal-changePassword" tabindex="-1">
+            <div class="modal-dialog">
+                <form class="form" id='changePasswordForm' method="POST">
+                    @csrf
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Change Password</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="form-group">
+                                <label class="form-label">Title</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i class="ti-user"></i></span>
+                                    <input type="text" class="form-control" name="title" readonly
+                                        value="{{ auth()->user()->title }}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Full Name</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i class="ti-user"></i></span>
+                                    <input type="text" class="form-control" value="{{ auth()->user()->name }}"
+                                        readonly>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Current Password</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i class="ti-phone"></i></span>
+                                    <input type="text"required class="form-control" name="current_password"
+                                        placeholder="Current password">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">New Password</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i class="ti-phone"></i></span>
+                                    <input type="password" required class="form-control" name='new_password'
+                                        id="newPASSword" minlength="8">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Confirm Password</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i class="ti-phone"></i></span>
+                                    <input type="password" required class="form-control" id="verifyPAssword"
+                                        name='confirm_password' minlength="8">
+
+                                </div>
+                                <span class="form-text text-muted" id="passwordtextDis">
+                                </span>
+                            </div>
+
+                        </div>
+                        <!-- /.box-body -->
 
 
+                        <div class="modal-footer modal-footer-uniform">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" id="submit_btn" class="btn btn-primary float-end"><span
+                                    id="loaderPass" class="spinner-border spinner-border-sm me-2" role="status"
+                                    style="display: none"></span>Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
 
 
 </div>
@@ -217,6 +258,9 @@
 	<script src="{{ asset('adminassets/src/js/template.js')}}"></script>
     <script src="{{ asset('js/sweetalert/dist/sweetalert.min.js') }}"></script>
     <script src="{{ asset('studentassets/bootstrap/js/bootstrap.min.js')}}"></script>
+        <script src="{{ asset('js/request.js') }}"></script>
+    <script src="{{ asset('js/form.js') }}"></script>
+
     <script>
         @if ($errors->any())
             swal('Oops...', "{!! implode('', $errors->all(':message')) !!}", 'error')
@@ -238,6 +282,68 @@
         @endif
     </script>
 
+
+    <script type="text/javascript">
+        $(function() {
+            $("#verifyPAssword").keyup(function() {
+                var password = $("#newPASSword").val();
+                var confirmPassword = $("#verifyPAssword").val();
+
+                if (password != confirmPassword) {
+                    $("#passwordtextDis").text("Password does not match");
+                    $("#passwordtextDis").attr("style", "color:#F64E60 !important");
+                    $("#submit_btn").attr("disabled", true);
+
+                } else {
+                    $("#passwordtextDis").text("Password match");
+
+                    $("#passwordtextDis").attr("style", "color:#1BC5BD !important");
+                    $("#submit_btn").attr("disabled", false);
+                }
+
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+
+            $("#changePasswordForm").on('submit', async function(e) {
+
+                // alert('here')
+                e.preventDefault();
+                const serializedData = $("#changePasswordForm").serializeArray();
+                $('#loaderPass').show()
+                console.log(serializedData)
+                try {
+
+                    const postRequest = await request("{{ route('changePassword') }}",
+                        processFormInputs(
+                            serializedData), 'post');
+                    console.log('postRequest.message', postRequest.message);
+                    new swal("Good Job", postRequest.message + ', Please login with your new password',
+                        "success");
+                    $('#changePasswordForm').trigger("reset");
+                    $('#loaderPass').hide()
+                    $("#modal-changePassword .btn-close").click();
+                    window.location.replace('/logout');
+                } catch (e) {
+                    if ('message' in e) {
+                        console.log('e.message', e.message);
+                        $('#loaderPass').hide()
+                        new swal("Opss", e.message, "error");
+
+                    }
+                }
+            })
+        });
+    </script>
 
 
 	@yield('scripts')

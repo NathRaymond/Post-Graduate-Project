@@ -3,15 +3,19 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
-class Fee extends Model
+use OwenIt\Auditing\Contracts\Auditable;
+class Fee extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
     protected $fillable = [
-       
+
         'type',
         'amount',
-        'programme'
-        
+        'programme',
+        'late_fee',
+        'status',
+        'description',
+
     ];
 
     public function services()
@@ -26,7 +30,7 @@ class Fee extends Model
 
     public function programmes()
     {
-        return $this->belongsTo('App\Models\Programmes', 'programme')->withDefault(['name' => 'Anonymous']);;
+        return $this->belongsTo('App\Models\ProgrammeCategory', 'programme')->withDefault(['name' => 'Anonymous']);;
     }
 
     public function testinfo()

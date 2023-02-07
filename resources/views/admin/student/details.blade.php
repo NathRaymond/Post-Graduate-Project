@@ -48,26 +48,25 @@
                         <div class="row text-center mt-10">
                             <div class="col-md-6 border-end">
                                 <strong>Name</strong>
-                                <p>Jane Doe</p>
+                                <p>{{ $student->surname . ' ' . $student->firstname . ' ' . $student->middlename }}</p>
                             </div>
-                            <div class="col-md-6"><strong>Occupation</strong>
-                                <p>Computer</p>
+                            <div class="col-md-6"><strong>Programme</strong>
+                                <p>{{ $application->programme->description?? '' }}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row text-center mt-10" title="{{ $student->email }}">
+                            <div class="col-md-6 border-end"><strong>Email</strong>
+                                <p>{{ substr($student->email,0,9) }}</p>
+                            </div>
+                            <div class="col-md-6" title="{{ $student->phone_number }}"><strong>Phone</strong>
+                                <p>{{ $student->phone_number }}</p>
                             </div>
                         </div>
                         <hr>
                         <div class="row text-center mt-10">
-                            <div class="col-md-6 border-end"><strong>Email ID</strong>
-                                <p>janedoe@gmail.com</p>
-                            </div>
-                            <div class="col-md-6"><strong>Phone</strong>
-                                <p>+123 456 789</p>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row text-center mt-10">
-                            <div class="col-md-12"><strong>Address</strong>
-                                <p>E104, Dharti-2, Chandlodia Ahmedabad
-                                    <br> Gujarat, India.
+                            <div class="col-md-12"><strong>Field of Study</strong>
+                                <p>{{ $application->Course->description }}
                                 </p>
                             </div>
                         </div>
@@ -108,7 +107,8 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Surname</label>
-                                                    <input type="text" class="form-control" placeholder="Surname">
+                                                    <input type="text" class="form-control"
+                                                        value="{{ $student->surname }}" name="surname">
                                                 </div>
                                             </div>
                                         </div>
@@ -116,13 +116,15 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">First Name</label>
-                                                    <input type="text" class="form-control" placeholder="First Name">
+                                                    <input type="text" class="form-control"
+                                                        value="{{ $student->firstname }}" name="firstname">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">Middle Name</label>
-                                                    <input type="text" class="form-control" placeholder="Middle name">
+                                                    <input type="text" class="form-control"
+                                                        value="{{ $student->middlename }}" name="middlename">
                                                 </div>
                                             </div>
 
@@ -131,24 +133,34 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">Sex</label>
-                                                    <select type="text" class="form-select">
+                                                    <select type="text" class="form-select" name="sex">
 
                                                         <option value="">Select gender</option>
-                                                        <option value="M">Male</option>
-                                                        <option value="F">Female</option>
+                                                        <option value="M" {{ $student->sex == 'M' ? 'selected' : ' ' }}>
+                                                            Male</option>
+                                                        <option value="F" {{ $student->sex == 'F' ? 'selected' : ' ' }}>
+                                                            Female</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">Marital Status</label>
-                                                    <select type="text" class="form-select">
+                                                    <select type="text" class="form-select" name="marital_status">
 
                                                         <option value="">Select marital status</option>
-                                                        <option value="Married">Married</option>
-                                                        <option value="SIngle">Single</option>
-                                                        <option value="WIdow">Widow</option>
-                                                        <option value="DIvorce">Divorce</option>
+                                                        <option
+                                                            value="Married"{{ $student->marital_status == 'Married' ? 'selected' : ' ' }}>
+                                                            Married</option>
+                                                        <option value="Single"
+                                                            {{ $student->marital_status == 'Single' ? 'selected' : ' ' }}>
+                                                            Single</option>
+                                                        <option value="Widow"
+                                                            {{ $student->marital_status == 'Widow' ? 'selected' : ' ' }}>Widow
+                                                        </option>
+                                                        <option value="Divorce"
+                                                            {{ $student->marital_status == 'Divorce' ? 'selected' : ' ' }}>
+                                                            Divorce</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -159,13 +171,14 @@
                                                 <div class="form-group">
                                                     <label class="form-label">Phone Number 1</label>
                                                     <input type="text" class="form-control" minlength="11"
-                                                        maxlength="11" placeholder="Phone Numbr 1">
+                                                        maxlength="11" value="{{ $student->phone_number }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">Email 1</label>
-                                                    <input type="email" class="form-control" placeholder="Email 1">
+                                                    <input type="email" class="form-control"
+                                                        value="{{ $student->email }}">
                                                 </div>
                                             </div>
 
@@ -175,14 +188,15 @@
                                                 <div class="form-group">
                                                     <label class="form-label">Phone Number 2</label>
                                                     <input type="text" class="form-control" minlength="11"
-                                                        maxlength="11" placeholder="Phone Numbr 1">
+                                                        name="alt_phone_number" maxlength="11"
+                                                        value="{{ $student->alt_phone_number }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">Alternative Email</label>
-                                                    <input type="email" class="form-control"
-                                                        placeholder="Alternative Email">
+                                                    <input type="email" class="form-control" name="alt_email"
+                                                        value="{{ $student->alt_email }}">
                                                 </div>
                                             </div>
 
@@ -192,18 +206,24 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">Date of birth</label>
-                                                    <input type="date" class="form-control"
-                                                        placeholder="Date of birth">
+                                                    <input type="date" class="form-control" name="dob"
+                                                        value="{{ $student->dob }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">Religion</label>
-                                                    <select class="form-select">
+                                                    <select class="form-select" name="religion">
                                                         <option value="">select religion</option>
-                                                        <option value="Islam">Islam</option>
-                                                        <option value="Christianity">Christianity</option>
-                                                        <option value="Traditional">Traditional</option>
+                                                        <option value="Islam"
+                                                            {{ $student->religion == 'Islam' ? 'selected' : ' ' }}>Islam
+                                                        </option>
+                                                        <option value="Christianity"
+                                                            {{ $student->religion == 'Christianity' ? 'selected' : ' ' }}>
+                                                            Christianity</option>
+                                                        <option value="Traditional"
+                                                            {{ $student->religion == 'Traditional' ? 'selected' : ' ' }}>
+                                                            Traditional</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -213,12 +233,12 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="country">Nationality</label>
-                                                    <select class="form-select" name="country" id="mycountry"
+                                                    <select class="form-select" name="nationality" id="mycountry"
                                                         aria-label="Default select country">
                                                         <option value="">Choose Country</option>
                                                         @foreach ($countries as $country)
                                                             <option value="{{ $country->id }}"
-                                                                {{ $student->country == $country->id ? 'selected' : '' }}>
+                                                                {{ $student->nationality == $country->id ? 'selected' : '' }}>
                                                                 {{ $country->name }}</option>
                                                         @endforeach
                                                     </select>
@@ -234,7 +254,7 @@
                                                         <option value="">Choose State</option>
                                                         @foreach ($states as $state)
                                                             <option value="{{ $state->id_no }}"
-                                                                {{ $state->id_no == $student->state_id ? 'selected' : '' }}>
+                                                                {{ $state->id_no == ($student->studentHome()->state_of_origin ?? ' ') ? 'selected' : '' }}>
                                                                 {{ $state->state }}</option>
                                                         @endforeach
                                                     </select>
@@ -249,7 +269,7 @@
                                                         <option value="">Choose LGA</option>
                                                         @foreach ($lgas->where('state_id', $student->state_id) as $lga)
                                                             <option value="{{ $lga->id_no }}"
-                                                                {{ $lga->id_no == $student->lga_id ? 'selected' : '' }}>
+                                                                {{ $lga->id_no == ($student->studentHome()->lga_id ?? ' ') ? 'selected' : '' }}>
                                                                 {{ $lga->local_govt }}</option>
                                                         @endforeach
                                                     </select>
@@ -270,7 +290,7 @@
                                                         <option value="">Choose Country</option>
                                                         @foreach ($countries as $country)
                                                             <option value="{{ $country->id }}"
-                                                                {{ $student->country == $country->id ? 'selected' : '' }}>
+                                                                {{ ($student->studentHome()->country_id ?? ' ') == $country->id ? 'selected' : '' }}>
                                                                 {{ $country->name }}</option>
                                                         @endforeach
                                                     </select>
@@ -286,37 +306,25 @@
                                                         <option value="">Choose State</option>
                                                         @foreach ($states as $state)
                                                             <option value="{{ $state->id_no }}"
-                                                                {{ $state->id_no == $student->state_id ? 'selected' : '' }}>
+                                                                {{ $state->id_no == ($student->studentHome()->state ?? ' ') ? 'selected' : '' }}>
                                                                 {{ $state->state }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6" id="hidden-govt"
-                                                @if ($student->country != 156) style="display:none" @endif>
-                                                <div class="form-group">
-                                                    <label for="lga">LGA</label>
-                                                    <select class="form-select select2-container--below lgaa"
-                                                        name="lga_id" aria-label="Default select example">
-                                                        <option value="">Choose LGA</option>
-                                                        @foreach ($lgas->where('state_id', $student->state_id) as $lga)
-                                                            <option value="{{ $lga->id_no }}"
-                                                                {{ $lga->id_no == $student->lga_id ? 'selected' : '' }}>
-                                                                {{ $lga->local_govt }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
+
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">Town</label>
-                                                    <input type="text" class="form-control" placeholder="Town">
+                                                    <input type="text" class="form-control"
+                                                        value="{{ $student->studentHome()->town ?? '' }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">Street</label>
-                                                    <input type="text" class="form-control" placeholder="Street">
+                                                    <input type="text" class="form-control"
+                                                        value="{{ $student->studentHome()->street ?? '' }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -330,7 +338,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">POBox/PMB/Postal Code</label>
-                                                    <input type="text" class="form-control" placeholder="Street">
+                                                    <input type="text" class="form-control" value="{{ $student->studentContact()->pobox?? ' ' }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -341,53 +349,26 @@
                                                         <option value="">Choose Country</option>
                                                         @foreach ($countries as $country)
                                                             <option value="{{ $country->id }}"
-                                                                {{ $student->country == $country->id ? 'selected' : '' }}>
+                                                                {{ ($student->studentContact()->country_id ?? ' ') == $country->id ? 'selected' : '' }}>
                                                                 {{ $country->name }}</option>
                                                         @endforeach
                                                     </select>
 
                                                 </div>
                                             </div>
-                                            <div class="col-md-6" id="hidden-div"
-                                                @if ($student->country != 156) style="display:none" @endif>
-                                                <div class="form-group">
-                                                    <label for="state">State</label>
-                                                    <select class="form-select select2-container--below state"
-                                                        name="state_id" id="mystate" aria-label="Default select ">
-                                                        <option value="">Choose State</option>
-                                                        @foreach ($states as $state)
-                                                            <option value="{{ $state->id_no }}"
-                                                                {{ $state->id_no == $student->state_id ? 'selected' : '' }}>
-                                                                {{ $state->state }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6" id="hidden-govt"
-                                                @if ($student->country != 156) style="display:none" @endif>
-                                                <div class="form-group">
-                                                    <label for="lga">LGA</label>
-                                                    <select class="form-select select2-container--below lgaa"
-                                                        name="lga_id" aria-label="Default select example">
-                                                        <option value="">Choose LGA</option>
-                                                        @foreach ($lgas->where('state_id', $student->state_id) as $lga)
-                                                            <option value="{{ $lga->id_no }}"
-                                                                {{ $lga->id_no == $student->lga_id ? 'selected' : '' }}>
-                                                                {{ $lga->local_govt }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
+
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">City</label>
-                                                    <input type="text" class="form-control" placeholder="Town">
+                                                    <input type="text" class="form-control" name="s_contact_city"
+                                                        value="{{ $student->studentContact()->city ?? '' }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">c/o</label>
-                                                    <input type="text" class="form-control" placeholder="Street">
+                                                    <input type="text" class="form-control" name="s_c_o"
+                                                        value="{{ $student->studentContact()->c_o ?? ' ' }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -401,7 +382,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label">Department</label>
                                                     <input type="text" class="form-control"
-                                                        placeholder="World Bank for Africa Centre of Excellence in Agricultural Development and Sustainable Environment">
+                                                        value="{{ $student->studentCourse()->department->name ?? '' }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -411,7 +392,7 @@
                                                         <option value="">Choose Country</option>
                                                         @foreach ($programmes as $program)
                                                             <option value="{{ $program->id }}"
-                                                                {{ $student->program_id == $program->id ? 'selected' : '' }}>
+                                                                {{ ($student->studentCourse()->prog_id ?? '') == $program->id ? 'selected' : '' }}>
                                                                 {{ $country->description }}</option>
                                                         @endforeach
                                                     </select>
@@ -424,7 +405,7 @@
                                                         <option value="">Choose field of interest</option>
                                                         @foreach ($courses as $course)
                                                             <option value="{{ $course->id }}"
-                                                                {{ $student->course_id == $course->id ? 'selected' : '' }}>
+                                                                {{ ($student->studentCourse()->course_id ?? '') == $course->id ? 'selected' : '' }}>
                                                                 {{ $country->name }}</option>
                                                         @endforeach
                                                     </select>
@@ -435,59 +416,79 @@
                                                     <label class="form-label">Mode of Study</label>
                                                     <select class="form-select" name="mode">
                                                         <option value="">Choose mode of study</option>
-                                                        <option value="pt">Part Time</option>
-                                                        <option value="ft">Full Time</option>
+                                                        <option value="pt"
+                                                            {{ ($student->studentCourse()->mode_of_study ?? '') == 'pt' ? 'selected' : '' }}>
+                                                            Part Time</option>
+                                                        <option value="ft"
+                                                            {{ ($student->studentCourse()->mode_of_study ?? '') == 'ft' ? 'selected' : '' }}>
+                                                            Full Time</option>
 
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
                                         <br>
-                                        <a href="{{ route('admin_student_home') }}" class="btn btn-warning me-1">
+                                        {{-- <a href="{{ route('admin_student_home') }}" class="btn btn-warning me-1">
                                             <i class="ti-times"></i> Close
                                         </a>
                                         <button type="submit" class="btn btn-primary">
                                             <i class="ti-save-alt"></i> Save
-                                        </button>
+                                        </button> --}}
 
                                     </div>
+
                                     <div class="tab-pane p-3" id="profile-1" role="tabpanel">
                                         <h4 class="box-title text-info mb-2"><i class="ti-house me-15"></i> O'Level</h4>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="form-label">Exam Type</label>
-                                                    <select class="form-select">
-                                                        <option value="">select Exam type</option>
-                                                        <option value="WAEC">WAEC</option>
-                                                        <option value="NECO">NECO</option>
-                                                    </select>
+
+                                        @foreach ($studentOlevels as $exams)
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Exam Type</label>
+                                                        <select class="form-select">
+                                                            <option value="">select Exam type</option>
+                                                            <option value="WAEC"
+                                                                {{ $exams[0]->exam_type == 'WAEC' ? 'selected' : '' }}>WAEC
+                                                            </option>
+                                                            <option value="NECO"
+                                                                {{ $exams[0]->exam_type == 'NECO' ? 'selected' : '' }}>NECO
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Reg Number</label>
+                                                        <input type="text" class="form-control"
+                                                            value="{{ $exam[0]->exam_type }}">
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="form-label">Reg Number</label>
-                                                    <input type="text" class="form-control" placeholder="Reg Number">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <h4>Exam</h4>
-                                        <table class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>SN</th>
-                                                    <th>Exam Type</th>
-                                                    <th>Subject</th>
-                                                    <th>Grade</th>
+                                            <br>
+                                            <h4>Exam</h4>
+                                            <table class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>SN</th>
 
-                                                </tr>
-                                            </thead>
-                                            <tbody>
+                                                        <th>Subject</th>
+                                                        <th>Grade</th>
 
-                                            </tbody>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($exams as $exam)
+                                                        <tr>
+                                                            <td>{{ $loop->iteration }}</td>
+                                                            <td>{{ $exam->subject }}</td>
+                                                            <td>{{ $exam->grade }}</td>
+                                                        </tr>
+                                                    @endforeach
 
-                                        </table>
+                                                </tbody>
+
+                                            </table>
+                                        @endforeach
 
                                         <h4>Other Certificates</h4>
 
@@ -686,12 +687,7 @@
                                             <tbody id="table_alterations_eva_tbody">
                                             </tbody>
                                         </table> --}}
-                                        <div class="modal-footer" id="hidden-div" style="display: none">
-                                            <button type="button" class="btn btn-secondary refresh waves-effect"
-                                                data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary waves-effect waves-light">Save
-                                                Record</button>
-                                        </div>
+
                                     </div>
                                     <div class="tab-pane p-3" id="messages-1" role="tabpanel">
                                         <h4 class="box-title text-info mb-0 mt-20"><i class="ti-envelope me-15"></i>
@@ -710,16 +706,13 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>Title</td>
-                                                        <td></td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Title</td>
-                                                        <td></td>
-                                                        <td></td>
-                                                    </tr>
+                                                    @foreach ($publications as $pub)
+                                                        <tr>
+                                                            <td>{{ $loop->iteration }}</td>
+                                                            <td>{{ $pub->title }}</td>
+                                                            <td>{{ $pub->date_published }}</td>
+                                                        </tr>
+                                                    @endforeach
 
 
                                             </table>
@@ -739,16 +732,14 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>Title</td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Title</td>
-                                                        <td></td>
-                                                    </tr>
-
-
+                                                    @foreach ($prizes as $prize)
+                                                        <tr>
+                                                            <td>{{ $loop->iteration }}</td>
+                                                            <td>{{ $prize->prize }}</td>
+                                                            <td></td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
                                             </table>
                                         </div>
                                         <br>
@@ -763,24 +754,21 @@
                                                         <th>Employer</th>
                                                         <th>Post</th>
                                                         <th>Duration</th>
-                                                        <th>Employer</th>
+
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>2</td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                    </tr>
+
+                                                    @foreach ($appointments as $appoint)
+                                                        <tr>
+                                                            <td>{{ $loop->iteration }}</td>
+                                                            <td>{{ $loop->employer }}</td>
+                                                            <td>{{ $loop->post }}</td>
+                                                            <td>{{ $loop->duration }}</td>
+
+
+                                                        </tr>
+                                                    @endforeach
 
 
 
@@ -791,66 +779,70 @@
                                         <div class="table-responsive">
                                             <h4 class="box-title text-info mb-0 mt-20"><i class="ti-envelope me-15"></i>
                                                 Referee
-                                                </h4>
+                                            </h4>
                                             <hr class="my-15">
-                                            <table class="table table-bordered table-striped">
-                                              <thead>
-                                                <tr>
-                                                    <th>Details</th>
-                                                    <th class="text-center">
+                                            @foreach ($referee as $ref)
+                                                <table class="table table-bordered table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Details</th>
+                                                            <th class="text-center">
 
-                                                    </th>
-                                                </tr>
-                                              </thead>
-                                              <tbody>
-                                                <tr>
-                                                  <th class="text-nowrap" scope="row">Name</th>
-                                                  <td></td>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <th class="text-nowrap" scope="row">Name</th>
+                                                            <td>{{ $ref->name }}</td>
 
-                                                </tr>
-                                                <tr>
-                                                  <th class="text-nowrap" scope="row">Post</th>
-                                                  <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="text-nowrap" scope="row">Post</th>
+                                                            <td>{{ $ref->post }}</td>
 
-                                                </tr>
-                                                <tr>
-                                                  <th class="text-nowrap" scope="row">Address</th>
-                                                  <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="text-nowrap" scope="row">Address</th>
+                                                            <td>{{ $ref->address }}</td>
 
-                                                </tr>
-                                                <tr>
-                                                  <th class="text-nowrap" scope="row">Email</th>
-                                                  <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="text-nowrap" scope="row">Email</th>
+                                                            <td>{{ $ref->email }}</td>
 
-                                                </tr>
-                                                <tr>
-                                                  <th class="text-nowrap" scope="row">Phone Number</th>
-                                                  <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="text-nowrap" scope="row">Phone Number</th>
+                                                            <td>{{ $ref->phone_number }}</td>
 
-                                                </tr>
-                                             </tbody>
-                                            </table>
-                                            <br>
-                                            <h5>Response</h5>
-                                            <table class="table table-bordered">
-                                                <thead>
-                                                  <tr>
-                                                      <th>Questions</th>
-                                                      <th class="text-center">
-                                                        Response
-                                                      </th>
-                                                  </tr>
-                                                </thead>
-                                                <tbody>
-                                                  <tr>
-                                                    <th class="text-nowrap" scope="row">Name</th>
-                                                    <td></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <br>
+                                                <h5>Response</h5>
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Questions</th>
+                                                            <th class="text-center">
+                                                                Response
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($refereeresponse->where('refereeId',$ref->id) as  $response)
+                                                        <tr>
+                                                            <th class="text-nowrap" scope="row">{{ $response->question->description }}</th>
 
-                            
+                                                            <td>{{ $response->comment }}</td>
 
-                                                  </tr>
-                                               </tbody>
-                                              </table>
+                                                        </tr>
+
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -861,10 +853,10 @@
                             <!-- /.box-body -->
                             <div class="box-footer">
                                 <button type="button" class="btn btn-warning me-1">
-                                    <i class="ti-trash"></i> Cancel
+                                    <i class="ti-cancel"></i> Cancel
                                 </button>
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="ti-save-alt"></i> Save
+                                <button type="button" class="btn btn-primary" id="approveRecord" data-id="{{ $student->id }}">
+                                    <i class="ti-mark-alt"></i> Approve
                                 </button>
                             </div>
                         </form>
@@ -890,6 +882,56 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
+                  /* When click delete button */
+                  $('body').on('click', '#approveRecord', function() {
+                var record_id = $(this).data('id');
+                var user_name = $(this).data('username');
+                var token = $("meta[name='csrf-token']").attr("content");
+                var el = this;
+
+                confirmApproval(el, record_id, user_name);
+            });
+
+
+            async function confirmApproval(el, record_id, user_name) {
+                const willUpdate = await swal({
+                    title: "Confirm Application Approval",
+                    text: `Are you sure you want to approve ${user_name} for this programme?`,
+                    icon: "warning",
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes!",
+                    showCancelButton: true,
+                    buttons: ["Cancel", "Yes, Approve"]
+                });
+                if (willUpdate) {
+                    //performReset()
+                    performApproval(el, record_id);
+                } else {
+                    swal("No action will be performed :)");
+                }
+            }
+
+
+            function performApproval(el, record_id) {
+                //alert(record_id);
+                try {
+                    $.get('{{ route('approve_Application') }}?id=' + record_id,
+                        function(data, status) {
+                            console.log(status);
+                            console.table(data);
+                            if (status === "success") {
+                                let alert = swal("Application approved successfully!.");
+                                location.reload()
+                            }
+                        }
+                    );
+                } catch (e) {
+                    let alert = swal(e.message);
+                }
+            }
+
+
             $("#mystate").on("change click", function(e) {
                 $(".lgaa").empty()
                 var id = $(this).val(); // $(this).data('id');

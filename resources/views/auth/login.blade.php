@@ -40,7 +40,7 @@
 									<div class="form-group">
 										<div class="input-group mb-3">
 											<span class="input-group-text bg-transparent"><i class="ti-user"></i></span>
-											<input type="text" class="form-control ps-15 bg-transparent" name="email" placeholder="Username">
+											<input type="text" class="form-control ps-15 bg-transparent" name="email" placeholder="Email">
 										</div>
 									</div>
 									<div class="form-group">
@@ -64,24 +64,17 @@
 										</div>
 										<!-- /.col -->
 										<div class="col-12 text-center">
-										  <button type="submit" class="btn btn-danger mt-10">SIGN IN</button>
+										  <button type="submit" class="btn btn-success mt-10">SIGN IN</button>
 										</div>
 										<!-- /.col -->
 									  </div>
 								</form>	
 								<div class="text-center">
-									<p class="mt-15 mb-0">Don't have an account? <a href="{{route('register_page')}}" class="text-warning ms-5">Sign Up</a></p>
+									<p class="mt-15 mb-0">Don't have an account? <a href="{{route('register_page')}}" class="text-info ms-5">New Registration</a></p>
 								</div>	
 							</div>						
 						</div>
-						<div class="text-center">
-						  <p class="mt-20 text-white">- Sign With -</p>
-						  <p class="gap-items-2 mb-20">
-							  <a class="btn btn-social-icon btn-round btn-facebook" href="#"><i class="fa fa-facebook"></i></a>
-							  <a class="btn btn-social-icon btn-round btn-twitter" href="#"><i class="fa fa-twitter"></i></a>
-							  <a class="btn btn-social-icon btn-round btn-instagram" href="#"><i class="fa fa-instagram"></i></a>
-							</p>	
-						</div>
+					
 					</div>
 				</div>
 			</div>
@@ -92,7 +85,30 @@
 	<!-- Vendor JS -->
 	<script src="{{ asset('adminassets/src/js/vendors.min.js')}}"></script>
 	<script src="{{ asset('adminassets/src/js/pages/chat-popup.js')}}"></script>
-    <script src="{{ asset('adminassets/icons/feather-icons/feather.min.js')}}"></script>	
+    <script src="{{ asset('adminassets/icons/feather-icons/feather.min.js')}}"></script>
+    <script src="{{ asset('js/sweetalert/dist/sweetalert.min.js') }}"></script>
+
+    <script>
+        @if ($errors->any())
+        new  swal('Oops...', "{!! implode('', $errors->all(':message')) !!}", 'error')
+        @endif
+
+        @if (session()->has('success'))
+          new  swal(
+            'Success!',
+            "{{ session()->get('message') }}",
+            'success'
+            )
+        @endif
+        @if (session()->has('message'))
+          new  swal(
+            'Success!',
+            "{{ session()->get('message') }}",
+            'success'
+            )
+        @endif
+    </script>
+
 
 </body>
 

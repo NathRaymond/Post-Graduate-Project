@@ -5,6 +5,7 @@ use function App\Helpers\api_request_response;
 use function App\Helpers\bad_response_status_code;
 use function App\Helpers\success_status_code;
 use App\Models\Programmes;
+use App\Models\ProgrammeCategory;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -75,10 +76,6 @@ class ProgrammesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -86,9 +83,11 @@ class ProgrammesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit(Request $request)
+    {$id= $request->id;
+        // dd($id);
+        $prog = Programmes::where('id', $id)->first();
+        return response()->json($prog);
     }
 
     /**
@@ -98,9 +97,40 @@ class ProgrammesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        try{
+
+            $input = $request->all();
+            $id = $request->id;
+            $available = Programmes::where('description', $request->description)->where('id','!=',$id)
+            ->first();
+            if($available){
+                return api_request_response(
+                    "error",
+                    "There is another programme with this name ",
+                    bad_response_status_code()
+                );
+            }
+            $program = Programmes::find($id);
+            $updtateProgramme= $program->update($input);
+            $programmes = Programmes::all();
+            return api_request_response(
+                "ok",
+                "Programme  updated Succesfully!",
+                success_status_code(),
+                $programmes
+            );
+        }
+        catch(\Exception $exception){
+
+            return api_request_response(
+                "error",
+                $exception->getMessage(),
+                bad_response_status_code()
+            );
+
+        }
     }
 
     /**

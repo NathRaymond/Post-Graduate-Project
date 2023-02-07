@@ -13,7 +13,7 @@ use function App\Helpers\generate_uuid;
 use function App\Helpers\unauthorized_status_code;
 use function App\Helpers\bad_response_status_code;
 use function App\Helpers\success_status_code;
-
+use App\Models\SavePermission;
 
 class RolesController extends Controller
 {
@@ -21,7 +21,8 @@ class RolesController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index', 'store']]);
+       
+                $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index', 'store']]);
         $this->middleware('permission:role-create', ['only' => ['create', 'store']]);
         $this->middleware('permission:role-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:role-delete', ['only' => ['destroy']]);
@@ -46,7 +47,7 @@ class RolesController extends Controller
         $data["roles"] = $roles;
 
 
-        return view('admin.roles', $data)->with('i');
+        return view('admin.role.index', $data)->with('i');
     }
     /**
      * Show the form for creating a new resource.
@@ -141,6 +142,7 @@ class RolesController extends Controller
         $role->name = $request->input('name');
         $role->save();
         $role->syncPermissions($request->input('permission'));
+        DB::commit();
         return $request->wantsJson()
         ? response()->json(["data" => $role, "message" => "Role updated successfully"])
         : redirect()->route('roles_home')->with("message", "Role updated successfully");
@@ -184,5 +186,38 @@ class RolesController extends Controller
         $role['data']  = Role::all();
 
         return json_encode($role);
+    }
+    
+    
+    public function create_permission(Request $request){
+
+        try{
+
+            $input = $request->all();
+            // dd($input);
+            $input['guard_name']= 'web';
+
+            if ($this->user = SavePermission::where('name', $request->name)->first()) {
+                throw new \Exception('This permission already exists!');
+            }
+
+            $saveInput = SavePermission::create($input);
+
+
+            return api_request_response(
+                'ok',
+                'Data Update successful!',
+                success_status_code(),
+                $saveInput
+            );
+
+            } catch (\Exception $exception) {
+            // ( $exception->getMessage() );
+            return api_request_response(
+                'error',
+                $exception->getMessage(),
+                bad_response_status_code()
+            );
+        }
     }
 }

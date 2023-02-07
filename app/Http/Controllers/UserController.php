@@ -38,8 +38,9 @@ class UserController extends Controller
     public function __construct()
     {
 
-        // $this->middleware('permission:view-user', ['only' => ['index']]);
-        // $this->middleware('permission:edit-user', ['only' => ['update']]);
+        $this->middleware('permission:view-user', ['only' => ['index']]);
+         $this->middleware('permission:edit-user', ['only' => ['update']]);
+         $this->middleware('permission:delete-user', ['only' => ['delete']]);
     }
     public function updateMyInfo(Request $request)
     {
@@ -77,7 +78,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $data['users'] = User::where('user_type', "admin")->get();
+        $data['users'] = User::where('user_type', "admin")->paginate(50);
         $data["roles"] = Role::all();
         $data["states"] = State::all();
         $data["countries"] = Countries::all();
@@ -91,49 +92,6 @@ class UserController extends Controller
         $data["roles"] = Role::all();
         $data["states"] = State::all();
         return view('admin.admin-create-index', $data);
-    }
-
-    public function assignMemberAdmin(Request $request)
-    {
-        //  dd($request->all());
-        try {
-            if ($request->has('country')) {
-                foreach ($request->country as $image) {
-
-                    // dd($fileStore);
-                    $country[] = $image;
-                }
-                $input['country'] = json_encode($country);
-            }
-            if ($request->has('state')) {
-                foreach ($request->state as $region) {
-
-                    // dd($fileStore);
-                    $state[] = $region;
-                }
-                $input['state'] = json_encode($state);
-            }
-            if ($request->has('lga')) {
-                foreach ($request->lga as $local) {
-
-                    // dd($fileStore);
-                    $lga[] = $local;
-                }
-                $input['lga'] = json_encode($lga);
-            }
-            $input['user_type'] = "admin";
-            $input['is_staff'] = 1;
-            $user = User::where('id', $request->member)->first();
-            $user->update($input);
-            // dd($request->all());
-            return $request->wantsJson()
-                ? response()->json(["data" => $user, "message" => "Member Assigned As Staff Successfully"])
-                : redirect()->route('users.index')->with("message", "Member Assigned As Staff Successfully");
-        } catch (\Exception $e) {
-            return $request->wantsJson()
-                ? response()->json(["message" => $e->getMessage()], 400)
-                : redirect()->back()->withInput()->withErrors([$e->getMessage()]);
-        }
     }
 
 
@@ -227,7 +185,7 @@ class UserController extends Controller
 
 
             if ($this->user = User::where('phone_number', $this->input['phone_number'])->first()) {
-                return redirect()->back()->withErrors('This phone number has been used!');
+                return redirect()->back()->withErrors('The phone number has already been taken.!');
             }
 
 
@@ -262,6 +220,7 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $id,
+            'phone_number' => 'required|unique:users,phone_number,' . $id,
 
         ]);
 
@@ -273,18 +232,7 @@ class UserController extends Controller
         }
         // dd($id);
 
-        if ($request->has('photo')) {
-            $input["photo"] = $photoName = time() . 'photo' . '.' . $request->photo->extension();
-            $request->photo->move(public_path('assets/photo'), $photoName);
 
-
-            $filename = public_path() . '/assets/photo/' . $user->photo;
-
-            if (File::exists($filename)) {
-
-                File::delete($filename);
-            }
-        }
         $user->update($input);
 
         if ($request->has('role')) {

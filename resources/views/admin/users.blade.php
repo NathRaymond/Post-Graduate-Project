@@ -17,9 +17,11 @@
                 </div>
             </div>
             <div class="row float-end">
+                @can('user-list')
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-center">
                     Add New User
                 </button>
+                @endcan
             </div>
         </div>
     </div>
@@ -55,9 +57,12 @@
 
                             <div class="row float-end">
                                 <div class="d-flex ">
-
-                                    <button class="btn btn-info flex-end m-1" id="edit-user"  data-id="{{ $user->id }}" data-bs-toggle="modal" data-bs-target="#modal-edit">Edit</button>
-                                    <button class="btn btn-danger-light m-1"  id="deleteRecord" data-id="{{ $user->id }}" data-username="{{ $user->title.' '.$user->name }}">Delete</button>
+                                @can('user-edit')
+                                    <button class="btn btn-info flex-end m-1 btn-sm" id="edit-user"  data-id="{{ $user->id }}" data-bs-toggle="modal" data-bs-target="#modal-edit">Edit</button>
+                                    @endcan
+                                    @can('user-delete')
+                                    <button class="btn btn-danger-light m-1 btn-sm"  id="deleteRecord" data-id="{{ $user->id }}" data-username="{{ $user->title.' '.$user->name }}">Delete</button>
+                                    @endcan
                                 </div>
                             </div>
                         </div>
@@ -65,6 +70,7 @@
                 </div>
             @endforeach
 
+            {{ $users->links() }}
         </div>
     </section>
     <!-- /.content -->
@@ -139,7 +145,7 @@
     <!-- Edit Modal -->
     <div class="modal center-modal fade" id="modal-edit" tabindex="-1">
         <div class="modal-dialog">
-            <form class="form" action="{{ route('create_new_user') }}" method="POST" onsubmit="$('#loaderk').show()" id="editUserform">
+            <form class="form" action="{{ route('admin_user_update') }}" method="POST" onsubmit="$('#loaderk').show()" id="editUserform">
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header">

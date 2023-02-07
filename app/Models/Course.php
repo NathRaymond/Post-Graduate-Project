@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
     use HasFactory;
+    protected $guarded= [];
+
+    public function programme()
+    {
+        return $this->belongsTo('App\Models\Programmes', 'program_id')->withDefault(['name' => '']);;
+    }
+
 }

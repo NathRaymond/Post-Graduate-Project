@@ -27,6 +27,7 @@ class User extends Authenticatable implements Auditable
         'user_type',
         'last_login',
         'is_first_time',
+        'applicant_id',
         'deleted'
     ];
 

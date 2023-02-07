@@ -206,7 +206,6 @@
                 var user_id = $(this).data('id');
                 var token = $("meta[name='csrf-token']").attr("content");
                 var el = this;
-                alert(user_id);
                 resetAccount(el, user_id);
             });
 

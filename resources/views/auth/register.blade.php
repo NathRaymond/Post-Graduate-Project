@@ -7,16 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="https://crm-admin-dashboard-template.multipurposethemes.com/images/favicon.ico">
+    <link rel="icon" href="funaab-logo.jpg">
 
     <title>CEADESE - Registration </title>
-  
+
 	<!-- Vendors Style-->
 	<link rel="stylesheet" href="{{ asset('adminassets/src/css/vendors_css.css')}}">
-	  
-	<!-- Style-->  
+
+	<!-- Style-->
 	<link rel="stylesheet" href="{{ asset('adminassets/src/css/style.css')}}">
-	<link rel="stylesheet" href="{{ asset('adminassets/src/css/skin_color.css')}}">	
+	<link rel="stylesheet" href="{{ asset('adminassets/src/css/skin_color.css')}}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 	<style>
 		.preloader {
@@ -45,14 +45,14 @@
     </div>
 	<div class="container h-p100">
 		<div class="row align-items-center justify-content-md-center h-p100">
-			
+
 			<div class="col-12">
 				<div class="row justify-content-center g-0">
 					<div class="col-lg-5 col-md-5 col-12">
 						<div class="bg-white rounded10 shadow-lg">
 							<div class="content-top-agile p-20 pb-0">
 								<h2 class="text-primary">Get started with Us</h2>
-								<p class="mb-0">Register as new student</p>							
+								<p class="mb-0">Apply for a programme</p>
 							</div>
 							<div class="p-40">
 								<form id="studentRegistration" method="post">
@@ -78,11 +78,21 @@
 									<div class="form-group">
 										<div class="input-group mb-3">
 											<span class="input-group-text bg-transparent"><i class="ti-email"></i></span>
-                                            <select class="form-select" required name="programme" id="programme">
-                                                <option value="">Select Programme</option>
-                                                @foreach ($programmes as $program)
+                                            <select class="form-select" required name="programme_category" id="programmeCat">
+                                                <option value="">Select Programme Category</option>
+                                                @foreach ($programmeCategory as $program)
                                                 <option value="{{$program->id}}">{{$program->description}}</option>
                                                 @endforeach
+                                            </select>
+											{{-- <input type="email" class="form-control ps-15 bg-transparent" placeholder="Email"> --}}
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="input-group mb-3">
+											<span class="input-group-text bg-transparent"><i class="ti-email"></i></span>
+                                            <select class="form-select" required name="programme" id="programme">
+                                                <option value="">Select Programme</option>
+
                                             </select>
 											{{-- <input type="email" class="form-control ps-15 bg-transparent" placeholder="Email"> --}}
 										</div>
@@ -114,28 +124,21 @@
 										</div>
 										<!-- /.col -->
 										<div class="col-12 text-center">
-										  <button type="submit" class="btn btn-info margin-top-10">REGISTER</button>
+										  <button type="submit" class="btn btn-info margin-top-10">Submit</button>
 										</div>
 										<!-- /.col -->
 									  </div>
-								</form>				
+								</form>
 								<div class="text-center">
-									<p class="mt-15 mb-0">Already have an account?<a href="/logout" class="text-danger ms-5"> Sign In</a></p>
+									<p class="mt-15 mb-0">Already have an account?<a href="/login" class="text-info ms-5"> Login</a></p>
 								</div>
 							</div>
-						</div>								
-
-						<div class="text-center">
-						  <p class="mt-20 text-white">- Register With -</p>
-						  <p class="gap-items-2 mb-20">
-							  <a class="btn btn-social-icon btn-round btn-facebook" href="#"><i class="fa fa-facebook"></i></a>
-							  <a class="btn btn-social-icon btn-round btn-twitter" href="#"><i class="fa fa-twitter"></i></a>
-							  <a class="btn btn-social-icon btn-round btn-instagram" href="#"><i class="fa fa-instagram"></i></a>
-							</p>	
 						</div>
+
+
 					</div>
 				</div>
-			</div>			
+			</div>
 		</div>
 	</div>
 
@@ -143,7 +146,7 @@
 	<!-- Vendor JS -->
 	<script src="{{ asset('adminassets/src/js/vendors.min.js')}}"></script>
 	<script src="{{ asset('adminassets/src/js/pages/chat-popup.js')}}"></script>
-    <script src="{{ asset('adminassets/icons/feather-icons/feather.min.js')}}"></script>	
+    <script src="{{ asset('adminassets/icons/feather-icons/feather.min.js')}}"></script>
 	<script src="{{ asset('js/sweetalert/dist/sweetalert.min.js') }}"></script>
     <script src="{{ asset('js\request.js') }}"></script>
 	<script src="{{ asset('js\form.js') }}"></script>
@@ -165,8 +168,8 @@
                     const postRequest = await request("/temporary-registration", processFormInputs(serializedData), 'post');
                     console.log('postRequest.message', postRequest.message);
                     new swal("Good Job","Registration Successfully! Kindly visit designated banks to make payment.","success");
-                    $('#studentRegistration').trigger("reset"); 
-                    preLoader.hide();                
+                    $('#studentRegistration').trigger("reset");
+                    preLoader.hide();
                     // window.location.reload();
                 } catch (e) {
                     if ('message' in e) {
@@ -177,38 +180,77 @@
                 }
             })
 
-            $("#programme").on("change", function(e) {
-                    
-                var programme = $(this).val();//$(this).data('id');
+
+
+            $("#programmeCat").on("change", function(e) {
+
+                var programme  = $(this).val();//$(this).data('id');
                 var type =$('#type').val();
+                // alert(programme)
                 if(programme == "" || type == ""){
                     $("#amount").val("");
                 }else{
                     $.get('{{ route('get_fee_by_type') }}?type=' + type + "&programme="+programme, function (data) {
-                        $("#amount").val(data.amount);
+                        if(data.status == 1){
+							$("#amount").val(data.late_fee);
+						}else{
+							$("#amount").val(data.amount);
+						}
                     })
                 }
-                
-                
-                  
+
             });
 
             $("#type").on("change", function(e) {
-                    
+
                 var type = $(this).val();//$(this).data('id');
-                var programme =$('#programme').val();
+                var programme =$('#programmeCat').val();
+                // alert(programme)
                 if(programme == "" || type == ""){
                     $("#amount").val("");
                 }else{
                     $.get('{{ route('get_fee_by_type') }}?type=' + type + "&programme="+programme, function (data) {
-                        $("#amount").val(data.amount);
+                        if(data.status == 1){
+							$("#amount").val(data.late_fee);
+						}else{
+							$("#amount").val(data.amount);
+						}
                     })
                 }
-                  
+
+            });
+            $("#programmeCat").on("change", function(e) {
+
+                var type = $(this).val();//$(this).data('id');
+                $("#programme").empty();
+
+                var option = "<option value=''>Select Programme</option>";
+                        $("#programme").append(option);
+                $.ajax({
+                url: "{{ route('getProgrammeList') }}?id=" + type ,
+                type: "GET",
+                dataType: "json",
+                success: function(response) {
+                    var len = 0;
+                    if (response['data'] != null) {
+                        len = response['data'].length;
+                    }
+                    for (var i = 0; i < len; i++) {
+                        var id = response['data'][i].id;
+                        var descr = response['data'][i].description;
+                        var option = "<option value='" + id + "'>" + descr + "</option>";
+                        $("#programme").append(option);
+
+                    }
+
+                }
+            });
+
+
             });
         });
         </script>
-	
+
 </body>
 
 </html>

@@ -2,15 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Programmes extends Model
+class Programmes extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
+    use HasFactory;
+    protected $table = 'programmes';
     protected $fillable = [
-       
         'description',
-        //'supervisor_name',
-       // 'email'
-        
     ];
 }

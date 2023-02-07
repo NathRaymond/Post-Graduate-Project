@@ -17,9 +17,11 @@
                 </div>
             </div>
             <div class="row float-end">
+                @can('create-academic-session')
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-center">
                     Add New Session
                 </button>
+                @endcan
             </div>
         </div>
     </div>
@@ -66,6 +68,9 @@
                                 @endif
                             </td>
                             <td>
+                                <button class="btn btn-info flex-end m-1 btn-sm" id="edit-session"
+                                data-id="{{ $sess->id }}" data-bs-toggle="modal"
+                                data-bs-target="#modal-edit">Edit</button>
 
                             </td>
                         </tr>
@@ -88,6 +93,7 @@
 
 
     <!-- Modal -->
+    @can('create-academic-session')
     <div class="modal center-modal fade" id="modal-center" tabindex="-1">
         <div class="modal-dialog">
         <form class="form" action="{{ route('create_new_session') }}" method="POST" onsubmit="$('#loaderg').show()" enctype="multipart/form-data">
@@ -142,7 +148,60 @@
             </form>
         </div>
     </div>
+    @endcan
 
+
+    <div class="modal center-modal fade" id="modal-edit" tabindex="-1">
+        <div class="modal-dialog">
+            <form id="editacademicform" method="POST" action="{{ route('update_academic_session') }}" onsubmit="$('#loaderkk').show()" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <input type="hidden" name="id" id="recordid">
+                        <h5 class="modal-title">Edit Academic Session</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="form-label">Session</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="ti-calendar"></i></span>
+                                <input type="text" class="form-control" name="description" placeholder="" id="description" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Start Date</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="ti-calendar"></i></span>
+                                <input type="date" class="form-control" name="start_date" placeholder="" id="start_date" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">End Date</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="ti-calendar"></i></span>
+                                <input type="date" class="form-control" name="end_date" placeholder="" id="end_date" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Calendar</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="ti-file"></i></span>
+                                <input type="file" class="form-control" name="calendar" placeholder="" accept=".pdf">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer modal-footer-uniform">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary float-end"><span id="loaderkk"
+                                class="spinner-border spinner-border-sm me-2" role="status"
+                                style="display: none"></span>Save changes</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
     <!-- /.modal -->
 @endsection
 
@@ -161,52 +220,24 @@
                 }
             });
 
-      /* When click delete button */
-      $('body').on('click', '#deleteRecord', function() {
-                var user_id = $(this).data('id');
-                var token = $("meta[name='csrf-token']").attr("content");
-                var el = this;
-                alert(user_id);
-                resetAccount(el, user_id);
-            });
+
+            $('body').on('click', '#edit-session', function() {
+
+                var item_id = $(this).data('id');
+
+                $.get('{{ route('edit_academic_session') }}?id=' + item_id, function(data) {
 
 
-            async function resetAccount(el, user_id) {
-                const willUpdate = await swal({
-                    title: "Confirm User Delete",
-                    text: `Are you sure you want to delete this user?`,
-                    icon: "warning",
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Yes!",
-                    showCancelButton: true,
-                    buttons: ["Cancel", "Yes, Delete"]
+                    // $('#userid').val(data.id);
+                    $('#description').val(data.description)
+                    $('#start_date').val(data.start_date)
+                    $('#end_date').val(data.end_date)
+                    $('#recordid').val(data.id)
+
+
+                })
                 });
-                if (willUpdate) {
-                    //performReset()
-                    performDelete(el, user_id);
-                } else {
-                    swal("User record will not be deleted  :)");
-                }
-            }
 
-
-            function performDelete(el, user_id) {
-                //alert(user_id);
-                try {
-                    $.get('{{ route('user.destroy') }}?id=' + user_id,
-                        function(data, status) {
-                            console.log(status);
-                            console.table(data);
-                            if (status === "success") {
-                                let alert = swal("User successfully deleted!.");
-                                location.reload()
-                            }
-                        }
-                    );
-                } catch (e) {
-                    let alert = swal(e.message);
-                }
-            }
 
 
         })

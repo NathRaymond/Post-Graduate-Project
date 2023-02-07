@@ -1,114 +1,105 @@
-<div class="tl-footer">
-    <div class="footer-content bg-image" style="background-image: url(assets/images/bg/footer.jpg);">
-        <div class="container">
-            <div class="footer-top">
-                <div class="newsletter justify-content-between">
-                    <h3>Subscribe Our Newsletter</h3>
-                    <form action="#">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Enter Your E-mail">
-                            <input type="submit" class="btn btn-primary" value="Subscribe Now">
-                        </div>
-                    </form>
+<nav id="compactSidebar">
+    <ul class="menu-categories">
+        {{--  <li class="menu active">  --}}
+        <li class="menu">
+            <a href="{{ route('student_dashboard') }}" data-active="true" class="menu-toggle">
+                <div class="base-menu">
+                    <div class="base-icons">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="feather feather-home">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                    </div>
+                    <span>Dashboard</span>
                 </div>
-            </div><!-- /.footer-top -->
+            </a>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="feather feather-chevron-left">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </li>
 
-            <div class="footer-middle">
-                <div class="row">
-                    <div class="col-md-8 col-lg-4">
-                        <div class="footer-widget">
-                            <div class="footer-logo">
-                                <img src="assets/images/logo.jpeg" alt="Logo" class="img-fluid">
-                            </div>
-                            <p>
-                                RochDalocome Properties is a value minded and professional property Management turn to
-                                wealth. With our integrated service, Rent collection, Managemnt agreement, Vendor
-                                Payout, Tenant Screening, Maintenance and repair services, Lease agreement, Property
-                                information management, Document and report.
-                            </p>
-                            <span class="phone-number"><a href="tel:+234 8146194881"> <span
-                                        class="mr-2 fa fa-phone"></span> +234 8146194881</a></span>
-                        </div><!-- /.footer-widget -->
+        <li class="menu">
+            <a href="{{ route('student_registration_page') }}" data-active="false" class="menu-toggle">
+                <div class="base-menu">
+                    <div class="base-icons">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="feather feather-cpu">
+                            <rect x="4" y="4" width="16" height="16" rx="2"
+                                ry="2"></rect>
+                            <rect x="9" y="9" width="6" height="6"></rect>
+                            <line x1="9" y1="1" x2="9" y2="4"></line>
+                            <line x1="15" y1="1" x2="15" y2="4"></line>
+                            <line x1="9" y1="20" x2="9" y2="23"></line>
+                            <line x1="15" y1="20" x2="15" y2="23"></line>
+                            <line x1="20" y1="9" x2="23" y2="9"></line>
+                            <line x1="20" y1="14" x2="23" y2="14"></line>
+                            <line x1="1" y1="9" x2="4" y2="9"></line>
+                            <line x1="1" y1="14" x2="4" y2="14"></line>
+                        </svg>
                     </div>
-                    <div class="col-md-4 col-lg-2">
-                        <div class="footer-widget">
-                            <h3>Navigation</h3>
-                            <ul class="global-list">
-                                <li><a href="{{ route('about') }}">About Us</a></li>
-                                <li><a href="{{ route('property') }}">Properties</a></li>
-                                <li><a href="{{ route('team') }}">Agents</a></li>
-                                <li><a href="{{ route('property-submit') }}">Submit Property</a></li>
-                                <li><a href="#">News</a></li>
-                                <li><a href="{{ route('contact') }}">Contact</a></li>
-                            </ul>
-                        </div><!-- /.footer-widget -->
-                    </div>
-                    <div class="col-md-8 col-lg-3">
-                        <div class="footer-widget">
-                            <h3>Recent Post</h3>
-                            <div class="tl-post">
-                                <div class="entry-header">
-                                    <div class="entry-thumbnail">
-                                        <a href="#"><img src="assets/images/blog/1.png" alt="Image"
-                                                class="img-fluid"></a>
-                                    </div>
-                                </div>
-                                <div class="entry-content align-self-center">
-                                    <h2 class="entry-title"><a href="#">Completely aggregate maintainable.</a>
-                                    </h2>
-                                    <div class="entry-meta">
-                                        <ul class="global-list">
-                                            <li>20 May 2019</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div><!-- /.tl-post -->
-
-                            <div class="tl-post">
-                                <div class="entry-header">
-                                    <div class="entry-thumbnail">
-                                        <a href="#"><img src="assets/images/blog/2.png" alt="Image"
-                                                class="img-fluid"></a>
-                                    </div>
-                                </div>
-                                <div class="entry-content align-self-center">
-                                    <h2 class="entry-title"><a href="#">Completely aggregate maintainable.</a>
-                                    </h2>
-                                    <div class="entry-meta">
-                                        <ul class="global-list">
-                                            <li>20 May 2019</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div><!-- /.tl-post -->
-                        </div><!-- /.footer-widget -->
-                    </div>
-                    <div class="col-md-4 col-lg-3">
-                        <div class="footer-widget">
-                            <h3>Property States</h3>
-                            <ul class="global-list">
-                                <li><a href={{ route('property') }}">Ogun State</a></li>
-                                <li><a href={{ route('property') }}">Lagos</a></li>
-                            </ul>
-                        </div><!-- /.footer-widget -->
-                    </div>
-                </div><!-- /.row -->
-            </div><!-- /.footer-middle -->
-
-            <div class="footer-bottom clearfix">
-                <div class="d-flex justify-content-between">
-                    <div class="left-content">
-                        <span>RockDalocome &copy; 2023 Developed by <a href="#">Raycom Software Professional</a></span>
-                    </div>
-                    <div class="right-content">
-                        <ul class="global-list d-flex">
-                            <li><a href="#">Privacy</a></li>
-                            <li><a href="#">Terms & Condition</a></li>
-                            <li><a href="{{ route('contact') }}">Contact</a></li>
-                        </ul>
-                    </div>
+                    <span>Registration</span>
                 </div>
-            </div><!-- /.footer-bottom -->
-        </div><!-- /.container -->
-    </div><!-- /.footer-content -->
-</div><!-- /.tl-footer -->
+            </a>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="feather feather-chevron-left">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </li>
+
+        <li class="menu">
+            {{--  <a href="{{ route('student_payment_page') }}" data-active="false" class="menu-toggle">  --}}
+            <a href="#" data-active="false" class="menu-toggle">
+                <div class="base-menu">
+                    <div class="base-icons">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="feather feather-zap">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                        </svg>
+                    </div>
+                    <span>Payments</span>
+                </div>
+            </a>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" class="feather feather-chevron-left">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </li>
+
+        <li class="menu">
+            <a href="#components" data-active="false" class="menu-toggle">
+                <div class="base-menu">
+                    <div class="base-icons">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="feather feather-box">
+                            <path
+                                d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                            </path>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                        </svg>
+                    </div>
+                    <span>Change Password</span>
+                </div>
+            </a>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" class="feather feather-chevron-left">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </li>
+    </ul>
+</nav>
+
+<div id="compact_submenuSidebar" class="submenu-sidebar">
+
+
+</div>

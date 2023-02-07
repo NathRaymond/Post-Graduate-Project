@@ -60,13 +60,13 @@
                                     <div class="form-group">
 										<div class="input-group mb-3">
 											<span class="input-group-text bg-transparent"><i class="ti-email"></i></span>
-											<input type="email" name="email" id="email" required class="form-control ps-15 bg-transparent" placeholder="Please enter email used for application">
+											<input type="text" name="application_id" id="transaction" required class="form-control ps-15 bg-transparent" placeholder="Please enter transaction id">
 										</div>
 									</div>
 									<div class="form-group">
 										<div class="input-group mb-3">
 											<span class="input-group-text bg-transparent"><i class="ti-user"></i></span>
-											<input type="file" name="receipt" required id="files" class="form-control ps-15 bg-transparent" placeholder="">
+											<input type="file" name="receipt" required id="files"  accept="application/pdf, image/*" class="form-control ps-15 bg-transparent" placeholder="">
 										</div>
 									</div>
 									<div class="form-group">
@@ -118,9 +118,9 @@
                 // Swal.fire('Assigning contract, please wait...')
                 var file = $('#files')[0].files;
                 var description = $("#description").val();
-                var email = $("#email").val();
+                var transaction = $("#transaction").val();
                 var fd = new FormData;
-                fd.append('email', email);
+                fd.append('application_id', transaction);
                 fd.append('description', description);
                 if(file !== undefined) {
                     fd.append('file', file[0]);
