@@ -9,25 +9,27 @@ class Application extends Model implements Auditable
 {
     use \OwenIt\Auditing\Auditable;
     use HasFactory;
-    protected $fillable = [ 
-        'applicant_email',
-        'applicant_id',
-        'status',
-         'session_id', 
-         'course_id', 
-         'program_id',
-         'applicationRefNo',
-        'payment_status',
-        'semester',
-        'accept_declaration',
-        'nationality',
-        'isRecommended',
-        'is_late',
-        'teller_no',
-        'type',
-        'amount'
 
-    ];
+    protected $guarded = [];
+    // protected $fillable = [
+    //     'applicant_email',
+    //     'applicant_id',
+    //     'status',
+    //      'session_id',
+    //      'course_id',
+    //      'program_id',
+    //      'applicationRefNo',
+    //     'payment_status',
+    //     'semester',
+    //     'accept_declaration',
+    //     'nationality',
+    //     'isRecommended',
+    //     'is_late',
+    //     'teller_no',
+    //     'type',
+    //     'amount'
+
+    // ];
 
     public function sessions()
     {
@@ -43,7 +45,7 @@ class Application extends Model implements Auditable
     {
         return $this->belongsTo('App\Models\Programmes', 'program_id')->withDefault(['name' => 'Anonymous']);;
     }
-    
+
      public function appsession()
     {
         return $this->belongsTo('App\Models\Programmes', 'session_id')->withDefault(['name' => ' ']);;
