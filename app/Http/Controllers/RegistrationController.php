@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\StudentVerificationEmail;
 use App\Mail\ReferenceMail;
 use function App\Helpers\api_request_response;
 use function App\Helpers\bad_response_status_code;
@@ -13,6 +14,7 @@ use function App\Helpers\success_status_code;
 use App\Models\AcademicSession;
 use App\Models\Programmes;
 use App\Models\Application;
+use App\Models\Applicant;
 use App\Models\ProgrammeCategory;
 use App\Models\FeeCategory;
 use App\Models\TemporalRegistration;
@@ -59,6 +61,74 @@ class RegistrationController extends Controller
         return view('auth.register', $data);
     }
 
+    public function returningStudent(){
+        return view('auth.returning_student');
+    }
+
+    public function verifyReturningStudent(Request $request){
+        try {
+            $input = $request->all();
+            $checkStudent = Applicant::where('applicantRefNo', $input['application_id'])->first();
+            if(!$checkStudent){
+                return api_request_response(
+                    'error',
+                    "Invalid Matric Number",
+                    bad_response_status_code()
+                );
+            }
+            $checkUser = User::where('email', $checkStudent->email)->first();
+
+            if($checkUser){
+                return api_request_response(
+                    'error',
+                    "You Already have a verified account",
+                    bad_response_status_code()
+                );
+            }
+            $input['applicant_id'] = $checkStudent->id ;
+            $input['user_type'] = "student" ;
+            $input['is_first_time'] = 1  ;
+            $input['name'] = $checkStudent->first_name .' '. $checkStudent->last_name ;
+            $input['email'] = $checkStudent->email ;
+            $password = Str::random(10);
+            $insertPassword = bcrypt($password);
+            $input['password'] = $insertPassword ;
+            $user = User::create($input);
+            $this->name = $input['name'];
+            $this->email = $checkStudent->email;
+            $this->password = $password;
+            $this->matric = $input['application_id'];
+            Mail::to($this->email)->send(new StudentVerificationEmail(
+                $this->name,
+                $this->email,
+                $this->password,
+                $this->matric
+            ));
+            return api_request_response(
+                "ok",
+                "Search Complete!",
+                success_status_code(),
+                $user
+            );
+        } catch (\Exception $exception) {
+            $errorCode = $exception->errorInfo[1] ?? $exception;
+            if (is_int($errorCode)) {
+                return api_request_response(
+                    'error',
+                    $exception->errorInfo[2],
+                    bad_response_status_code()
+                );
+            } else {
+                return api_request_response(
+                    'error',
+                    $exception->getMessage(),
+                    bad_response_status_code()
+                );
+                // dd($exception);
+            }
+        }
+    }
+
     public function getProgrammeList(Request $request)
     {
         $id= $request->id;
@@ -71,6 +141,7 @@ class RegistrationController extends Controller
     {
         $programme = $request->programme;
         $type = $request->type;
+        // dd($request->all());
         $fee = Fee::where('description', "like" , "%registration%")->where('programme', $programme)->where('type', $type)->first();
         return response()->json($fee);
     }

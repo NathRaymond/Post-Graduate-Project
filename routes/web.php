@@ -23,7 +23,8 @@ Route::get('/', function () {
 Route::get('/getfee', [App\Http\Controllers\RegistrationController::class, 'getFee'])->name('get_fee_by_type');
 Route::get('/upload-receipt', [App\Http\Controllers\RegistrationController::class, 'uploadReceipt'])->name('upload-receipt');
 Route::get( '/getProgrammes', [App\Http\Controllers\RegistrationController::class, 'getProgrammeList'])->name('getProgrammeList');
-
+Route::get('/returning-student', [App\Http\Controllers\RegistrationController::class, 'returningStudent'])->name('returning-student-home');
+Route::post('/verify-returning-student', [App\Http\Controllers\RegistrationController::class, 'verifyReturningStudent'])->name('verify-returning-student-home');
 Route::post('/upload-receipt', [App\Http\Controllers\RegistrationController::class, 'saveReceipt'])->name('upload-receipt-file');
 Route::get('/new-registration', [App\Http\Controllers\RegistrationController::class, 'register'])->name('register_page');
 Route::post('/temporary-registration', [App\Http\Controllers\RegistrationController::class, 'tempRegistration'])->name('temporary-registration');
