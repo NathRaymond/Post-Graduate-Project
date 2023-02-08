@@ -78,7 +78,7 @@
 									<div class="form-group">
 										<div class="input-group mb-3">
 											<span class="input-group-text bg-transparent"><i class="ti-email"></i></span>
-                                            <select class="form-select" required name="programme_category" id="programmeCat">
+                                            <select class="form-select programmeCat" required name="programme_category" id="programmeCat">
                                                 <option value="">Select Programme Category</option>
                                                 @foreach ($programmeCategory as $program)
                                                 <option value="{{$program->id}}">{{$program->description}}</option>
@@ -182,10 +182,11 @@
 
 
 
-            $("#programmeCat").on("change", function(e) {
+            $(".programmeCats").on("change", function(e) {
 
                 var programme  = $(this).val();//$(this).data('id');
                 var type =$('#type').val();
+				$("#amount").empty();
                 // alert(programme)
                 if(programme == "" || type == ""){
                     $("#amount").val("");
@@ -223,6 +224,8 @@
 
                 var type = $(this).val();//$(this).data('id');
                 $("#programme").empty();
+                $("#amount").val("");
+                $("#type").val("");
 
                 var option = "<option value=''>Select Programme</option>";
                         $("#programme").append(option);

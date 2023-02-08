@@ -132,17 +132,19 @@
 
                     <div class="col-xl-6 col-md-6">
                         <div class="card card-animate">
-                            <div class="card-body">
-                                <div class="avatar-sm float-right">
-                                    <span class="avatar-title bg-soft-primary rounded-circle">
-                                        <!-- <i class="bx bx-basket m-0 h3 text-primary"></i> -->
-                                        <i class="fa-solid fa-arrow-rotate-left" style="color: green;"></i>
-                                    </span>
+                            <a href="{{route('returning-student-home')}}">
+                                <div class="card-body">
+                                    <div class="avatar-sm float-right">
+                                        <span class="avatar-title bg-soft-primary rounded-circle">
+                                            <!-- <i class="bx bx-basket m-0 h3 text-primary"></i> -->
+                                            <i class="fa-solid fa-arrow-rotate-left" style="color: green;"></i>
+                                        </span>
+                                    </div>
+                                    <!-- <h6 class="text-muted text-uppercase mt-0">Quoted </h6> -->
+                                    <h3 class="my-3" data-plugin="counterup"  style="color:green;">Returning <br> Students</h3>
+                                    <!-- <span class="badge badge-soft-primary mr-1"> +89% </span> <span class="text-muted">This Month</span> -->
                                 </div>
-                                <!-- <h6 class="text-muted text-uppercase mt-0">Quoted </h6> -->
-                                <h3 class="my-3" data-plugin="counterup"  style="color:green;">Returning <br> Students</h3>
-                                <!-- <span class="badge badge-soft-primary mr-1"> +89% </span> <span class="text-muted">This Month</span> -->
-                            </div>
+                            </a>
                         </div>
                     </div>
                 </div>

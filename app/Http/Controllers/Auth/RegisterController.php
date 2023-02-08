@@ -11,6 +11,7 @@ use function App\Helpers\api_request_response;
 use function App\Helpers\bad_response_status_code;
 use function App\Helpers\success_status_code;
 use App\Models\AcademicSession;
+use App\Models\Applicant;
 use App\Models\Programmes;
 use App\Models\Application;
 use App\Models\programmeCategory;
@@ -86,6 +87,8 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
+    
 
     public function register(){
         $data['programmes'] = Programmes::all();
@@ -238,6 +241,7 @@ class RegisterController extends Controller
         return view('auth.upload');
     }
 
+    
     public function saveReceipt(Request $request){
         try {
             // dd($request->all());
