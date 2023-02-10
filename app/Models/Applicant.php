@@ -35,6 +35,7 @@ class Applicant extends Model
         'is_late',
         'description',
         'profile_picture',
+        'matricno',
     ];
 
     public function Scount()

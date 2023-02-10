@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Applicant;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -25,7 +27,20 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         // dd("here");
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'user_type' => 'student'])) {
+        $checkMatricNo = Applicant::where('matricno', $request->email)->first();
+        if($checkMatricNo){
+            $getEmail = $checkMatricNo->email;       
+        }
+        $checkAppRefNo = Applicant::where('applicantRefNo', $request->email)->first();
+        if($checkAppRefNo){
+            $getEmail = $checkAppRefNo->email;       
+        }
+        $checkUser = User::where('email', $request->email)->first();
+        if($checkUser){
+            $getEmail = $checkUser->email;       
+        }
+        // dd($getEmail);
+        if (Auth::attempt(['email' => $getEmail, 'password' => $request->password, 'user_type' => 'student'])) {
             // The user is active, not suspended, and exists.
             //    if (Auth::user()->is_first_time == 1) {
             //     return redirect()->intended('/password/change');
@@ -34,7 +49,7 @@ class LoginController extends Controller
                 return redirect()->intended('/student');
             // }
             
-        } else if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'user_type' => 'admin'])) {
+        } else if (Auth::attempt(['email' => $getEmail, 'password' => $request->password, 'user_type' => 'admin'])) {
 
             // The user is active, not suspended, and exists.
 

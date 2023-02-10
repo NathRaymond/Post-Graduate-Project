@@ -68,7 +68,7 @@ class RegistrationController extends Controller
     public function verifyReturningStudent(Request $request){
         try {
             $input = $request->all();
-            $checkStudent = Applicant::where('applicantRefNo', $input['application_id'])->first();
+            $checkStudent = Applicant::where('matricno', $input['application_id'])->first();
             if(!$checkStudent){
                 return api_request_response(
                     'error',
