@@ -2,6 +2,8 @@
 
 namespace App\Imports;
 
+use App\Models\AcademicSession;
+use App\Models\Programmes;
 use App\Models\Applicant;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +28,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 
 
-class UploadApplicant implements ToModel, WithHeadingRow, WithChunkReading,WithValidation, WithBatchInserts
+class UploadApplicant implements ToModel, WithHeadingRow,WithValidation, WithBatchInserts
 {
 
 
@@ -48,35 +50,48 @@ class UploadApplicant implements ToModel, WithHeadingRow, WithChunkReading,WithV
      */
     public function model(array $row)
     {
-      dd($row);
+    //   dd($row);
         $i=0;
 
+        $session = AcademicSession::where('description',$row["session"])->first();
+        $programme = Programmes::where('description',trim($row["degreename"]))->first();
+        if($programme){
+            $program_id = $programme->id;
+        }else{
+            $program_id = $row["degreename"];
+
+        }
+        if($session){
+            $session_id = $session->id;
+        }else{
+            $session_id = $row["session"];
+
+        }
 
         return new Applicant([
             'applicantRefNo'=>$row["applicationrefno"],
-            'session'=>$row["session"],
-            'surname'=>$row["surname"],
+            'session'=>$session_id,
+            'last_name'=>$row["surname"],
             'first_name'=>$row["firstname"],
             'middlename'=>$row["middlename"],
+            'religion'=>$row["religion"],
             'sex'=>$row["sex"],
             'marital_status'=>$row["maritalstatus"],
             'dob'=>$row["dateofbirth"],
-            'religion'=>$row["religion"],
             'phone'=>$row["phone"],
-            'surname'=>$row["nationname"],
+            'country'=>$row["nationname"],
             'state'=>$row["statename"],
             'email'=>$row["email"],
-            'programme'=>$row["degreename"],
+            'programme'=>$program_id ,
             'mode'=>$row["modename"],
-            'surname'=>$row["mailingaddressid"],
-            'surname'=>$row["homeaddressid"],
-            'surname'=>$row["fieldinterest"],
-            'surname'=>$row["registeredfordegreeinanyuni"],
+            'fieldinterest'=>$row["fieldinterest"],
+            'registeredfordegreeinanyuni'=>$row["registeredfordegreeinanyuni"],
             'status'=>$row["status"],
             'type'=>$row["islocal"],
-            'surname'=>$row["acceptdeclaration"],
-            'surname'=>$row["isrecommended"],
-            'surname'=>$row["matricno"],
+            'acceptdeclaration'=>$row["acceptdeclaration"],
+            'isrecommended'=>$row["isrecommended"],
+            'matricno'=>$row["matricno"],
+            'applicantid'=>$row["applicantid"],
                     ]);
     }
 
@@ -97,12 +112,12 @@ class UploadApplicant implements ToModel, WithHeadingRow, WithChunkReading,WithV
 
 
 
-    public function chunkSize(): int
-    {
-        return 1000;
-    }
+    // public function chunkSize(): int
+    // {
+    //     return 200;
+    // }
     public function batchSize(): int
     {
-        return 1000;
+        return 50;
     }
 }

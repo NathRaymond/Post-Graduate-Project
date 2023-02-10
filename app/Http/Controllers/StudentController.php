@@ -268,15 +268,15 @@ class StudentController extends Controller
     public function upload_applicants(Request $request) {
 
 
-    try {
-        $import = new UploadApplicant();
+    // try {
+        $import = new UploadStudent();
         // dd($request->file);
         $data = \Excel::import($import, request()->file('file'));
 
         return redirect()->back()->with('success',"Record successfully uploaded !.");
-    } catch (\Exception $exception) {
-        return redirect()->back()->withErrors($exception->getMessage());
-    }
+    // } catch (\Exception $exception) {
+    //     return redirect()->back()->withErrors($exception->getMessage());
+    // }
 
     }
 }

@@ -25,27 +25,28 @@ class Student extends Model
 {
     use HasFactory;
     protected $table = 'students';
-    protected $fillable = [
-        'surname',
-        'firstname',
-        'middlename',
-        'sex',
-        'marital_status',
-        'state_of_origin',
-        'dob',
-        'nationality',
-        'religion',
-        'phone_number',
-        'alt_phone_number',
-        'email',
-        'alt_email',
-    ];
+    protected $guarded = [];
+    // protected $fillable = [
+    //     'surname',
+    //     'firstname',
+    //     'middlename',
+    //     'sex',
+    //     'marital_status',
+    //     'state_of_origin',
+    //     'dob',
+    //     'nationality',
+    //     'religion',
+    //     'phone_number',
+    //     'alt_phone_number',
+    //     'email',
+    //     'alt_email',
+    // ];
 
     public function statename()
     {
         return $this->belongsTo('App\Models\State', 'state_of_origin')->withDefault(['name'=> '']);
     }
-    
+
     public function studentContact()
     {
         $student = StudentContact::where('student_id',$this->id)->first();
